@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:health_hero/screens/allergies_page.dart';
+import 'package:health_hero/screens/preferred_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,16 +17,14 @@ class MyApp extends StatelessWidget {
   }
 }
 class MyHomePage extends StatelessWidget {
-@override
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Health Hero'),
-      ),
-      body: Center(
-        child: Text('Hello World!'),
-      ),
+    return MaterialApp(
+      initialRoute: 'preferredPage',
+      routes: {
+        'preferredPage': (context) => preferredPage(),
+        'allergyPage' : (context) => allergyPage(),
+      },
     );
   }
 }
-
