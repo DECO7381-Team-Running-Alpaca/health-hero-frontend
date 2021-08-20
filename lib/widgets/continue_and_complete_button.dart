@@ -11,12 +11,17 @@ class ContinueAndCompleteButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        color: Colors.teal,
-        height: 50,
-        width: 300,
+        color: Colors.white,
+        height: 60,
+        width: 100,
+        margin: EdgeInsets.only(
+          top: 30,
+          bottom: 30,
+        ),
         child: Center(
           child: Text(
-            buttonTitle,
+            buttonTitle.toUpperCase(),
+            style: TextStyle(fontSize: 17),
           ),
         ),
       ),
