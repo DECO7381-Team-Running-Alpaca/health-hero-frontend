@@ -13,7 +13,7 @@ class ContinueAndCompleteButton extends StatelessWidget {
       child: Container(
         color: Colors.white,
         height: 60,
-        width: 100,
+        width: 20,
         margin: EdgeInsets.only(
           top: 30,
           bottom: 30,
@@ -21,7 +21,10 @@ class ContinueAndCompleteButton extends StatelessWidget {
         child: Center(
           child: Text(
             buttonTitle.toUpperCase(),
-            style: TextStyle(fontSize: 17),
+            style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),

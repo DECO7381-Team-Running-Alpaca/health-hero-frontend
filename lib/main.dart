@@ -16,15 +16,15 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
-      initialRoute: 'preferredPage',
+      initialRoute: 'allergyPage',
       routes: {
         'preferredPage': (context) => PreferredPage(),
-        'allergyPage' : (context) => AllergyPage(),
+        'allergyPage': (context) => AllergyPage(),
       },
     );
   }

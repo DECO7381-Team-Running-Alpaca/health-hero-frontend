@@ -2,7 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:health_hero/widgets/continue_and_complete_button.dart';
 import 'package:health_hero/widgets/food_box.dart';
 
-class PreferredPage extends StatelessWidget {
+class PreferredPage extends StatefulWidget {
+  @override
+  _PreferredPageState createState() => _PreferredPageState();
+}
+
+class _PreferredPageState extends State<PreferredPage> {
+  bool isCheckVisible;
+
+  void chageState() {
+    this.isCheckVisible = !isCheckVisible;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -52,22 +63,23 @@ class PreferredPage extends StatelessWidget {
                                 FoodBoxCard(
                                   title: 'Beef',
                                   background: 'assets/images/beef.jpg',
-                                  onPress: () {},
+                                  
                                 ),
                                 FoodBoxCard(
                                   title: 'mushiroom',
-                                  background: 'assets/images/beef.jpg',
-                                  onPress: () {},
+                                  background: 'assets/images/mushroom.jpg',
+                                  
                                 ),
                                 FoodBoxCard(
                                   title: 'Beef',
                                   background: 'assets/images/beef.jpg',
-                                  onPress: () {},
+                                  
+                                  
                                 ),
                                 FoodBoxCard(
-                                  title: 'Beef',
-                                  background: 'assets/images/beef.jpg',
-                                  onPress: () {},
+                                  title: 'mushroom',
+                                  background: 'assets/images/mushroom.jpg',
+                                  
                                 ),
                               ],
                             ),
@@ -75,24 +87,24 @@ class PreferredPage extends StatelessWidget {
                             Column(
                               children: [
                                 FoodBoxCard(
-                                  title: 'Beef',
-                                  background: 'assets/images/beef.jpg',
-                                  onPress: () {},
+                                  title: 'chicken',
+                                  background: 'assets/images/chicken.jpg',
+                                  
                                 ),
                                 FoodBoxCard(
-                                  title: 'Beef',
-                                  background: 'assets/images/beef.jpg',
-                                  onPress: () {},
+                                  title: 'brocroli',
+                                  background: 'assets/images/brocroli.jpg',
+                                  
                                 ),
                                 FoodBoxCard(
-                                  title: 'Beef',
-                                  background: 'assets/images/beef.jpg',
-                                  onPress: () {},
+                                  title: 'chicken',
+                                  background: 'assets/images/chicken.jpg',
+                                  
                                 ),
                                 FoodBoxCard(
-                                  title: 'Beef',
-                                  background: 'assets/images/beef.jpg',
-                                  onPress: () {},
+                                  title: 'brocroli',
+                                  background: 'assets/images/brocroli.jpg',
+                                 
                                 ),
                               ],
                             ),
@@ -101,7 +113,8 @@ class PreferredPage extends StatelessWidget {
 
                         // bottom button
                         ContinueAndCompleteButton(
-                          //onTap: Navigator.pushNamed(context, 'allergyPage'),
+                          onTap: () =>
+                              Navigator.pushNamed(context, 'allergyPage'),
                           buttonTitle: 'continue',
                         )
                       ],
