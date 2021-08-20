@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_hero/widgets/continue_and_complete_button.dart';
 
-class preferredPage extends StatelessWidget {
+class PreferredPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

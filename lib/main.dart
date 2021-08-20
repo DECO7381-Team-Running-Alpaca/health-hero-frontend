@@ -22,8 +22,8 @@ class MyHomePage extends StatelessWidget {
     return MaterialApp(
       initialRoute: 'preferredPage',
       routes: {
-        'preferredPage': (context) => preferredPage(),
-        'allergyPage' : (context) => allergyPage(),
+        'preferredPage': (context) => PreferredPage(),
+        'allergyPage' : (context) => AllergyPage(),
       },
     );
   }
