@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health_hero/widgets/continue_and_complete_button.dart';
@@ -47,7 +45,10 @@ class _AllergyPageState extends State<AllergyPage> {
                   },
                   child: Text('ADD MORE')),
               TextButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                  },
                   child: Text('FINISH')),
             ],
           );
@@ -60,7 +61,9 @@ class _AllergyPageState extends State<AllergyPage> {
         builder: (context) {
           return AlertDialog(
             title: Text('Enter the ingredient you are allergic to'),
-            content: TextField(),
+            content: TextField(
+              keyboardType: TextInputType.emailAddress,
+            ),
             actions: [
               TextButton(onPressed: () {}, child: Text('ADD')),
               TextButton(
