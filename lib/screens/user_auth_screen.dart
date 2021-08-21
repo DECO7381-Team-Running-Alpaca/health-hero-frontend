@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_hero/screens/home_screen.dart';
 import 'package:health_hero/screens/landing_screen.dart';
 
 class UserAuthScreen extends StatefulWidget {
@@ -84,8 +85,7 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                                       border: InputBorder.none,
                                       hintText: 'Please enter user name',
                                     ),
-                                    // obscureText: true,
-                                    controller: _weightController,
+                                    controller: _usernameController,
                                     validator: (value) => value.isEmpty
                                         ? 'Username cannot be empty!'
                                         : null,
@@ -118,9 +118,6 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                                     obscureText: true,
                                     controller: _passwordController,
                                     validator: (value) {
-                                      // if (value.length < 6) {
-                                      //   return 'Password must longer than 6';
-                                      // }
                                       if (value.isEmpty || value.length < 6) {
                                         return 'Password must longer than 6';
                                       }
@@ -142,19 +139,12 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                                 onPressed: () {
                                   setState(() {
                                     _loginData['username'] =
-                                      _usernameController.text;
-                                  _loginData['password'] =
-                                      _passwordController.text;
+                                        _usernameController.text;
+                                    _loginData['password'] =
+                                        _passwordController.text;
                                   });
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        content: Text(
-                                            "${_loginData['username']} has logged in successfully"),
-                                      );
-                                    },
-                                  );
+                                  Navigator.of(context)
+                                      .pushNamed(HomeScreen.routeName);
                                 },
                                 child: Text(
                                   'SIGN IN',
@@ -249,9 +239,6 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                                     obscureText: true,
                                     controller: _passwordController,
                                     validator: (value) {
-                                      // if (value.length < 6) {
-                                      //   return 'Password must longer than 6';
-                                      // }
                                       if (value.isEmpty || value.length < 6) {
                                         return 'Password must longer than 6';
                                       }
@@ -410,14 +397,15 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                                   setState(() {
                                     _signupData['username'] =
                                         _usernameController.text;
-                                      _signupData['password'] =
+                                    _signupData['password'] =
                                         _passwordController.text;
-                                        _signupData['height'] =
+                                    _signupData['height'] =
                                         _heightController.text;
-                                        _signupData['weight'] =
+                                    _signupData['weight'] =
                                         _weightController.text;
                                   });
-                                  Navigator.of(context).pushNamed('preferredPage');
+                                  Navigator.of(context)
+                                      .pushNamed('preferredPage');
                                 },
                                 child: Text(
                                   'CONTINUE',

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 
 import 'package:health_hero/screens/allergies_page.dart';
+import 'package:health_hero/screens/home_screen.dart';
 import 'package:health_hero/screens/landing_screen.dart';
 import 'package:health_hero/screens/preferred_page.dart';
 import 'package:health_hero/screens/user_auth_screen.dart';
@@ -31,6 +32,7 @@ class MyHomePage extends StatelessWidget {
         'allergyPage': (context) => AllergyPage(),
         LandingScreen.routeName: (context) => LandingScreen(),
         UserAuthScreen.routeName: (context) => UserAuthScreen(),
+        HomeScreen.routeName: (context) => HomeScreen(),
       },
     );
   }
