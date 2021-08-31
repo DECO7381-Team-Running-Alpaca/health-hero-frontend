@@ -4,6 +4,7 @@ import 'package:health_hero/widgets/continue_and_complete_button.dart';
 import 'package:health_hero/widgets/food_box.dart';
 
 class AllergyPage extends StatefulWidget {
+  static const routeName = '/allergy';
   @override
   _AllergyPageState createState() => _AllergyPageState();
 }
@@ -129,12 +130,12 @@ class _AllergyPageState extends State<AllergyPage> {
                                   background: 'assets/images/mushroom.jpg',
                                 ),
                                 FoodBoxCard(
-                                  title: 'milk',
-                                  background: 'assets/images/milk.jpg',
+                                  title: 'onion',
+                                  background: 'assets/images/onion.jpg',
                                 ),
                                 FoodBoxCard(
-                                  title: 'mushroom',
-                                  background: 'assets/images/mushroom.jpg',
+                                  title: 'shrimp',
+                                  background: 'assets/images/shrimp.jpg',
                                 ),
                               ],
                             ),
@@ -150,11 +151,11 @@ class _AllergyPageState extends State<AllergyPage> {
                                   background: 'assets/images/brocroli.jpg',
                                 ),
                                 FoodBoxCard(
-                                  title: 'beans',
-                                  background: 'assets/images/beans.jpg',
+                                  title: 'carrot',
+                                  background: 'assets/images/carrot.jpg',
                                 ),
                                 FoodBoxCard(
-                                  title: 'brocroli',
+                                  title: 'other',
                                   background: 'assets/images/brocroli.jpg',
                                 ),
                               ],
