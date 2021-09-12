@@ -14,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
-  Function changePage(int index) {
+  void changePage(int index) {
     setState(() {
       currentIndex = index;
     });
