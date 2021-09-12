@@ -1,4 +1,10 @@
+import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:health_hero/screens/preferred_page.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:health_hero/screens/home_screen.dart';
 import 'package:health_hero/screens/landing_screen.dart';
 
@@ -13,6 +19,8 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
   var _mode;
   final _formKey = GlobalKey<FormState>();
   bool _isChecked = false;
+  bool _isLoading = false;
+
   Map<String, String> _loginData = {'username': '', 'password': ''};
   Map<String, String> _signupData = {
     'username': '',
@@ -21,11 +29,15 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
     'weight': ''
   };
 
+  String _loginStatus = '';
+
   double _deviceheight = 0;
   double _devicewidth = 0;
 
-  final _passwordController = TextEditingController();
-  final _usernameController = TextEditingController();
+  final _lPasswordController = TextEditingController();
+  final _lUserController = TextEditingController();
+  final _sPasswordController = TextEditingController();
+  final _sUserController = TextEditingController();
   final _heightController = TextEditingController();
   final _weightController = TextEditingController();
 
@@ -36,6 +48,86 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
     _devicewidth = MediaQuery.of(context).size.width;
 
     super.didChangeDependencies();
+  }
+
+  void _submitLoginData() async {
+    setState(() {
+      _isLoading = true;
+      _loginStatus = '';
+      _loginData['username'] = _lUserController.text;
+      _loginData['password'] = _lPasswordController.text;
+    });
+
+    final url = 'http://whispering-plateau-82869.herokuapp.com/users/login';
+
+    var body = json.encode({
+      "user_name": _loginData['username'],
+      "password": _loginData['password'],
+    });
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {"Content-Type": "application/json"},
+        body: body,
+      );
+      final responseData = json.decode(response.body);
+      final _message = responseData['message'];
+
+      setState(() {
+        _loginStatus = _message;
+        _isLoading = false;
+      });
+      if (_message != 'You Shall Not Pass!') {
+        Navigator.of(context).pushNamed(HomeScreen.routeName);
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  void _submitSignupData() async {
+    setState(() {
+      _isLoading = true;
+      _loginStatus = '';
+      _signupData['username'] = _sUserController.text;
+      _signupData['password'] = _sPasswordController.text;
+      _signupData['height'] = _heightController.text;
+      _signupData['weight'] = _weightController.text;
+    });
+    print(_signupData);
+    final url = 'http://whispering-plateau-82869.herokuapp.com/users';
+
+    var body = json.encode({
+      "user_name": _signupData['username'],
+      "password": _signupData['password'],
+      "email": "test@test.com",
+      "weight": _signupData['weight'],
+      "height": _signupData['height'],
+    });
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: {"Content-Type": "application/json"},
+        body: body,
+      );
+      final responseData = json.decode(response.body);
+      final _message = responseData['message'];
+      print(_message);
+
+      setState(() {
+        _loginStatus = _message;
+        _isLoading = false;
+      });
+      if (_message != 'Please make sure that body is well organized.') {
+        Navigator.of(context).pushNamed(PreferredPage.routeName);
+      }
+    } catch (error) {
+      setState(() {
+        _loginStatus = 'User already exists';
+        _isLoading = false;
+      });
+      throw error;
+    }
   }
 
   @override
@@ -83,9 +175,10 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                                   child: TextFormField(
                                     decoration: InputDecoration(
                                       border: InputBorder.none,
-                                      hintText: 'Please enter user name',
+                                      hintText:
+                                          'Please enter username or email',
                                     ),
-                                    controller: _usernameController,
+                                    controller: _lUserController,
                                     validator: (value) => value.isEmpty
                                         ? 'Username cannot be empty!'
                                         : null,
@@ -116,7 +209,7 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                                       hintText: 'Please enter password',
                                     ),
                                     obscureText: true,
-                                    controller: _passwordController,
+                                    controller: _lPasswordController,
                                     validator: (value) {
                                       if (value.isEmpty || value.length < 6) {
                                         return 'Password must longer than 6';
@@ -130,31 +223,34 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                             SizedBox(
                               height: 70,
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: Color.fromRGBO(205, 214, 169, 100)),
-                              height: 56,
-                              width: 328,
-                              child: FlatButton(
-                                onPressed: () {
-                                  setState(() {
-                                    _loginData['username'] =
-                                        _usernameController.text;
-                                    _loginData['password'] =
-                                        _passwordController.text;
-                                  });
-                                  Navigator.of(context)
-                                      .pushNamed(HomeScreen.routeName);
-                                },
-                                child: Text(
-                                  'SIGN IN',
-                                  style: TextStyle(
-                                    color: Colors.black45,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ),
+                            // Request Placeholder
+                            Text(
+                              _loginStatus,
+                              style: TextStyle(color: Colors.black),
                             ),
+                            _isLoading
+                                ? CircularProgressIndicator(
+                                    value: null,
+                                    strokeWidth: 7,
+                                    color: Color.fromRGBO(205, 214, 169, 100),
+                                  )
+                                : Container(
+                                    decoration: BoxDecoration(
+                                        color:
+                                            Color.fromRGBO(205, 214, 169, 100)),
+                                    height: 56,
+                                    width: 328,
+                                    child: FlatButton(
+                                      onPressed: _submitLoginData,
+                                      child: Text(
+                                        'LOG IN',
+                                        style: TextStyle(
+                                          color: Colors.black45,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
@@ -205,7 +301,7 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                                       hintText: 'User name',
                                     ),
                                     // obscureText: true,
-                                    controller: _usernameController,
+                                    controller: _sUserController,
                                     validator: (value) =>
                                         value.isEmpty || value == null
                                             ? 'Username cannot be empty!'
@@ -237,7 +333,7 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                                       hintText: 'Please enter password',
                                     ),
                                     obscureText: true,
-                                    controller: _passwordController,
+                                    controller: _sPasswordController,
                                     validator: (value) {
                                       if (value.isEmpty || value.length < 6) {
                                         return 'Password must longer than 6';
@@ -387,35 +483,33 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
                                 ],
                               ),
                             ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: Color.fromRGBO(205, 214, 169, 100)),
-                              height: 56,
-                              width: 328,
-                              child: FlatButton(
-                                onPressed: () {
-                                  setState(() {
-                                    _signupData['username'] =
-                                        _usernameController.text;
-                                    _signupData['password'] =
-                                        _passwordController.text;
-                                    _signupData['height'] =
-                                        _heightController.text;
-                                    _signupData['weight'] =
-                                        _weightController.text;
-                                  });
-                                  Navigator.of(context)
-                                      .pushNamed('preferredPage');
-                                },
-                                child: Text(
-                                  'CONTINUE',
-                                  style: TextStyle(
-                                    color: Colors.black45,
-                                    fontSize: 20,
-                                  ),
-                                ),
-                              ),
+                            Text(
+                              _loginStatus,
+                              style: TextStyle(color: Colors.red),
                             ),
+                            _isLoading
+                                ? CircularProgressIndicator(
+                                    value: null,
+                                    strokeWidth: 7,
+                                    color: Color.fromRGBO(205, 214, 169, 100),
+                                  )
+                                : Container(
+                                    decoration: BoxDecoration(
+                                        color:
+                                            Color.fromRGBO(205, 214, 169, 100)),
+                                    height: 56,
+                                    width: 328,
+                                    child: FlatButton(
+                                      onPressed: _submitSignupData,
+                                      child: Text(
+                                        'CONTINUE',
+                                        style: TextStyle(
+                                          color: Colors.black45,
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
