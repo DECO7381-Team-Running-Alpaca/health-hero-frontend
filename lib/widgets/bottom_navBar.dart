@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:health_hero/screens/home_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
   Function onTap;
