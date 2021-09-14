@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:health_hero/provider/app_state.dart';
+import 'package:health_hero/widgets/date_meal_widget.dart';
 import 'package:health_hero/widgets/day_selector.dart';
 import 'package:provider/provider.dart';
+import 'package:health_hero/models/meal.dart';
 
 class WeeklyPlanPage extends StatelessWidget {
   @override
@@ -26,7 +28,7 @@ class WeeklyPlanPage extends StatelessWidget {
                               fontWeight: FontWeight.bold),
                         ),
                         Icon(
-                          Icons.settings_backup_restore,
+                          Icons.date_range,
                           size: 50,
                           color: Color.fromRGBO(100, 110, 91, 1),
                         )
@@ -40,7 +42,7 @@ class WeeklyPlanPage extends StatelessWidget {
                       child: Text(
                         'You have consumed 3500 calories today',
                         style: TextStyle(
-                          color: Color.fromRGBO(100, 110, 91, 1),
+                          color: Colors.transparent,
                           fontSize: 16,
                         ),
                       ),
@@ -51,49 +53,64 @@ class WeeklyPlanPage extends StatelessWidget {
             ),
             ChangeNotifierProvider<AppState>(
               create: (_) => AppState(),
-              child: Consumer<AppState>(
-                builder: (context, appState, _) => Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      DaySelector(
-                        selfIndex: 0,
-                        day: 'SUN',
-                        date: 12,
+              child: Column(
+                children: [
+                  Consumer<AppState>(
+                    builder: (context, appState, _) => Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          DaySelector(
+                            selfIndex: 0,
+                            day: 'SUN',
+                            date: 12,
+                          ),
+                          DaySelector(
+                            selfIndex: 1,
+                            day: 'MON',
+                            date: 13,
+                          ),
+                          DaySelector(
+                            selfIndex: 2,
+                            day: 'TUE',
+                            date: 14,
+                          ),
+                          DaySelector(
+                            selfIndex: 3,
+                            day: 'WED',
+                            date: 15,
+                          ),
+                          DaySelector(
+                            selfIndex: 4,
+                            day: 'THU',
+                            date: 16,
+                          ),
+                          DaySelector(
+                            selfIndex: 5,
+                            day: 'FRI',
+                            date: 17,
+                          ),
+                          DaySelector(
+                            selfIndex: 6,
+                            day: 'SAT',
+                            date: 18,
+                          ),
+                        ],
                       ),
-                      DaySelector(
-                        selfIndex: 1,
-                        day: 'MON',
-                        date: 13,
-                      ),
-                      DaySelector(
-                        selfIndex: 2,
-                        day: 'TUE',
-                        date: 14,
-                      ),
-                      DaySelector(
-                        selfIndex: 3,
-                        day: 'WED',
-                        date: 15,
-                      ),
-                      DaySelector(
-                        selfIndex: 4,
-                        day: 'THU',
-                        date: 16,
-                      ),
-                      DaySelector(
-                        selfIndex: 5,
-                        day: 'FRI',
-                        date: 17,
-                      ),
-                      DaySelector(
-                        selfIndex: 6,
-                        day: 'SAT',
-                        date: 18,
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                  Consumer<AppState>(
+                    builder: (context, appState, _) => Column(
+                      children: [
+                        for (final meal in meals.where((e) =>
+                            e.dateId.contains(appState.selectedCategoryId)))
+                          DateMealWidget(
+                            everyDayMeal: meal,
+                          )
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
