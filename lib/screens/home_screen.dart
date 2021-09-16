@@ -30,12 +30,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/homeBackGround.jpg'),
-                fit: BoxFit.cover),
-          ),
-          child: pages[currentIndex]),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/images/homeBackGround.jpg'),
+              fit: BoxFit.cover),
+        ),
+        child: pages[currentIndex],
+      ),
       bottomNavigationBar: BottomNavBar(
         onTap: changePage,
         currentIndex: currentIndex,

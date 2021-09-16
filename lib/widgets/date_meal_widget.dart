@@ -11,15 +11,15 @@ class DateMealWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-        top: 17,
+        top: 30,
         left: 20,
         right: 20,
       ),
-      height: 550,
+      height: 540,
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -59,58 +59,52 @@ class DateMealWidget extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 20),
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.red, width: 2)),
-                child: Column(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.red, width: 2)),
-                      child: Column(
-                        children: [
-                          Text(
-                            everyDayMeal.mealType,
-                            style: TextStyle(
-                              color: Color.fromRGBO(100, 110, 91, 1),
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Text(
-                            everyDayMeal.breakfastCal,
-                            style: TextStyle(
-                              color: Color.fromRGBO(100, 110, 91, 1),
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
+              child: Column(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        everyDayMeal.mealType,
+                        style: TextStyle(
+                          color: Color.fromRGBO(100, 110, 91, 1),
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5),
-                      child: Column(
-                        children: [
-                          Text(everyDayMeal.mealName),
-                          Image(image: everyDayMeal.image)
-                        ],
+                      Text(
+                        everyDayMeal.breakfastCal,
+                        style: TextStyle(
+                          color: Color.fromRGBO(100, 110, 91, 1),
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Column(
+                      children: [
+                        Text(everyDayMeal.mealName),
+                        Image(image: everyDayMeal.image)
+                      ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Column(
-                        children: [
-                          Text(everyDayMeal.ingredients),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(everyDayMeal.directions),
-                        ],
-                      ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(everyDayMeal.ingredients),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(everyDayMeal.directions),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            )
+            ),
           ],
         ),
       ),
