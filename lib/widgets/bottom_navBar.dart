@@ -29,12 +29,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.receipt),
+            icon: Icon(Icons.content_paste),
             label: 'Plan',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.camera_alt),
-            label: 'Scan',
+            icon: Icon(Icons.description),
+            label: 'Report',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),

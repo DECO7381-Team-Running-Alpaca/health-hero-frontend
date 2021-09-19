@@ -379,7 +379,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     Container(
                       padding: EdgeInsets.only(left: 20, right: 15, top: 5),
-                      height: 21,
+                      height: 46,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -395,59 +395,108 @@ class _ProfilePageState extends State<ProfilePage> {
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            child: Icon(
-                              Icons.create,
-                              color: Color.fromRGBO(100, 110, 91, 1),
-                              size: 20,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 25,
-                            width: 50,
-                            padding: EdgeInsets.only(top: 12, left: 20),
-                            child: Column(
-                              children: [
-                                Expanded(child: TextFormField(
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  height,
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: Color.fromRGBO(100, 110, 91, 1),
                                     fontWeight: FontWeight.normal,
                                   ),
-                                  keyboardType: TextInputType.number,
-                                  controller: heightController,
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: height,
-                                    hintStyle: TextStyle(
-                                      fontSize: 14,
-                                      color: Color.fromRGBO(100, 110, 91, 1),
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                  ),
-                                ),),
+                                ),
                               ],
                             ),
                           ),
-                          Container(
-                            padding: EdgeInsets.only(top: 5, left: 10, bottom: 3),
-                            child: Text(
-                              'cm',
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Color.fromRGBO(100, 110, 91, 1),
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
+                          IconButton(
+                            padding: EdgeInsets.only(left: 20, bottom: 20),
+                            icon: Icon(Icons.create),
+                            color: Color.fromRGBO(100, 110, 91, 1),
+                            iconSize: 20,
+                            onPressed: (){
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog (
+                                    title: Container(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'Change Height',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Color.fromRGBO(100, 110, 91, 1),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    content: Container(
+                                      height: 30,
+                                      width: 400,
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 30,
+                                            width: 210,
+                                            child: TextField(
+                                              keyboardType: TextInputType.number,
+                                              controller: heightController,
+                                              decoration: InputDecoration(
+                                                contentPadding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                                                hintText: 'Enter new height',
+                                                hintStyle: TextStyle(
+                                                  fontSize: 14,
+                                                ),
+                                                border: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Colors.black,
+                                                    width: 1,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    actions: [
+                                      Container(
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: const Text(
+                                                'CONFIRM',
+                                                style: TextStyle(
+                                                  color: Color.fromRGBO(100, 109, 93, 1),
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 80,
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: const Text(
+                                                'CANCEL',
+                                                style: TextStyle(
+                                                  color: Color.fromRGBO(100, 109, 93, 1),
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                              );
+                            },
                           ),
                         ],
                       ),
@@ -457,61 +506,126 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     Container(
                       padding: EdgeInsets.only(left: 20, right: 15, top: 5),
-                      height: 21,
+                      height: 46,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            'Weight',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Color.fromRGBO(100, 110, 91, 1),
-                              fontWeight: FontWeight.bold,
+                          Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Weight',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Color.fromRGBO(100, 110, 91, 1),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  weight,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Color.fromRGBO(100, 110, 91, 1),
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
+                          IconButton(
+                            padding: EdgeInsets.only(left: 20, bottom: 20),
+                            icon: Icon(Icons.create),
+                            color: Color.fromRGBO(100, 110, 91, 1),
+                            iconSize: 20,
+                            onPressed: (){
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog (
+                                    title: Container(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        'Change Weight',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Color.fromRGBO(100, 110, 91, 1),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    content: Container(
+                                      height: 30,
+                                      width: 400,
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: 30,
+                                            width: 210,
+                                            child: TextField(
+                                              keyboardType: TextInputType.number,
+                                              controller: weightController,
+                                              decoration: InputDecoration(
+                                                contentPadding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                                                hintText: 'Enter new weight',
+                                                hintStyle: TextStyle(
+                                                  fontSize: 14,
+                                                ),
+                                                border: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Colors.black,
+                                                    width: 1,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    actions: [
+                                      Container(
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: const Text(
+                                                'CONFIRM',
+                                                style: TextStyle(
+                                                  color: Color.fromRGBO(100, 109, 93, 1),
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 80,
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: const Text(
+                                                'CANCEL',
+                                                style: TextStyle(
+                                                  color: Color.fromRGBO(100, 109, 93, 1),
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                              );
+                            },
+                          ),
                         ],
-                      ),
-                    ),
-                    Container(
-                      height: 27,
-                      padding: EdgeInsets.only(top: 5, left: 20),
-                      child: TextFormField(
-                        style: TextStyle(
-                          height: 1.7,
-                          fontSize: 14,
-                          color: Color.fromRGBO(100, 110, 91, 1),
-                          fontWeight: FontWeight.normal,
-                          // textBaseline: TextBaseline.alphabetic,
-                        ),
-                        keyboardType: TextInputType.number,
-                        controller: weightController,
-                        decoration: InputDecoration(
-                          // isDense: true,
-                          contentPadding: EdgeInsets.only(),
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                          ),
-                          suffixIcon: Icon(
-                            Icons.create,
-                            size: 20,
-                            color: Color.fromRGBO(100, 110, 91, 1),
-                          ),
-                          suffix: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text('kg'),
-                                SizedBox(
-                                  width: 190,
-                                ),
-                              ]
-                          ),
-                          hintText: weight,
-                          hintStyle: TextStyle(
-                            fontSize: 14,
-                            color: Color.fromRGBO(100, 110, 91, 1),
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
                       ),
                     ),
                   ],
