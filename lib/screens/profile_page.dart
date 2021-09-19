@@ -70,9 +70,27 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-  void _updateUserInfo(
-
-  ) async {}
+  void _updateUserInfo() async {
+    final url = 'http://whispering-plateau-82869.herokuapp.com/users/me';
+    try {
+      final response = await http.get(
+        Uri.parse(url),
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': 'Bearer ' + _dummyToken,
+        },
+      );
+      final userData = json.decode(response.body);
+      setState(() {
+        email = userData['email'];
+        height = userData['height'];
+        weight = userData['weight'];
+      });
+    } catch (error) {
+      print(error);
+      throw error;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
