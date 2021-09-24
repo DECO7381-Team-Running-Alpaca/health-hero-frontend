@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:health_hero/screens/home_page.dart';
 import 'package:health_hero/screens/profile_page.dart';
-import 'package:health_hero/screens/scan_page.dart';
 import 'package:health_hero/screens/weekly_plan_page.dart';
 import 'package:health_hero/widgets/bottom_navBar.dart';
+import 'health_profile_page.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home';
@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final pages = [
     HomePage(),
     WeeklyPlanPage(),
-    ScanPage(),
+    HealthProfilePage(),
     ProfilePage(),
   ];
   @override
