@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:health_hero/screens/preferred_page.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
+import 'package:health_hero/screens/preferred_page.dart';
 import 'package:health_hero/screens/home_screen.dart';
 import 'package:health_hero/screens/landing_screen.dart';
+import '../provider/auth.dart';
 
 class UserAuthScreen extends StatefulWidget {
   static const routeName = '/auth';
@@ -52,33 +54,27 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
     setState(() {
       _isLoading = true;
       _loginStatus = '';
-      _loginData['username'] = _lUserController.text;
-      _loginData['password'] = _lPasswordController.text;
+      // _loginData['username'] = _lUserController.text;
+      // _loginData['password'] = _lPasswordController.text;
+      _loginData['username'] = 'eetest';
+      _loginData['password'] = 'EEee77';
     });
 
-    final url = 'http://whispering-plateau-82869.herokuapp.com/users/login';
-
-    var body = json.encode({
-      "user_name": _loginData['username'],
-      "password": _loginData['password'],
-    });
     try {
-      final response = await http.post(
-        Uri.parse(url),
-        headers: {"Content-Type": "application/json"},
-        body: body,
-      );
-      final responseData = json.decode(response.body);
-      final _message = responseData['message'];
-
+      await Provider.of<Auth>(context, listen: false).login(_loginData);
       setState(() {
-        _loginStatus = _message;
+        _loginStatus = Provider.of<Auth>(context, listen: false).message;
         _isLoading = false;
       });
-      if (_message != 'You Shall Not Pass!') {
+
+      // more elegant way to handle error
+      if (_loginStatus != 'You Shall Not Pass!') {
         Navigator.of(context).pushNamed(HomeScreen.routeName);
       }
     } catch (error) {
+      setState(() {
+        _isLoading = false;
+      });
       throw error;
     }
   }
@@ -92,31 +88,15 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
       _signupData['height'] = _heightController.text;
       _signupData['weight'] = _weightController.text;
     });
-    print(_signupData);
-    final url = 'http://whispering-plateau-82869.herokuapp.com/users';
-
-    var body = json.encode({
-      "user_name": _signupData['username'],
-      "password": _signupData['password'],
-      "email": "test@test.com",
-      "weight": _signupData['weight'],
-      "height": _signupData['height'],
-    });
     try {
-      final response = await http.post(
-        Uri.parse(url),
-        headers: {"Content-Type": "application/json"},
-        body: body,
-      );
-      final responseData = json.decode(response.body);
-      final _message = responseData['message'];
-      print(_message);
-
+      await Provider.of<Auth>(context, listen: false).signup(_signupData);
       setState(() {
-        _loginStatus = _message;
+        _loginStatus = Provider.of<Auth>(context, listen: false).message;
         _isLoading = false;
       });
-      if (_message != 'Please make sure that body is well organized.') {
+
+      // more elegant way to handle error
+      if (_loginStatus != 'Please make sure that body is well organized.') {
         Navigator.of(context).pushNamed(PreferredPage.routeName);
       }
     } catch (error) {
