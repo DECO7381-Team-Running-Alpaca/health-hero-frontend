@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:health_hero/utils/services/local_storage_servcie.dart';
 import 'package:http/http.dart' as http;
 
+import '../services/local_storage_servcie.dart';
 import '../../constants/api_path.dart' as URL;
 
 Future<Map<String, String>> authLogin(Map<String, String> loginData) async {
@@ -20,8 +20,6 @@ Future<Map<String, String>> authLogin(Map<String, String> loginData) async {
     );
     final rawResponse = json.decode(response.body);
 
-    // store the user auth Data
-    // Backend haven't been modified 26/9
     Map<String, String> userData = {
       'userId': rawResponse['data']['id'],
       'token': rawResponse['data']['token'],
@@ -77,8 +75,8 @@ Future<Map<String, String>> fetchCurrentUser() async {
     Map<String, String> userData = {
       'userName': rawResponse['data']['user_name'],
       'email': rawResponse['data']['email'],
-      'height': "$rawResponse['data']['height']",
-      'weight': "$rawResponse['data']['weight']",
+      'height': rawResponse['data']['height'].toString(),
+      'weight': rawResponse['data']['weight'].toString(),
     };
     return userData;
   } catch (error) {
@@ -87,7 +85,31 @@ Future<Map<String, String>> fetchCurrentUser() async {
   }
 }
 
-// update current user
+// Future<Map<String, String>> updateCurrentUser() async {
+//   try {
+//     final token = await getLocalUser();
+//     final response = await http.patch(
+//       Uri.parse(URL.updateUser),
+//       headers: {
+//         "Content-Type": "application/json",
+//         'Authorization': 'Bearer ' + token,
+//       },
+//     );
+//     final rawResponse = json.decode(response.body);
+
+//     // To be update
+//     Map<String, String> userData = {
+//       'userName': rawResponse['data']['user_name'],
+//       'email': rawResponse['data']['email'],
+//       'height': rawResponse['data']['height'].toString(),
+//       'weight': rawResponse['data']['weight'].toString(),
+//     };
+//     return userData;
+//   } catch (error) {
+//     print(error);
+//     throw error;
+//   }
+// }
 
 // add preferences
 
