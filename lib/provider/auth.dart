@@ -12,19 +12,29 @@ class Auth with ChangeNotifier {
   Timer _countTime;
   String _message;
 
+  String get token {
+    // To be fufilled with expiration date.
+    return _token;
+  }
+
   String get message {
     return _message;
   }
 
+  String get userId {
+    return _userId;
+  }
+
   Future<void> login(Map<String, String> loginData) async {
     try {
-      await authLogin(loginData).then((userData) {
-        _message = userData['message'];
-        _token = userData['token'];
-        _userId = userData['userId'];
+      await authLogin(loginData).then((authData) {
+        _message = authData['message'];
+        _token = authData['token'];
+        _userId = authData['userId'];
       }).catchError((e) {
         throw e;
       });
+      
       notifyListeners();
       await storeUserLocally(_token, _userId);
     } catch (error) {
@@ -34,10 +44,10 @@ class Auth with ChangeNotifier {
 
   Future<void> signup(Map<String, String> signupData) async {
     try {
-      await authSignup(signupData).then((userData) {
-        _message = userData['message'];
-        _token = userData['token'];
-        _userId = userData['userId'];
+      await authSignup(signupData).then((authData) {
+        _message = authData['message'];
+        _token = authData['token'];
+        _userId = authData['userId'];
       }).catchError((e) {
         throw e;
       });
