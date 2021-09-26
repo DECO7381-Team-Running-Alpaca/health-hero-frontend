@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../utils/services/rest_api_service.dart';
+import '../utils/services/local_storage_servcie.dart';
 
 class Auth with ChangeNotifier {
   String _token;
@@ -25,6 +26,7 @@ class Auth with ChangeNotifier {
         throw e;
       });
       notifyListeners();
+      await storeUserLocally(_token, _userId);
     } catch (error) {
       throw error;
     }

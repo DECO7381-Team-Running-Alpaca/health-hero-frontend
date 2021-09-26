@@ -50,14 +50,12 @@ Future<Map<String, String>> authSignup(Map<String, String> signupData) async {
       body: body,
     );
     final rawResponse = json.decode(response.body);
-    print(rawResponse);
 
     Map<String, String> userData = {
       'userId': rawResponse['data']['id'],
       'token': rawResponse['data']['token'],
       'message': rawResponse['message'],
     };
-    print(userData);
     return userData;
   } catch (error) {
     throw error;
