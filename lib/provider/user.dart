@@ -39,6 +39,7 @@ class User with ChangeNotifier {
     }
   }
 
+  // Bug exists here
   Future<String> modfiyUserProfile(String info, String value) async {
     try {
       await updateCurrentUser(info, value).then((updateInfo) {
