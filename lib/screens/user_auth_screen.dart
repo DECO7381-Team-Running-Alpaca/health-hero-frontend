@@ -54,24 +54,20 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
     setState(() {
       _isLoading = true;
       _loginStatus = '';
-      _loginData['username'] = _lUserController.text;
-      _loginData['password'] = _lPasswordController.text;
+      // _loginData['username'] = _lUserController.text;
+      // _loginData['password'] = _lPasswordController.text;
+      _loginData['username'] = 'eetest';
+      _loginData['password'] = 'EEee77';
     });
 
     try {
-      // await Provider.of<Auth>(context, listen: false).login(
-      //   _loginData['username'],
-      //   _loginData['password'],
-      // );
-      await Provider.of<Auth>(context, listen: false).login(
-        'eetest',
-        'EEee77',
-      );
-
+      await Provider.of<Auth>(context, listen: false).login(_loginData);
       setState(() {
         _loginStatus = Provider.of<Auth>(context, listen: false).message;
         _isLoading = false;
       });
+
+      // more elegant way to handle error
       if (_loginStatus != 'You Shall Not Pass!') {
         Navigator.of(context).pushNamed(HomeScreen.routeName);
       }
@@ -92,31 +88,15 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
       _signupData['height'] = _heightController.text;
       _signupData['weight'] = _weightController.text;
     });
-    print(_signupData);
-    final url = 'http://whispering-plateau-82869.herokuapp.com/users';
-
-    var body = json.encode({
-      "user_name": _signupData['username'],
-      "password": _signupData['password'],
-      "email": "test@test.com",
-      "weight": _signupData['weight'],
-      "height": _signupData['height'],
-    });
     try {
-      final response = await http.post(
-        Uri.parse(url),
-        headers: {"Content-Type": "application/json"},
-        body: body,
-      );
-      final responseData = json.decode(response.body);
-      final _message = responseData['message'];
-      print(_message);
-
+      await Provider.of<Auth>(context, listen: false).signup(_signupData);
       setState(() {
-        _loginStatus = _message;
+        _loginStatus = Provider.of<Auth>(context, listen: false).message;
         _isLoading = false;
       });
-      if (_message != 'Please make sure that body is well organized.') {
+
+      // more elegant way to handle error
+      if (_loginStatus != 'Please make sure that body is well organized.') {
         Navigator.of(context).pushNamed(PreferredPage.routeName);
       }
     } catch (error) {

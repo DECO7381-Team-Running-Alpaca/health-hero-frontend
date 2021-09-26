@@ -1,8 +1,7 @@
 import 'dart:async';
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+
+import '../utils/services/rest_api_service.dart';
 
 class Auth with ChangeNotifier {
   String _token;
@@ -16,29 +15,30 @@ class Auth with ChangeNotifier {
     return _message;
   }
 
-  Future<void> login(String account, String password) async {
-    final url = 'http://whispering-plateau-82869.herokuapp.com/users/login';
-
-    var body = json.encode({
-      "user_name": account,
-      "password": password,
-    });
-
+  Future<void> login(Map<String, String> loginData) async {
     try {
-      final response = await http.post(
-        Uri.parse(url),
-        headers: {"Content-Type": "application/json"},
-        body: body,
-      );
-      final responseData = json.decode(response.body);
+      await authLogin(loginData).then((userData) {
+        _message = userData['message'];
+        _token = userData['token'];
+        _userId = userData['userId'];
+      }).catchError((e) {
+        throw e;
+      });
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
+  }
 
-      // need error handling
-      _message = responseData['message'];
-      // store the user auth Data
-      // Backend haven't been modified 26/9
-      _token = responseData['user']['tokens'].last['token'];
-      _userId = responseData['user']['_id'];
-
+  Future<void> signup(Map<String, String> signupData) async {
+    try {
+      await authSignup(signupData).then((userData) {
+        _message = userData['message'];
+        _token = userData['token'];
+        _userId = userData['userId'];
+      }).catchError((e) {
+        throw e;
+      });
       notifyListeners();
     } catch (error) {
       throw error;
