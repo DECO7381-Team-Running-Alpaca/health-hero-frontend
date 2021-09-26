@@ -6,6 +6,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:health_hero/models/meal.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/user.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -37,7 +40,11 @@ class _ProfilePageState extends State<ProfilePage> {
       setState(() {
         _isLoading = true;
       });
-      _fetchUserInfo().then((_) {
+      Provider.of<User>(context).getUserProfile().then((_) {
+        setState(() {
+          userName = Provider.of<User>(context, listen: false).userName;
+        });
+      }).then((_) {
         setState(() {
           _isLoading = false;
         });
@@ -128,12 +135,12 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               _isLoading
                   ? Container(
-                    margin: const EdgeInsets.only(bottom: 20.0),
-                    child: CircularProgressIndicator(
+                      margin: const EdgeInsets.only(bottom: 20.0),
+                      child: CircularProgressIndicator(
                         value: null,
                         color: Color.fromRGBO(205, 214, 169, 100),
                       ),
-                  )
+                    )
                   : Container(
                       margin: EdgeInsets.only(
                           top: 60, left: 35, right: 35, bottom: 25),
@@ -540,7 +547,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           Container(
                             padding:
-                            EdgeInsets.only(left: 20, right: 15, top: 5),
+                                EdgeInsets.only(left: 20, right: 15, top: 5),
                             height: 46,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -548,14 +555,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Container(
                                   child: Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Height',
                                         style: TextStyle(
                                           fontSize: 14,
                                           color:
-                                          Color.fromRGBO(100, 110, 91, 1),
+                                              Color.fromRGBO(100, 110, 91, 1),
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -567,7 +574,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         style: TextStyle(
                                           fontSize: 14,
                                           color:
-                                          Color.fromRGBO(100, 110, 91, 1),
+                                              Color.fromRGBO(100, 110, 91, 1),
                                           fontWeight: FontWeight.normal,
                                         ),
                                       ),
@@ -576,7 +583,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                                 IconButton(
                                   padding:
-                                  EdgeInsets.only(left: 20, bottom: 20),
+                                      EdgeInsets.only(left: 20, bottom: 20),
                                   icon: Icon(Icons.create),
                                   color: Color.fromRGBO(100, 110, 91, 1),
                                   iconSize: 20,
@@ -584,110 +591,112 @@ class _ProfilePageState extends State<ProfilePage> {
                                     showDialog(
                                         context: context,
                                         builder: (context) => AlertDialog(
-                                          title: Container(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              'Change Height',
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: Color.fromRGBO(
-                                                    100, 110, 91, 1),
-                                                fontWeight: FontWeight.bold,
+                                              title: Container(
+                                                alignment: Alignment.center,
+                                                child: Text(
+                                                  'Change Height',
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Color.fromRGBO(
+                                                        100, 110, 91, 1),
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                          ),
-                                          content: Container(
-                                            height: 30,
-                                            width: 400,
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  height: 30,
-                                                  width: 210,
-                                                  child: TextField(
-                                                    controller:
-                                                    heightController,
-                                                    keyboardType: TextInputType.number,
-                                                    decoration:
-                                                    InputDecoration(
-                                                      contentPadding:
-                                                      EdgeInsets
-                                                          .symmetric(
-                                                          horizontal:
-                                                          5,
-                                                          vertical:
-                                                          5),
-                                                      hintText:
-                                                      'Enter new height',
-                                                      hintStyle: TextStyle(
-                                                        fontSize: 14,
-                                                      ),
-                                                      border:
-                                                      OutlineInputBorder(
-                                                        borderSide:
-                                                        BorderSide(
-                                                          color:
-                                                          Colors.black,
-                                                          width: 1,
+                                              content: Container(
+                                                height: 30,
+                                                width: 400,
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      height: 30,
+                                                      width: 210,
+                                                      child: TextField(
+                                                        controller:
+                                                            heightController,
+                                                        keyboardType:
+                                                            TextInputType
+                                                                .number,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          contentPadding:
+                                                              EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          5,
+                                                                      vertical:
+                                                                          5),
+                                                          hintText:
+                                                              'Enter new height',
+                                                          hintStyle: TextStyle(
+                                                            fontSize: 14,
+                                                          ),
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderSide:
+                                                                BorderSide(
+                                                              color:
+                                                                  Colors.black,
+                                                              width: 1,
+                                                            ),
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
+                                                  ],
+                                                ),
+                                              ),
+                                              actions: [
+                                                Container(
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: const Text(
+                                                          'CONFIRM',
+                                                          style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    100,
+                                                                    109,
+                                                                    93,
+                                                                    1),
+                                                            fontSize: 14,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 80,
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: const Text(
+                                                          'CANCEL',
+                                                          style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    100,
+                                                                    109,
+                                                                    93,
+                                                                    1),
+                                                            fontSize: 14,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ],
-                                            ),
-                                          ),
-                                          actions: [
-                                            Container(
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: const Text(
-                                                      'CONFIRM',
-                                                      style: TextStyle(
-                                                        color:
-                                                        Color.fromRGBO(
-                                                            100,
-                                                            109,
-                                                            93,
-                                                            1),
-                                                        fontSize: 14,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 80,
-                                                  ),
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: const Text(
-                                                      'CANCEL',
-                                                      style: TextStyle(
-                                                        color:
-                                                        Color.fromRGBO(
-                                                            100,
-                                                            109,
-                                                            93,
-                                                            1),
-                                                        fontSize: 14,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ));
+                                            ));
                                   },
                                 ),
                               ],
@@ -698,7 +707,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           Container(
                             padding:
-                            EdgeInsets.only(left: 20, right: 15, top: 5),
+                                EdgeInsets.only(left: 20, right: 15, top: 5),
                             height: 46,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -706,14 +715,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Container(
                                   child: Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Weight',
                                         style: TextStyle(
                                           fontSize: 14,
                                           color:
-                                          Color.fromRGBO(100, 110, 91, 1),
+                                              Color.fromRGBO(100, 110, 91, 1),
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -725,7 +734,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         style: TextStyle(
                                           fontSize: 14,
                                           color:
-                                          Color.fromRGBO(100, 110, 91, 1),
+                                              Color.fromRGBO(100, 110, 91, 1),
                                           fontWeight: FontWeight.normal,
                                         ),
                                       ),
@@ -734,7 +743,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                                 IconButton(
                                   padding:
-                                  EdgeInsets.only(left: 20, bottom: 20),
+                                      EdgeInsets.only(left: 20, bottom: 20),
                                   icon: Icon(Icons.create),
                                   color: Color.fromRGBO(100, 110, 91, 1),
                                   iconSize: 20,
@@ -742,110 +751,112 @@ class _ProfilePageState extends State<ProfilePage> {
                                     showDialog(
                                         context: context,
                                         builder: (context) => AlertDialog(
-                                          title: Container(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              'Change Weight',
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: Color.fromRGBO(
-                                                    100, 110, 91, 1),
-                                                fontWeight: FontWeight.bold,
+                                              title: Container(
+                                                alignment: Alignment.center,
+                                                child: Text(
+                                                  'Change Weight',
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Color.fromRGBO(
+                                                        100, 110, 91, 1),
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                          ),
-                                          content: Container(
-                                            height: 30,
-                                            width: 400,
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  height: 30,
-                                                  width: 210,
-                                                  child: TextField(
-                                                    controller:
-                                                    weightController,
-                                                    keyboardType: TextInputType.number,
-                                                    decoration:
-                                                    InputDecoration(
-                                                      contentPadding:
-                                                      EdgeInsets
-                                                          .symmetric(
-                                                          horizontal:
-                                                          5,
-                                                          vertical:
-                                                          5),
-                                                      hintText:
-                                                      'Enter new weight',
-                                                      hintStyle: TextStyle(
-                                                        fontSize: 14,
-                                                      ),
-                                                      border:
-                                                      OutlineInputBorder(
-                                                        borderSide:
-                                                        BorderSide(
-                                                          color:
-                                                          Colors.black,
-                                                          width: 1,
+                                              content: Container(
+                                                height: 30,
+                                                width: 400,
+                                                child: Column(
+                                                  children: [
+                                                    Container(
+                                                      height: 30,
+                                                      width: 210,
+                                                      child: TextField(
+                                                        controller:
+                                                            weightController,
+                                                        keyboardType:
+                                                            TextInputType
+                                                                .number,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          contentPadding:
+                                                              EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          5,
+                                                                      vertical:
+                                                                          5),
+                                                          hintText:
+                                                              'Enter new weight',
+                                                          hintStyle: TextStyle(
+                                                            fontSize: 14,
+                                                          ),
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderSide:
+                                                                BorderSide(
+                                                              color:
+                                                                  Colors.black,
+                                                              width: 1,
+                                                            ),
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
+                                                  ],
+                                                ),
+                                              ),
+                                              actions: [
+                                                Container(
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: const Text(
+                                                          'CONFIRM',
+                                                          style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    100,
+                                                                    109,
+                                                                    93,
+                                                                    1),
+                                                            fontSize: 14,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 80,
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: const Text(
+                                                          'CANCEL',
+                                                          style: TextStyle(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    100,
+                                                                    109,
+                                                                    93,
+                                                                    1),
+                                                            fontSize: 14,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ],
-                                            ),
-                                          ),
-                                          actions: [
-                                            Container(
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: const Text(
-                                                      'CONFIRM',
-                                                      style: TextStyle(
-                                                        color:
-                                                        Color.fromRGBO(
-                                                            100,
-                                                            109,
-                                                            93,
-                                                            1),
-                                                        fontSize: 14,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 80,
-                                                  ),
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: const Text(
-                                                      'CANCEL',
-                                                      style: TextStyle(
-                                                        color:
-                                                        Color.fromRGBO(
-                                                            100,
-                                                            109,
-                                                            93,
-                                                            1),
-                                                        fontSize: 14,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ));
+                                            ));
                                   },
                                 ),
                               ],

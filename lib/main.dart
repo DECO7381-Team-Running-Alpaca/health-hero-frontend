@@ -7,6 +7,7 @@ import 'package:health_hero/screens/landing_screen.dart';
 import 'package:health_hero/screens/preferred_page.dart';
 import 'package:health_hero/screens/user_auth_screen.dart';
 import './provider/auth.dart';
+import './provider/user.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,7 +16,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => Auth())
+        ChangeNotifierProvider(create: (context) => Auth()),
+        ChangeNotifierProxyProvider<Auth, User>(
+          create: null,
+          update: (context, auth, prevUser) => User(
+            auth.token,
+            auth.userId,
+            prevUser == null ? '' : prevUser.userName
+          ),
+        ),
       ],
       child: MaterialApp(
         title: 'Health Hero',
