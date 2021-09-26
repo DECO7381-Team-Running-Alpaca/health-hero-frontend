@@ -39,20 +39,27 @@ class User with ChangeNotifier {
     }
   }
 
-  // Future<void> modfiyUserProfile() async {
-  //   try {
-  //     await updateCurrentUser().then((userData) {
-  //       _userName = userData['userName'];
-  //       _email = userData['email'];
-  //       _height = userData['height'];
-  //       _weight = userData['weight'];
-  //     });
+  Future<String> modfiyUserProfile(String info, String value) async {
+    try {
+      await updateCurrentUser(info, value).then((updateInfo) {
+        String message;
+        switch (info) {
+          case "password":
+            {
+              message = "Password Update Successfully.";
+            }
+            break;
+          default:
+            {
+              message = '$info update fail';
+            }
+        }
+        return message;
+      });
 
-  //     notifyListeners();
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
-
-
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
+  }
 }

@@ -85,32 +85,30 @@ Future<Map<String, String>> fetchCurrentUser() async {
   }
 }
 
-// Future<Map<String, String>> updateCurrentUser() async {
-//   try {
-//     final token = await getLocalUser();
-//     final response = await http.patch(
-//       Uri.parse(URL.updateUser),
-//       headers: {
-//         "Content-Type": "application/json",
-//         'Authorization': 'Bearer ' + token,
-//       },
-//     );
-//     final rawResponse = json.decode(response.body);
+Future<Map<String, String>> updateCurrentUser(String info, String value) async {
+  try {
+    final token = await getLocalUser();
+    var body = json.encode({info: value});
 
-//     // To be update
-//     Map<String, String> userData = {
-//       'userName': rawResponse['data']['user_name'],
-//       'email': rawResponse['data']['email'],
-//       'height': rawResponse['data']['height'].toString(),
-//       'weight': rawResponse['data']['weight'].toString(),
-//     };
-//     return userData;
-//   } catch (error) {
-//     print(error);
-//     throw error;
-//   }
-// }
+    final response = await http.patch(
+      Uri.parse(URL.updateUser),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': 'Bearer ' + token,
+      },
+      body: body,
+    );
+    final rawResponse = json.decode(response.body);
 
+    Map<String, String> updateInfo = {
+      info: rawResponse['data']['user'][info],
+    };
+    return updateInfo;
+  } catch (error) {
+    print(error);
+    throw error;
+  }
+}
 // add preferences
 
 // add allergies

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/user.dart';
 
 class UpdatePasswordDialog extends StatefulWidget {
   @override
@@ -6,9 +9,26 @@ class UpdatePasswordDialog extends StatefulWidget {
 }
 
 class _UpdatePasswordDialogState extends State<UpdatePasswordDialog> {
+  bool _isLoading = false;
+  String _statusMsg = '';
+
   String password = '';
   final passwordController = TextEditingController();
   final newPasswordController = TextEditingController();
+
+  void _updatePassword() async {
+    setState(() {
+      _isLoading = true;
+    });
+    await Provider.of<User>(context, listen: false)
+        .modfiyUserProfile('password', newPasswordController.text)
+        .then((msg) {
+      setState(() {
+        _isLoading = false;
+        _statusMsg = msg;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,59 +45,75 @@ class _UpdatePasswordDialogState extends State<UpdatePasswordDialog> {
         ),
       ),
       content: Container(
-        height: 72,
+        height: 70,
         width: 400,
-        child: Column(
-          children: [
-            Container(
-              height: 30,
-              width: 200,
-              child: TextField(
-                controller: passwordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                  hintText: 'Enter original password',
-                  hintStyle: TextStyle(
-                    fontSize: 14,
-                  ),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.black,
-                      width: 1,
+        child: _isLoading
+            ?
+            // Indicator style bugs
+            CircularProgressIndicator(
+                color: Color.fromRGBO(205, 214, 169, 100),
+              )
+            : _statusMsg == ''
+                ? Column(
+                    children: [
+                      Container(
+                        height: 30,
+                        width: 200,
+                        child: TextField(
+                          controller: passwordController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 5),
+                            hintText: 'Enter original password',
+                            hintStyle: TextStyle(
+                              fontSize: 14,
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                                width: 1,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        height: 30,
+                        width: 200,
+                        child: TextField(
+                          controller: newPasswordController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 5),
+                            hintText: 'Enter new password',
+                            hintStyle: TextStyle(
+                              fontSize: 14,
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                                width: 1,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : Center(
+                    child: Text(
+                      'Update Successfully',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 15,
+                      ),
                     ),
                   ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 12,
-            ),
-            Container(
-              height: 30,
-              width: 200,
-              child: TextField(
-                controller: newPasswordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                  hintText: 'Enter new password',
-                  hintStyle: TextStyle(
-                    fontSize: 14,
-                  ),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.black,
-                      width: 1,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
       actions: [
         Container(
@@ -85,13 +121,7 @@ class _UpdatePasswordDialogState extends State<UpdatePasswordDialog> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextButton(
-                onPressed: () {
-                  print(newPasswordController.text);
-                  Navigator.of(context).pop();
-                  setState(() {
-                    password = newPasswordController.text;
-                  });
-                },
+                onPressed: _updatePassword,
                 child: const Text(
                   'CONFIRM',
                   style: TextStyle(
@@ -105,6 +135,9 @@ class _UpdatePasswordDialogState extends State<UpdatePasswordDialog> {
               ),
               TextButton(
                 onPressed: () {
+                  setState(() {
+                    _statusMsg = '';
+                  });
                   Navigator.of(context).pop();
                 },
                 child: const Text(
