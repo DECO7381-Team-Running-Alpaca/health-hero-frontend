@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_hero/screens/health_report_page.dart';
 import 'package:health_hero/screens/home_page.dart';
 import 'package:health_hero/screens/profile_page.dart';
 import 'package:health_hero/screens/weekly_plan_page.dart';
