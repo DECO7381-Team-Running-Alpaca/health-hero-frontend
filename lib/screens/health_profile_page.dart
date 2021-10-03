@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health_hero/models/meal.dart';
-import 'package:health_hero/provider/record.dart';
+import 'package:health_hero/models/record.dart';
 
 import 'health_report_page.dart';
 
