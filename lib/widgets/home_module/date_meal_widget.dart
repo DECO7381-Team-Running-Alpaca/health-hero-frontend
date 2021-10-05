@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_hero/models/meal.dart';
-import 'package:health_hero/widgets/breakfast_lunch_dinner_selector.dart';
+import 'package:health_hero/widgets/weekly_plan_module/breakfast_lunch_dinner_selector.dart';
 
 class DateMealWidget extends StatelessWidget {
   final EveryDayMeal everyDayMeal;

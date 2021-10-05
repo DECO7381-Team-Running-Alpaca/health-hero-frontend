@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_hero/provider/app_state.dart';
-import 'package:health_hero/widgets/date_meal_widget.dart';
-import 'package:health_hero/widgets/day_selector.dart';
+import 'package:health_hero/widgets/home_module/date_meal_widget.dart';
+import 'package:health_hero/widgets/weekly_plan_module/day_selector.dart';
 import 'package:provider/provider.dart';
 import 'package:health_hero/models/meal.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:health_hero/widgets/continue_and_complete_button.dart';
-import 'package:health_hero/widgets/food_box.dart';
+import 'package:health_hero/widgets/prefer_allergy_module/continue_and_complete_button.dart';
+import 'package:health_hero/widgets/prefer_allergy_module/food_box.dart';
 
 class AllergyPage extends StatefulWidget {
   static const routeName = '/allergy';

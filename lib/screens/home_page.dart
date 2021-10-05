@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:health_hero/widgets/today_plan.dart';
-import 'package:health_hero/widgets/tomorrow_plan.dart';
+import 'package:health_hero/widgets/home_module/today_plan.dart';
+import 'package:health_hero/widgets/home_module/tomorrow_plan.dart';
 
 class HomePage extends StatelessWidget {
   @override
