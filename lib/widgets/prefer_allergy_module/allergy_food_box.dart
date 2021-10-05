@@ -1,23 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:health_hero/screens/allergies_page.dart';
 
-class FoodBoxCard extends StatefulWidget {
+class AllergyFoodBoxCard extends StatefulWidget {
   final String background;
   final String title;
   bool visibility = false;
 
-  FoodBoxCard({this.background, this.title});
+  AllergyFoodBoxCard({this.background, this.title});
 
   @override
-  _FoodBoxCardState createState() => _FoodBoxCardState();
+  _AllergyFoodBoxCardState createState() => _AllergyFoodBoxCardState();
 }
 
-class _FoodBoxCardState extends State<FoodBoxCard> {
+class _AllergyFoodBoxCardState extends State<AllergyFoodBoxCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         setState(() {
-          this.widget.visibility = !this.widget.visibility;
+          if (widget.visibility == false) {
+            widget.visibility = true;
+            selectedAllergyList.add(widget.title);
+          } else {
+            widget.visibility = false;
+            selectedAllergyList.remove(widget.title);
+          }
         });
       },
       child: Container(

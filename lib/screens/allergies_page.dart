@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:health_hero/widgets/prefer_allergy_module/allergy_food_box.dart';
 import 'package:health_hero/widgets/prefer_allergy_module/continue_and_complete_button.dart';
-import 'package:health_hero/widgets/prefer_allergy_module/food_box.dart';
 
 class AllergyPage extends StatefulWidget {
   static const routeName = '/allergy';
   @override
   _AllergyPageState createState() => _AllergyPageState();
 }
+List selectedAllergyList = [];
 
 class _AllergyPageState extends State<AllergyPage> {
   yesOrNoDialog() {
@@ -120,19 +121,19 @@ class _AllergyPageState extends State<AllergyPage> {
                             //left row
                             Column(
                               children: [
-                                FoodBoxCard(
+                                AllergyFoodBoxCard(
                                   title: 'milk',
                                   background: 'assets/images/milk.jpg',
                                 ),
-                                FoodBoxCard(
+                                AllergyFoodBoxCard(
                                   title: 'mushiroom',
                                   background: 'assets/images/mushroom.jpg',
                                 ),
-                                FoodBoxCard(
+                                AllergyFoodBoxCard(
                                   title: 'onion',
                                   background: 'assets/images/onion.jpg',
                                 ),
-                                FoodBoxCard(
+                                AllergyFoodBoxCard(
                                   title: 'shrimp',
                                   background: 'assets/images/shrimp.jpg',
                                 ),
@@ -141,19 +142,19 @@ class _AllergyPageState extends State<AllergyPage> {
                             //right row
                             Column(
                               children: [
-                                FoodBoxCard(
+                                AllergyFoodBoxCard(
                                   title: 'beans',
                                   background: 'assets/images/beans.jpg',
                                 ),
-                                FoodBoxCard(
+                                AllergyFoodBoxCard(
                                   title: 'brocroli',
                                   background: 'assets/images/brocroli.jpg',
                                 ),
-                                FoodBoxCard(
+                                AllergyFoodBoxCard(
                                   title: 'carrot',
                                   background: 'assets/images/carrot.jpg',
                                 ),
-                                FoodBoxCard(
+                                AllergyFoodBoxCard(
                                   title: 'other',
                                   background: 'assets/images/brocroli.jpg',
                                 ),

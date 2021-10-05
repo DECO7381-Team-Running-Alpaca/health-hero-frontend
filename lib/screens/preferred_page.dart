@@ -1,13 +1,18 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:health_hero/screens/allergies_page.dart';
 import 'package:health_hero/widgets/prefer_allergy_module/continue_and_complete_button.dart';
-import 'package:health_hero/widgets/prefer_allergy_module/food_box.dart';
+import 'package:health_hero/widgets/prefer_allergy_module/prefer_food_box.dart';
 
 class PreferredPage extends StatefulWidget {
   static const routeName = '/prefer';
+
   @override
   _PreferredPageState createState() => _PreferredPageState();
 }
+
+List selectedPreferList = [];
 
 class _PreferredPageState extends State<PreferredPage> {
   bool isCheckVisible;
@@ -62,19 +67,19 @@ class _PreferredPageState extends State<PreferredPage> {
                             //left row
                             Column(
                               children: [
-                                FoodBoxCard(
+                                PreferFoodBoxCard(
                                   title: 'Beef',
                                   background: 'assets/images/beef.jpg',
                                 ),
-                                FoodBoxCard(
+                                PreferFoodBoxCard(
                                   title: 'mushiroom',
                                   background: 'assets/images/mushroom.jpg',
                                 ),
-                                FoodBoxCard(
+                                PreferFoodBoxCard(
                                   title: 'tomato',
                                   background: 'assets/images/tomato.jpg',
                                 ),
-                                FoodBoxCard(
+                                PreferFoodBoxCard(
                                   title: 'pork',
                                   background: 'assets/images/pork.jpg',
                                 ),
@@ -83,19 +88,19 @@ class _PreferredPageState extends State<PreferredPage> {
                             //right row
                             Column(
                               children: [
-                                FoodBoxCard(
+                                PreferFoodBoxCard(
                                   title: 'chicken',
                                   background: 'assets/images/chicken.jpg',
                                 ),
-                                FoodBoxCard(
+                                PreferFoodBoxCard(
                                   title: 'brocroli',
                                   background: 'assets/images/brocroli.jpg',
                                 ),
-                                FoodBoxCard(
+                                PreferFoodBoxCard(
                                   title: 'cucumber',
                                   background: 'assets/images/cucumber.jpg',
                                 ),
-                                FoodBoxCard(
+                                PreferFoodBoxCard(
                                   title: 'egg',
                                   background: 'assets/images/egg.jpg',
                                 ),
@@ -106,8 +111,10 @@ class _PreferredPageState extends State<PreferredPage> {
 
                         // bottom button
                         ContinueAndCompleteButton(
-                          onTap: () => Navigator.pushNamed(
-                              context, AllergyPage.routeName),
+                          onTap: () {
+                            Navigator.pushNamed(context, AllergyPage.routeName);
+                            print(selectedPreferList);
+                          },
                           buttonTitle: 'continue',
                         )
                       ],
