@@ -104,6 +104,15 @@ class _PreferredPageState extends State<PreferredPage> {
                                       fit: BoxFit.fill,
                                     ),
                                   ),
+                                  Container(
+                                    transform:
+                                        Matrix4.translationValues(0, 420, 0),
+                                    child: Image(
+                                      image: AssetImage(
+                                          'assets/images/preference-bottom.png'),
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
                                   SingleChildScrollView(
                                     child: Column(
                                       children: [
@@ -175,15 +184,6 @@ class _PreferredPageState extends State<PreferredPage> {
                                           ],
                                         ),
                                       ],
-                                    ),
-                                  ),
-                                  Container(
-                                    transform:
-                                        Matrix4.translationValues(0, 420, 0),
-                                    child: Image(
-                                      image: AssetImage(
-                                          'assets/images/preference-bottom.png'),
-                                      fit: BoxFit.fill,
                                     ),
                                   ),
                                 ],
