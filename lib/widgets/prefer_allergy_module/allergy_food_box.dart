@@ -29,8 +29,8 @@ class _AllergyFoodBoxCardState extends State<AllergyFoodBoxCard> {
       },
       child: Container(
         // margin: EdgeInsets.all(20),
-        width: 170,
-        height: 170,
+        width: 150,
+        height: 150,
         margin: EdgeInsets.all(12),
         child: Center(
           child: Stack(
@@ -42,7 +42,7 @@ class _AllergyFoodBoxCardState extends State<AllergyFoodBoxCard> {
                 ),
               ),
               Visibility(
-                visible: this.widget.visibility,
+                visible: widget.visibility,
                 child: Align(
                   alignment: Alignment(0.8, -0.8),
                   child: Icon(
@@ -53,10 +53,10 @@ class _AllergyFoodBoxCardState extends State<AllergyFoodBoxCard> {
               ),
               Center(
                 child: Text(
-                  this.widget.title.toUpperCase(),
+                  widget.title.toUpperCase(),
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 23,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

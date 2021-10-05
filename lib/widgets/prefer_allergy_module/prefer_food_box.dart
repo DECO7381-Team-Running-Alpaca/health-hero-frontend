@@ -29,8 +29,8 @@ class _PreferFoodBoxCardState extends State<PreferFoodBoxCard> {
       },
       child: Container(
         // margin: EdgeInsets.all(20),
-        width: 170,
-        height: 170,
+        width: 150,
+        height: 150,
         margin: EdgeInsets.all(12),
         child: Center(
           child: Stack(
@@ -53,10 +53,10 @@ class _PreferFoodBoxCardState extends State<PreferFoodBoxCard> {
               ),
               Center(
                 child: Text(
-                  this.widget.title.toUpperCase(),
+                  widget.title.toUpperCase(),
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 23,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -67,7 +67,7 @@ class _PreferFoodBoxCardState extends State<PreferFoodBoxCard> {
         // margin: EdgeInsets.all(15),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(this.widget.background),
+            image: AssetImage(widget.background),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(30),

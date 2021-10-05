@@ -52,75 +52,156 @@ class _PreferredPageState extends State<PreferredPage> {
                     ),
                   ),
                 ),
-                Expanded(
-                  //main part
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.25),
-                    ),
-                    child: ListView(
-                      children: [
-                        //food box area
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.25),
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 680,
+                        child: Column(
                           children: [
-                            //left row
-                            Column(
-                              children: [
-                                PreferFoodBoxCard(
-                                  title: 'Beef',
-                                  background: 'assets/images/beef.jpg',
-                                ),
-                                PreferFoodBoxCard(
-                                  title: 'mushiroom',
-                                  background: 'assets/images/mushroom.jpg',
-                                ),
-                                PreferFoodBoxCard(
-                                  title: 'tomato',
-                                  background: 'assets/images/tomato.jpg',
-                                ),
-                                PreferFoodBoxCard(
-                                  title: 'pork',
-                                  background: 'assets/images/pork.jpg',
-                                ),
-                              ],
+                            Container(
+                              padding: EdgeInsets.only(left: 17, right: 17),
+                              margin: EdgeInsets.only(
+                                bottom: 10,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {},
+                                    child: Icon(
+                                      Icons.arrow_back,
+                                      size: 25,
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                          context, AllergyPage.routeName);
+                                    },
+                                    child: Text(
+                                      'Skip',
+                                      style: TextStyle(fontSize: 17),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                            //right row
-                            Column(
-                              children: [
-                                PreferFoodBoxCard(
-                                  title: 'chicken',
-                                  background: 'assets/images/chicken.jpg',
-                                ),
-                                PreferFoodBoxCard(
-                                  title: 'brocroli',
-                                  background: 'assets/images/brocroli.jpg',
-                                ),
-                                PreferFoodBoxCard(
-                                  title: 'cucumber',
-                                  background: 'assets/images/cucumber.jpg',
-                                ),
-                                PreferFoodBoxCard(
-                                  title: 'egg',
-                                  background: 'assets/images/egg.jpg',
-                                ),
-                              ],
+                            Container(
+                              height: 600,
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    transform:
+                                        Matrix4.translationValues(0, -55, 0),
+                                    child: Image(
+                                      image: AssetImage(
+                                          'assets/images/preference-top.png'),
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                  SingleChildScrollView(
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          '---------------------MEAT---------------------',
+                                          style: TextStyle(fontSize: 17),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            PreferFoodBoxCard(
+                                              title: 'Beef',
+                                              background:
+                                                  'assets/images/beef.jpg',
+                                            ),
+                                            PreferFoodBoxCard(
+                                              title: 'chicken',
+                                              background:
+                                                  'assets/images/chicken.jpg',
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            PreferFoodBoxCard(
+                                              title: 'pork',
+                                              background:
+                                                  'assets/images/pork.jpg',
+                                            ),
+                                          ],
+                                        ),
+                                        Text(
+                                          '-------------------VEGGIES-------------------',
+                                          style: TextStyle(fontSize: 17),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            PreferFoodBoxCard(
+                                              title: 'mushiroom',
+                                              background:
+                                                  'assets/images/mushroom.jpg',
+                                            ),
+                                            PreferFoodBoxCard(
+                                              title: 'tomato',
+                                              background:
+                                                  'assets/images/tomato.jpg',
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            PreferFoodBoxCard(
+                                              title: 'brocroli',
+                                              background:
+                                                  'assets/images/brocroli.jpg',
+                                            ),
+                                            PreferFoodBoxCard(
+                                              title: 'cucumber',
+                                              background:
+                                                  'assets/images/cucumber.jpg',
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    transform:
+                                        Matrix4.translationValues(0, 420, 0),
+                                    child: Image(
+                                      image: AssetImage(
+                                          'assets/images/preference-bottom.png'),
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
-
-                        // bottom button
-                        ContinueAndCompleteButton(
-                          onTap: () {
-                            Navigator.pushNamed(context, AllergyPage.routeName);
-                            print(selectedPreferList);
-                          },
-                          buttonTitle: 'continue',
-                        )
-                      ],
-                    ),
+                      ),
+                      ContinueAndCompleteButton(
+                        onTap: () {
+                          Navigator.pushNamed(context, AllergyPage.routeName);
+                          print(selectedPreferList);
+                        },
+                        buttonTitle: 'continue',
+                      ),
+                    ],
                   ),
-                )
+                ),
               ],
             ),
           ),
