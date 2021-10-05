@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:health_hero/screens/health_profile_page.dart';
+import 'package:health_hero/screens/health_report_page.dart';
 import 'package:provider/provider.dart';
 
 import 'package:health_hero/screens/allergies_page.dart';
@@ -45,6 +47,7 @@ class MyHomePage extends StatelessWidget {
         LandingScreen.routeName: (context) => LandingScreen(),
         UserAuthScreen.routeName: (context) => UserAuthScreen(),
         HomeScreen.routeName: (context) => HomeScreen(),
+        HealthReportPage.routeName: (context) => HealthReportPage(),
       },
     );
   }
