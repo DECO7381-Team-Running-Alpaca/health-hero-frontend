@@ -19,11 +19,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => Auth()),
         ChangeNotifierProxyProvider<Auth, User>(
           create: null,
-          update: (context, auth, prevUser) => User(
-            auth.token,
-            auth.userId,
-            prevUser == null ? '' : prevUser.userName
-          ),
+          update: (context, auth, prevUser) => User(auth.token, auth.userId,
+              prevUser == null ? '' : prevUser.userName),
         ),
       ],
       child: MaterialApp(
@@ -41,7 +38,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: HomeScreen.routeName,
+      initialRoute: PreferredPage.routeName,
       routes: {
         PreferredPage.routeName: (context) => PreferredPage(),
         AllergyPage.routeName: (context) => AllergyPage(),

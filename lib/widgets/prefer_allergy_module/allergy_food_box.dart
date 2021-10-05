@@ -35,6 +35,12 @@ class _AllergyFoodBoxCardState extends State<AllergyFoodBoxCard> {
         child: Center(
           child: Stack(
             children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.4),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
               Visibility(
                 visible: this.widget.visibility,
                 child: Align(
