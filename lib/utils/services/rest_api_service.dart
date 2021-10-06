@@ -139,3 +139,30 @@ Future<dynamic> addUserAttribute(List<String> attributes, String type) async {
     throw error;
   }
 }
+
+// fetch preferences or allergies
+Future<dynamic> fetchUserAttribute(String type) async {
+  try {
+    final token = await getLocalUser();
+    var reqUrl;
+    if (type == 'preferences') {
+      reqUrl = URL.getPrefs;
+    } else if (type == 'allergies') {
+      reqUrl = URL.getAllg;
+    }
+
+    final response = await http.get(
+      Uri.parse(reqUrl),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': 'Bearer ' + token,
+      },
+    );
+    final rawResponse = json.decode(response.body);
+
+    return rawResponse['data'][type];
+  } catch (error) {
+    print(error);
+    throw error;
+  }
+}

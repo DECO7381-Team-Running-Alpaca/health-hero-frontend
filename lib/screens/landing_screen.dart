@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_hero/screens/user_auth_screen.dart';
+import 'package:health_hero/utils/services/rest_api_service.dart';
 import 'package:provider/provider.dart';
 import '../provider/user.dart';
 
@@ -36,6 +37,10 @@ class _LandingScreenState extends State<LandingScreen> {
       // //2) Add Allergies
       // List<String> aTestList = ["d", "e", "f"];
       // await Provider.of<User>(context, listen: false).addAllg(aTestList);
+
+      // // 3) Test on get preferences & allergy services
+      // await fetchUserAttribute('preferences').then((data) => print(data));
+      // await fetchUserAttribute('allergies').then((data) => print(data));
     } catch (e) {
       print(e);
     }

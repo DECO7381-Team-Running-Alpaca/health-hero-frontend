@@ -5,4 +5,5 @@ const getUser = '$baseURL/users/me';
 const updateUser = '$baseURL/users/me';
 const addPrefs = '$baseURL/users/preferences';
 const addAllg = '$baseURL/users/allergies';
-
+const getPrefs = '$baseURL/users/getPref';
+const getAllg = '$baseURL/users/getAllergies';

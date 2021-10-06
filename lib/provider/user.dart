@@ -99,4 +99,8 @@ class User with ChangeNotifier {
       throw error;
     }
   }
+
+  //TODO: Jeremy: getPrefs provider
+
+  //TODO: Jeremy: getAllg provider
 }
