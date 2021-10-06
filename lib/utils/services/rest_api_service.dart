@@ -109,6 +109,33 @@ Future<Map<String, String>> updateCurrentUser(String info, String value) async {
     throw error;
   }
 }
-// add preferences
 
-// add allergies
+// add preferences or allergies
+Future<dynamic> addUserAttribute(List<String> attributes, String type) async {
+  try {
+    final token = await getLocalUser();
+    var body, reqUrl;
+    if (type == 'preferences') {
+      body = json.encode({type: attributes});
+      reqUrl = URL.addPrefs;
+    } else if (type == 'allergies') {
+      body = json.encode({type: attributes});
+      reqUrl = URL.addAllg;
+    }
+
+    final response = await http.patch(
+      Uri.parse(reqUrl),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': 'Bearer ' + token,
+      },
+      body: body,
+    );
+    final rawResponse = json.decode(response.body);
+
+    return rawResponse['data'][type];
+  } catch (error) {
+    print(error);
+    throw error;
+  }
+}

@@ -9,6 +9,8 @@ class User with ChangeNotifier {
   String _email;
   String _height;
   String _weight;
+  List<String> _preferences = [];
+  List<String> _allergies = [];
 
   User(this.authToken, this.userId, this._userName);
 
@@ -60,6 +62,40 @@ class User with ChangeNotifier {
 
       notifyListeners();
     } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<void> addPrefs(List<String> prefs) async {
+    try {
+      await addUserAttribute(prefs, 'preferences').then((data) {
+        // change the dynamic type to String
+        for (var i = 0; i < data.length; i++) {
+          _preferences.add(data[i] as String);
+        }
+        print(_preferences);
+      });
+
+      notifyListeners();
+    } catch (error) {
+      print(error);
+      throw error;
+    }
+  }
+
+    Future<void> addAllg(List<String> allg) async {
+    try {
+      await addUserAttribute(allg, 'allergies').then((data) {
+        // change the dynamic type to String
+        for (var i = 0; i < data.length; i++) {
+          _allergies.add(data[i] as String);
+        }
+        print(_allergies);
+      });
+
+      notifyListeners();
+    } catch (error) {
+      print(error);
       throw error;
     }
   }

@@ -56,8 +56,8 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
       _loginStatus = '';
       // _loginData['username'] = _lUserController.text;
       // _loginData['password'] = _lPasswordController.text;
-      _loginData['username'] = 'eetest';
-      _loginData['password'] = 'EEee77';
+      _loginData['username'] = 'aatest';
+      _loginData['password'] = 'AAaa77';
     });
 
     try {
