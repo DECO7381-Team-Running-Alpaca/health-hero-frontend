@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:health_hero/screens/allergies_page.dart';
 import 'package:health_hero/widgets/prefer_allergy_module/continue_and_complete_button.dart';
@@ -12,7 +10,7 @@ class PreferredPage extends StatefulWidget {
   _PreferredPageState createState() => _PreferredPageState();
 }
 
-List selectedPreferList = [];
+List<String> selectedPreferList = [];
 
 class _PreferredPageState extends State<PreferredPage> {
   bool isCheckVisible;

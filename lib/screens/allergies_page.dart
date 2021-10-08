@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:health_hero/provider/auth.dart';
+import 'package:health_hero/provider/user.dart';
 import 'package:health_hero/screens/home_screen.dart';
 import 'package:health_hero/screens/preferred_page.dart';
 import 'package:health_hero/widgets/prefer_allergy_module/allergy_food_box.dart';
 import 'package:health_hero/widgets/prefer_allergy_module/continue_and_complete_button.dart';
-import 'package:health_hero/widgets/prefer_allergy_module/prefer_food_box.dart';
+import 'package:provider/provider.dart';
 
 class AllergyPage extends StatefulWidget {
   static const routeName = '/allergy';
@@ -11,9 +13,37 @@ class AllergyPage extends StatefulWidget {
   _AllergyPageState createState() => _AllergyPageState();
 }
 
-List selectedAllergyList = [];
+List<String> selectedAllergyList = [];
 
 class _AllergyPageState extends State<AllergyPage> {
+  bool _isLoading = false;
+
+  void _submitPreAllLists() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      await Provider.of<User>(context, listen: false)
+          .addPrefs(selectedPreferList);
+      await Provider.of<User>(context, listen: false)
+          .addAllg(selectedAllergyList);
+      setState(() {
+        _isLoading = false;
+      });
+      print('Prefer:');
+      print(selectedPreferList);
+      print('Allergy:');
+      print(selectedAllergyList);
+      Navigator.pushNamed(context, HomeScreen.routeName);
+    } catch (error) {
+      setState(() {
+        _isLoading = false;
+      });
+      throw error;
+    }
+  }
+
   yesOrNoDialog() {
     showDialog(
         context: context,
@@ -306,13 +336,28 @@ class _AllergyPageState extends State<AllergyPage> {
                           ],
                         ),
                       ),
-                      ContinueAndCompleteButton(
-                        onTap: () {
-                          Navigator.pushNamed(context, HomeScreen.routeName);
-                          print(selectedAllergyList);
-                        },
-                        buttonTitle: 'complete',
-                      ),
+                      _isLoading
+                          ? Column(
+                              children: [
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                CircularProgressIndicator(
+                                  value: null,
+                                  strokeWidth: 7,
+                                  color: Color.fromRGBO(205, 214, 169, 100),
+                                ),
+                                SizedBox(
+                                  height: 53,
+                                ),
+                              ],
+                            )
+                          : ContinueAndCompleteButton(
+                              onTap: () {
+                                _submitPreAllLists();
+                              },
+                              buttonTitle: 'complete',
+                            ),
                     ],
                   ),
                 ),
