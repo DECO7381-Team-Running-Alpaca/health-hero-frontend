@@ -40,7 +40,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: LandingScreen.routeName,
+      initialRoute: PreferredPage.routeName,
       routes: {
         PreferredPage.routeName: (context) => PreferredPage(),
         AllergyPage.routeName: (context) => AllergyPage(),

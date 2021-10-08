@@ -101,34 +101,34 @@ class User with ChangeNotifier {
   }
 
   Future<void> getPrefs() async {
-  try {
-    await fetchUserAttribute('preferences').then((data) {
-      // change the dynamic type to String
-      for (var i = 0; i < data.length; i++) {
-        _preferences.add(data[i] as String);
-      }
-      print(_preferences);
-    });
-    notifyListeners();
-  } catch (error) {
-    print(error);
-    throw error;
+    try {
+      await fetchUserAttribute('preferences').then((data) {
+        // change the dynamic type to String
+        for (var i = 0; i < data.length; i++) {
+          _preferences.add(data[i] as String);
+        }
+        print(_preferences);
+      });
+      notifyListeners();
+    } catch (error) {
+      print(error);
+      throw error;
+    }
   }
-}
 
   Future<void> getAllg() async {
-  try {
-    await fetchUserAttribute('allergies').then((data) {
-      // change the dynamic type to String
-      for (var i = 0; i < data.length; i++) {
-        _allergies.add(data[i] as String);
-      }
-      print(_allergies);
-    });
-    notifyListeners();
-  } catch (error) {
-    print(error);
-    throw error;
+    try {
+      await fetchUserAttribute('allergies').then((data) {
+        // change the dynamic type to String
+        for (var i = 0; i < data.length; i++) {
+          _allergies.add(data[i] as String);
+        }
+        print(_allergies);
+      });
+      notifyListeners();
+    } catch (error) {
+      print(error);
+      throw error;
+    }
   }
-}
 }
