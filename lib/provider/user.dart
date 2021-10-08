@@ -83,7 +83,7 @@ class User with ChangeNotifier {
     }
   }
 
-    Future<void> addAllg(List<String> allg) async {
+  Future<void> addAllg(List<String> allg) async {
     try {
       await addUserAttribute(allg, 'allergies').then((data) {
         // change the dynamic type to String
@@ -100,7 +100,35 @@ class User with ChangeNotifier {
     }
   }
 
-  //TODO: Jeremy: getPrefs provider
+  Future<void> getPrefs() async {
+  try {
+    await fetchUserAttribute('preferences').then((data) {
+      // change the dynamic type to String
+      for (var i = 0; i < data.length; i++) {
+        _preferences.add(data[i] as String);
+      }
+      print(_preferences);
+    });
+    notifyListeners();
+  } catch (error) {
+    print(error);
+    throw error;
+  }
+}
 
-  //TODO: Jeremy: getAllg provider
+  Future<void> getAllg() async {
+  try {
+    await fetchUserAttribute('allergies').then((data) {
+      // change the dynamic type to String
+      for (var i = 0; i < data.length; i++) {
+        _allergies.add(data[i] as String);
+      }
+      print(_allergies);
+    });
+    notifyListeners();
+  } catch (error) {
+    print(error);
+    throw error;
+  }
+}
 }
