@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/user.dart';
+import '../../provider/user.dart';
 
 class UpdatePasswordDialog extends StatefulWidget {
   @override
@@ -49,10 +49,12 @@ class _UpdatePasswordDialogState extends State<UpdatePasswordDialog> {
         width: 400,
         child: _isLoading
             ?
-            // Indicator style bugs
-            CircularProgressIndicator(
-                color: Color.fromRGBO(205, 214, 169, 100),
-              )
+        Container(
+          margin: const EdgeInsets.only(left:100, right: 100),
+          child: CircularProgressIndicator(
+            color: Color.fromRGBO(205, 214, 169, 100),
+          ),
+        )
             : _statusMsg == ''
                 ? Column(
                     children: [

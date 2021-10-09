@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:health_hero/widgets/user_profile_module/update_email_dialog.dart';
+import 'package:health_hero/widgets/user_profile_module/update_height_dialog.dart';
+import 'package:health_hero/widgets/user_profile_module/update_weight_dialog.dart';
 import 'package:provider/provider.dart';
 
-import '../widgets/update_password_dialog.dart';
+import '../widgets/user_profile_module/update_password_dialog.dart';
 import '../provider/user.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -36,6 +39,18 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void _passwordUpdateDialog() {
     showDialog(context: context, builder: (context) => UpdatePasswordDialog());
+  }
+
+  void _emailUpdateDialog() {
+    showDialog(context: context, builder: (context) => UpdateEmailDialog());
+  }
+
+  void _heightUpdateDialog() {
+    showDialog(context: context, builder: (context) => UpdateHeightDialog());
+  }
+
+  void _weightUpdateDialog() {
+    showDialog(context: context, builder: (context) => UpdateWeightDialog());
   }
 
   @override
@@ -220,118 +235,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     icon: Icon(Icons.create),
                                     color: Color.fromRGBO(100, 110, 91, 1),
                                     iconSize: 20,
-                                    onPressed: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (context) => AlertDialog(
-                                                title: Container(
-                                                  alignment: Alignment.center,
-                                                  child: Text(
-                                                    'Change Email Address',
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: Color.fromRGBO(
-                                                          100, 110, 91, 1),
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ),
-                                                content: Container(
-                                                  height: 30,
-                                                  width: 400,
-                                                  child: Column(
-                                                    children: [
-                                                      Container(
-                                                        height: 30,
-                                                        width: 210,
-                                                        child: TextField(
-                                                          controller:
-                                                              emailController,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            contentPadding:
-                                                                EdgeInsets
-                                                                    .symmetric(
-                                                                        horizontal:
-                                                                            5,
-                                                                        vertical:
-                                                                            5),
-                                                            hintText:
-                                                                'Enter new email address',
-                                                            hintStyle:
-                                                                TextStyle(
-                                                              fontSize: 14,
-                                                            ),
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderSide:
-                                                                  BorderSide(
-                                                                color: Colors
-                                                                    .black,
-                                                                width: 1,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                actions: [
-                                                  Container(
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: const Text(
-                                                            'CONFIRM',
-                                                            style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      100,
-                                                                      109,
-                                                                      93,
-                                                                      1),
-                                                              fontSize: 14,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 80,
-                                                        ),
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: const Text(
-                                                            'CANCEL',
-                                                            style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      100,
-                                                                      109,
-                                                                      93,
-                                                                      1),
-                                                              fontSize: 14,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ));
-                                    },
+                                    onPressed: _emailUpdateDialog,
                                   ),
                                 ],
                               ),
@@ -383,121 +287,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     icon: Icon(Icons.create),
                                     color: Color.fromRGBO(100, 110, 91, 1),
                                     iconSize: 20,
-                                    onPressed: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (context) => AlertDialog(
-                                                title: Container(
-                                                  alignment: Alignment.center,
-                                                  child: Text(
-                                                    'Change Height',
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: Color.fromRGBO(
-                                                          100, 110, 91, 1),
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ),
-                                                content: Container(
-                                                  height: 30,
-                                                  width: 400,
-                                                  child: Column(
-                                                    children: [
-                                                      Container(
-                                                        height: 30,
-                                                        width: 210,
-                                                        child: TextField(
-                                                          controller:
-                                                              heightController,
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .number,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            contentPadding:
-                                                                EdgeInsets
-                                                                    .symmetric(
-                                                                        horizontal:
-                                                                            5,
-                                                                        vertical:
-                                                                            5),
-                                                            hintText:
-                                                                'Enter new height',
-                                                            hintStyle:
-                                                                TextStyle(
-                                                              fontSize: 14,
-                                                            ),
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderSide:
-                                                                  BorderSide(
-                                                                color: Colors
-                                                                    .black,
-                                                                width: 1,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                actions: [
-                                                  Container(
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: const Text(
-                                                            'CONFIRM',
-                                                            style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      100,
-                                                                      109,
-                                                                      93,
-                                                                      1),
-                                                              fontSize: 14,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 80,
-                                                        ),
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: const Text(
-                                                            'CANCEL',
-                                                            style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      100,
-                                                                      109,
-                                                                      93,
-                                                                      1),
-                                                              fontSize: 14,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ));
-                                    },
+                                    onPressed: _heightUpdateDialog,
                                   ),
                                 ],
                               ),
@@ -549,121 +339,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     icon: Icon(Icons.create),
                                     color: Color.fromRGBO(100, 110, 91, 1),
                                     iconSize: 20,
-                                    onPressed: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (context) => AlertDialog(
-                                                title: Container(
-                                                  alignment: Alignment.center,
-                                                  child: Text(
-                                                    'Change Weight',
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: Color.fromRGBO(
-                                                          100, 110, 91, 1),
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ),
-                                                content: Container(
-                                                  height: 30,
-                                                  width: 400,
-                                                  child: Column(
-                                                    children: [
-                                                      Container(
-                                                        height: 30,
-                                                        width: 210,
-                                                        child: TextField(
-                                                          controller:
-                                                              weightController,
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .number,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            contentPadding:
-                                                                EdgeInsets
-                                                                    .symmetric(
-                                                                        horizontal:
-                                                                            5,
-                                                                        vertical:
-                                                                            5),
-                                                            hintText:
-                                                                'Enter new weight',
-                                                            hintStyle:
-                                                                TextStyle(
-                                                              fontSize: 14,
-                                                            ),
-                                                            border:
-                                                                OutlineInputBorder(
-                                                              borderSide:
-                                                                  BorderSide(
-                                                                color: Colors
-                                                                    .black,
-                                                                width: 1,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                actions: [
-                                                  Container(
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: const Text(
-                                                            'CONFIRM',
-                                                            style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      100,
-                                                                      109,
-                                                                      93,
-                                                                      1),
-                                                              fontSize: 14,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 80,
-                                                        ),
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: const Text(
-                                                            'CANCEL',
-                                                            style: TextStyle(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      100,
-                                                                      109,
-                                                                      93,
-                                                                      1),
-                                                              fontSize: 14,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ));
-                                    },
+                                    onPressed: _weightUpdateDialog,
                                   ),
                                 ],
                               ),
