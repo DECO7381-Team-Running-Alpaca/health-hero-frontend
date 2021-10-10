@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:health_hero/models/meal.dart';
 import 'package:health_hero/widgets/weekly_plan_module/breakfast_lunch_dinner_selector.dart';
 
+import '../../widgets/weekly_plan_module/video_player.dart';
+
 class DateMealWidget extends StatelessWidget {
   final EveryDayMeal everyDayMeal;
 
@@ -85,7 +87,7 @@ class DateMealWidget extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(everyDayMeal.mealName),
-                        Image(image: everyDayMeal.image)
+                        VideoPlayer()
                       ],
                     ),
                   ),
