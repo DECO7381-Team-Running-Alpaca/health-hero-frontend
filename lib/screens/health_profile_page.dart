@@ -57,9 +57,10 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
+                        // Rename sizebox overflow
+                        // SizedBox(
+                        //   height: 10,
+                        // ),
                       ],
                     ),
                   ),
