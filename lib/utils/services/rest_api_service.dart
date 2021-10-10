@@ -101,7 +101,7 @@ Future<Map<String, String>> updateCurrentUser(String info, String value) async {
     final rawResponse = json.decode(response.body);
 
     Map<String, String> updateInfo = {
-      info: rawResponse['data']['user'][info],
+      info: '${rawResponse['data']['user'][info]}',
     };
     return updateInfo;
   } catch (error) {

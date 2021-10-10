@@ -19,6 +19,7 @@ class _UpdateHeightDialogState extends State<UpdateHeightDialog> {
     setState(() {
       _isLoading = true;
     });
+
     await Provider.of<User>(context, listen: false)
         .modfiyUserProfile('height', heightController.text)
         .then((msg) {
@@ -47,48 +48,48 @@ class _UpdateHeightDialogState extends State<UpdateHeightDialog> {
         height: 30,
         width: 400,
         child: _isLoading
-            ?
-        Container(
-          margin: const EdgeInsets.only(left:125, right: 125),
-          child: CircularProgressIndicator(
-            color: Color.fromRGBO(205, 214, 169, 100),
-          ),
-        )
+            ? Container(
+                margin: const EdgeInsets.only(left: 125, right: 125),
+                child: CircularProgressIndicator(
+                  color: Color.fromRGBO(205, 214, 169, 100),
+                ),
+              )
             : _statusMsg == ''
-              ? Column(
-                  children: [
-                    Container(
-                      height: 30,
-                      width: 210,
-                      child: TextField(
-                        controller: heightController,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                          hintText: 'Enter new height',
-                          hintStyle: TextStyle(
-                            fontSize: 14,
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.black,
-                              width: 1,
+                ? Column(
+                    children: [
+                      Container(
+                        height: 30,
+                        width: 210,
+                        child: TextField(
+                          controller: heightController,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 5),
+                            hintText: 'Enter new height',
+                            hintStyle: TextStyle(
+                              fontSize: 14,
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                                width: 1,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                )
-              : Center(
-                  child: Text(
-                    'Update Successfully',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 15,
+                    ],
+                  )
+                : Center(
+                    child: Text(
+                      'Update Successfully',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 15,
+                      ),
                     ),
                   ),
-                ),
       ),
       actions: [
         Container(
