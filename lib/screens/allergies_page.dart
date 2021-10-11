@@ -215,11 +215,15 @@ class _AllergyPageState extends State<AllergyPage> {
                                           children: [
                                             AllergyFoodBoxCard(
                                               title: 'milk',
+                                              chosen: selectedAllergyList
+                                                  .contains('milk'),
                                               background:
                                                   'assets/images/milk.jpg',
                                             ),
                                             AllergyFoodBoxCard(
-                                              title: 'mushiroom',
+                                              title: 'mushroom',
+                                              chosen: selectedAllergyList
+                                                  .contains('mushroom'),
                                               background:
                                                   'assets/images/mushroom.jpg',
                                             ),
@@ -231,11 +235,15 @@ class _AllergyPageState extends State<AllergyPage> {
                                           children: [
                                             AllergyFoodBoxCard(
                                               title: 'onion',
+                                              chosen: selectedAllergyList
+                                                  .contains('onion'),
                                               background:
                                                   'assets/images/onion.jpg',
                                             ),
                                             AllergyFoodBoxCard(
                                               title: 'sea food',
+                                              chosen: selectedAllergyList
+                                                  .contains('sea food'),
                                               background:
                                                   'assets/images/shrimp.jpg',
                                             ),
@@ -247,11 +255,15 @@ class _AllergyPageState extends State<AllergyPage> {
                                           children: [
                                             AllergyFoodBoxCard(
                                               title: 'beans',
+                                              chosen: selectedAllergyList
+                                                  .contains('beans'),
                                               background:
                                                   'assets/images/beans.jpg',
                                             ),
                                             AllergyFoodBoxCard(
                                               title: 'brocroli',
+                                              chosen: selectedAllergyList
+                                                  .contains('brocroli'),
                                               background:
                                                   'assets/images/brocroli.jpg',
                                             ),
@@ -263,11 +275,15 @@ class _AllergyPageState extends State<AllergyPage> {
                                           children: [
                                             AllergyFoodBoxCard(
                                               title: 'carrot',
+                                              chosen: selectedAllergyList
+                                                  .contains('carrot'),
                                               background:
                                                   'assets/images/carrot.jpg',
                                             ),
                                             AllergyFoodBoxCard(
                                               title: 'peanut',
+                                              chosen: selectedAllergyList
+                                                  .contains('peanut'),
                                               background:
                                                   'assets/images/peanut.png',
                                             ),

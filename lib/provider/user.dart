@@ -26,6 +26,14 @@ class User with ChangeNotifier {
     };
   }
 
+  List<String> get preferences {
+    return _preferences;
+  }
+
+  List<String> get allergies {
+    return _allergies;
+  }
+
   Future<void> getUserProfile() async {
     try {
       await fetchCurrentUser().then((userData) {
@@ -71,9 +79,11 @@ class User with ChangeNotifier {
       await addUserAttribute(prefs, 'preferences').then((data) {
         // change the dynamic type to String
         for (var i = 0; i < data.length; i++) {
-          _preferences.add(data[i] as String);
+          if (!_preferences.contains(data[i].toString())) {
+            _preferences.add(data[i] as String);
+          }
         }
-        print(_preferences);
+        print('provider add preference output:' + _preferences.toString());
       });
 
       notifyListeners();
@@ -88,11 +98,12 @@ class User with ChangeNotifier {
       await addUserAttribute(allg, 'allergies').then((data) {
         // change the dynamic type to String
         for (var i = 0; i < data.length; i++) {
-          _allergies.add(data[i] as String);
+          if (!_allergies.contains(data[i].toString())) {
+            _allergies.add(data[i] as String);
+          }
         }
-        print(_allergies);
+        print('provider add preference output:' + _allergies.toString());
       });
-
       notifyListeners();
     } catch (error) {
       print(error);
@@ -102,6 +113,7 @@ class User with ChangeNotifier {
 
   Future<void> getPrefs() async {
     try {
+      _preferences = [];
       await fetchUserAttribute('preferences').then((data) {
         // change the dynamic type to String
         for (var i = 0; i < data.length; i++) {
@@ -118,12 +130,13 @@ class User with ChangeNotifier {
 
   Future<void> getAllg() async {
     try {
+      _allergies = [];
       await fetchUserAttribute('allergies').then((data) {
         // change the dynamic type to String
         for (var i = 0; i < data.length; i++) {
           _allergies.add(data[i] as String);
         }
-        print(_allergies);
+        print('provider get allergy list: ' + _allergies.toString());
       });
       notifyListeners();
     } catch (error) {

@@ -4,9 +4,9 @@ import 'package:health_hero/screens/allergies_page.dart';
 class AllergyFoodBoxCard extends StatefulWidget {
   final String background;
   final String title;
-  bool visibility = false;
+  bool chosen;
 
-  AllergyFoodBoxCard({this.background, this.title});
+  AllergyFoodBoxCard({this.background, this.title, this.chosen});
 
   @override
   _AllergyFoodBoxCardState createState() => _AllergyFoodBoxCardState();
@@ -18,11 +18,11 @@ class _AllergyFoodBoxCardState extends State<AllergyFoodBoxCard> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          if (widget.visibility == false) {
-            widget.visibility = true;
+          if (widget.chosen == false) {
+            widget.chosen = true;
             selectedAllergyList.add(widget.title);
           } else {
-            widget.visibility = false;
+            widget.chosen = false;
             selectedAllergyList.remove(widget.title);
           }
         });
@@ -42,7 +42,7 @@ class _AllergyFoodBoxCardState extends State<AllergyFoodBoxCard> {
                 ),
               ),
               Visibility(
-                visible: !widget.visibility,
+                visible: !widget.chosen,
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.5),
@@ -51,7 +51,7 @@ class _AllergyFoodBoxCardState extends State<AllergyFoodBoxCard> {
                 ),
               ),
               Visibility(
-                visible: widget.visibility,
+                visible: widget.chosen,
                 child: Align(
                   alignment: Alignment(0.8, -0.8),
                   child: Icon(

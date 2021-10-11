@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:health_hero/screens/allergies_page.dart';
+import 'package:health_hero/screens/preferred_page.dart';
 import 'package:health_hero/widgets/user_profile_module/update_email_dialog.dart';
 import 'package:health_hero/widgets/user_profile_module/update_height_dialog.dart';
 import 'package:health_hero/widgets/user_profile_module/update_weight_dialog.dart';
@@ -51,6 +53,48 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void _weightUpdateDialog() {
     showDialog(context: context, builder: (context) => UpdateWeightDialog());
+  }
+
+  void _getPre() async {
+    // setState(() {
+    //   _isLoading = true;
+    // });
+
+    try {
+      await Provider.of<User>(context, listen: false).getPrefs();
+      selectedPreferList =
+          Provider.of<User>(context, listen: false).preferences;
+
+      Navigator.pushNamed(context, PreferredPage.routeName);
+
+      // setState(() {
+      //   _isLoading = false;
+      // });
+    } catch (error) {
+      setState(() {
+        _isLoading = false;
+      });
+      throw error;
+    }
+  }
+
+  void _getAll() async {
+    // setState(() {
+    //   _isLoading = true;
+    // });
+
+    try {
+      await Provider.of<User>(context, listen: false).getAllg();
+      selectedAllergyList = Provider.of<User>(context, listen: false).allergies;
+
+      Navigator.pushNamed(context, AllergyPage.routeName);
+
+      // setState(() {
+      //   _isLoading = false;
+      // });
+    } catch (error) {
+      throw error;
+    }
   }
 
   @override
@@ -362,7 +406,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: 39,
                         padding: EdgeInsets.only(left: 10, right: 8, top: 5),
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            _getPre();
+                          },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -391,7 +437,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: 39,
                         padding: EdgeInsets.only(left: 10, right: 8, bottom: 5),
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            _getAll();
+                          },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [

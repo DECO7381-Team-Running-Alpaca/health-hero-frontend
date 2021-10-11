@@ -5,7 +5,9 @@ import 'package:health_hero/widgets/prefer_allergy_module/prefer_food_box.dart';
 
 class PreferredPage extends StatefulWidget {
   static const routeName = '/prefer';
-
+  // PreferredPage() {
+  //   selectedPreferList = [];
+  // }
   @override
   _PreferredPageState createState() => _PreferredPageState();
 }
@@ -29,8 +31,9 @@ class _PreferredPageState extends State<PreferredPage> {
                 'Are you sure to skip the food preference selection? You can still edit it later.'),
             actions: [
               TextButton(
-                  onPressed: () =>
-                      Navigator.pushNamed(context, AllergyPage.routeName),
+                  onPressed: () {
+                    Navigator.pushNamed(context, AllergyPage.routeName);
+                  },
                   // Navigator.pushNamed(context, AllergyPage.routeName),
                   child: Text('YES')),
               TextButton(
@@ -75,7 +78,9 @@ class _PreferredPageState extends State<PreferredPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
                         child: Icon(
                           Icons.arrow_back,
                           size: 25,
@@ -83,7 +88,9 @@ class _PreferredPageState extends State<PreferredPage> {
                       ),
                       TextButton(
                         onPressed: () {
-                          yesOrNoDialog();
+                          Navigator.pushNamed(context, AllergyPage.routeName);
+
+                          // Navigator.pushNamed(context, AllergyPage.routeName);
                         },
                         child: Text(
                           'Skip',
@@ -128,28 +135,21 @@ class _PreferredPageState extends State<PreferredPage> {
                                               MainAxisAlignment.center,
                                           children: [
                                             PreferFoodBoxCard(
-                                              title: 'Beef',
+                                              title: 'beef',
                                               background:
                                                   'assets/images/beef.jpg',
+                                              chosen: selectedPreferList
+                                                  .contains('beef'),
                                             ),
                                             PreferFoodBoxCard(
                                               title: 'chicken',
                                               background:
                                                   'assets/images/chicken.jpg',
+                                              chosen: selectedPreferList
+                                                  .contains('chicken'),
                                             ),
                                           ],
                                         ),
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.spaceEvenly,
-                                        //   children: [
-                                        //     PreferFoodBoxCard(
-                                        //       title: 'pork',
-                                        //       background:
-                                        //           'assets/images/pork.jpg',
-                                        //     ),
-                                        //   ],
-                                        // ),
                                         Text(
                                           'Veggies',
                                           style: TextStyle(fontSize: 17),
@@ -162,14 +162,18 @@ class _PreferredPageState extends State<PreferredPage> {
                                               MainAxisAlignment.center,
                                           children: [
                                             PreferFoodBoxCard(
-                                              title: 'mushiroom',
+                                              title: 'mushroom',
                                               background:
                                                   'assets/images/mushroom.jpg',
+                                              chosen: selectedPreferList
+                                                  .contains('mushroom'),
                                             ),
                                             PreferFoodBoxCard(
                                               title: 'tomato',
                                               background:
                                                   'assets/images/tomato.jpg',
+                                              chosen: selectedPreferList
+                                                  .contains('tomato'),
                                             ),
                                           ],
                                         ),
@@ -179,11 +183,15 @@ class _PreferredPageState extends State<PreferredPage> {
                                           children: [
                                             PreferFoodBoxCard(
                                               title: 'brocroli',
+                                              chosen: selectedPreferList
+                                                  .contains('brocroli'),
                                               background:
                                                   'assets/images/brocroli.jpg',
                                             ),
                                             PreferFoodBoxCard(
                                               title: 'cucumber',
+                                              chosen: selectedPreferList
+                                                  .contains('cucumber'),
                                               background:
                                                   'assets/images/cucumber.jpg',
                                             ),
@@ -202,11 +210,15 @@ class _PreferredPageState extends State<PreferredPage> {
                                           children: [
                                             PreferFoodBoxCard(
                                               title: 'citrues',
+                                              chosen: selectedPreferList
+                                                  .contains('citrues'),
                                               background:
                                                   'assets/images/citrues.png',
                                             ),
                                             PreferFoodBoxCard(
                                               title: 'avocado',
+                                              chosen: selectedPreferList
+                                                  .contains('avocado'),
                                               background:
                                                   'assets/images/avocado.png',
                                             ),
@@ -218,11 +230,15 @@ class _PreferredPageState extends State<PreferredPage> {
                                           children: [
                                             PreferFoodBoxCard(
                                               title: 'blueberry',
+                                              chosen: selectedPreferList
+                                                  .contains('blueberry'),
                                               background:
                                                   'assets/images/blueberry.png',
                                             ),
                                             PreferFoodBoxCard(
                                               title: 'banana',
+                                              chosen: selectedPreferList
+                                                  .contains('banana'),
                                               background:
                                                   'assets/images/banana.png',
                                             ),
@@ -241,11 +257,15 @@ class _PreferredPageState extends State<PreferredPage> {
                                           children: [
                                             PreferFoodBoxCard(
                                               title: 'yogurt',
+                                              chosen: selectedPreferList
+                                                  .contains('yogurt'),
                                               background:
                                                   'assets/images/yogurt.png',
                                             ),
                                             PreferFoodBoxCard(
                                               title: 'milk',
+                                              chosen: selectedPreferList
+                                                  .contains('milk'),
                                               background:
                                                   'assets/images/milk.jpg',
                                             ),
@@ -264,11 +284,15 @@ class _PreferredPageState extends State<PreferredPage> {
                                           children: [
                                             PreferFoodBoxCard(
                                               title: 'oat',
+                                              chosen: selectedPreferList
+                                                  .contains('oat'),
                                               background:
                                                   'assets/images/oat.png',
                                             ),
                                             PreferFoodBoxCard(
                                               title: 'rice',
+                                              chosen: selectedPreferList
+                                                  .contains('rice'),
                                               background:
                                                   'assets/images/rice.png',
                                             ),

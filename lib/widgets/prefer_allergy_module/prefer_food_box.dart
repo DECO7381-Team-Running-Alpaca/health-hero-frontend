@@ -4,9 +4,10 @@ import 'package:health_hero/screens/preferred_page.dart';
 class PreferFoodBoxCard extends StatefulWidget {
   final String background;
   final String title;
-  bool visibility = false;
+  bool chosen;
+  // bool chosen = false;
 
-  PreferFoodBoxCard({this.background, this.title});
+  PreferFoodBoxCard({this.background, this.title, this.chosen});
 
   @override
   _PreferFoodBoxCardState createState() => _PreferFoodBoxCardState();
@@ -18,11 +19,11 @@ class _PreferFoodBoxCardState extends State<PreferFoodBoxCard> {
     return GestureDetector(
       onTap: () {
         setState(() {
-          if (widget.visibility == false) {
-            widget.visibility = true;
+          if (widget.chosen == false) {
+            widget.chosen = true;
             selectedPreferList.add(widget.title);
           } else {
-            widget.visibility = false;
+            widget.chosen = false;
             selectedPreferList.remove(widget.title);
           }
         });
@@ -42,7 +43,7 @@ class _PreferFoodBoxCardState extends State<PreferFoodBoxCard> {
                 ),
               ),
               Visibility(
-                visible: !widget.visibility,
+                visible: !widget.chosen,
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.5),
@@ -51,7 +52,7 @@ class _PreferFoodBoxCardState extends State<PreferFoodBoxCard> {
                 ),
               ),
               Visibility(
-                visible: widget.visibility,
+                visible: widget.chosen,
                 child: Align(
                   alignment: Alignment(0.8, -0.8),
                   child: Icon(
