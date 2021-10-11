@@ -37,8 +37,17 @@ class _PreferFoodBoxCardState extends State<PreferFoodBoxCard> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.4),
+                  color: Colors.black.withOpacity(0.3),
                   borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+              Visibility(
+                visible: !widget.visibility,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
                 ),
               ),
               Visibility(

@@ -5,6 +5,7 @@ import 'package:health_hero/screens/home_screen.dart';
 import 'package:health_hero/screens/preferred_page.dart';
 import 'package:health_hero/widgets/prefer_allergy_module/allergy_food_box.dart';
 import 'package:health_hero/widgets/prefer_allergy_module/continue_and_complete_button.dart';
+import 'package:health_hero/widgets/prefer_allergy_module/loading_circle.dart';
 import 'package:provider/provider.dart';
 
 class AllergyPage extends StatefulWidget {
@@ -51,11 +52,11 @@ class _AllergyPageState extends State<AllergyPage> {
           return AlertDialog(
             title: Icon(Icons.warning),
             content: Text(
-                'I make sure that I have selected ALL FOOD ALLERGIES I have.'),
+                'Are you sure to skip your food allergies selection? You can still edit it later.'),
             actions: [
               TextButton(
                   onPressed: () {
-                    finishAllergy();
+                    Navigator.pushNamed(context, HomeScreen.routeName);
                   },
                   child: Text('YES')),
               TextButton(
@@ -144,103 +145,70 @@ class _AllergyPageState extends State<AllergyPage> {
           child: Center(
             child: Column(
               children: [
-                SafeArea(
-                  //title
-                  child: Container(
-                    padding: EdgeInsets.only(
-                      top: 15,
-                    ),
-                    child: Text(
-                      'Tell us your food allergies',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                Container(
+                  height: 90,
+                  padding: EdgeInsets.only(
+                    top: 60,
+                  ),
+                  child: Text(
+                    'Tell us your food allergies',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
                   ),
                 ),
-
-                //         // bottom button
-                //         ContinueAndCompleteButton(
-                //           onTap: () => yesOrNoDialog(),
-                //           buttonTitle: 'complete',
-                //         )
-                //       ],
-                //     ),
-                //   ),
-                // )
                 Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.25),
+                  padding: EdgeInsets.only(left: 17, right: 17, top: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Icon(
+                          Icons.arrow_back,
+                          size: 25,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          yesOrNoDialog();
+                        },
+                        child: Text(
+                          'Skip',
+                          style: TextStyle(fontSize: 17, color: Colors.black),
+                        ),
+                      ),
+                    ],
                   ),
-                  child: Column(
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 10, right: 10),
+                  child: Stack(
                     children: [
                       Container(
-                        height: 680,
+                        margin: EdgeInsets.only(left: 10, right: 10),
+                        height: 778,
                         child: Column(
                           children: [
                             Container(
-                              padding: EdgeInsets.only(left: 17, right: 17),
-                              margin: EdgeInsets.only(
-                                bottom: 10,
+                              decoration: BoxDecoration(
+                                color: Color.fromRGBO(200, 216, 181, 1),
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(50),
+                                    topRight: Radius.circular(50)),
                               ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Icon(
-                                      Icons.arrow_back,
-                                      size: 25,
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pushNamed(
-                                          context, HomeScreen.routeName);
-                                    },
-                                    child: Text(
-                                      'Skip',
-                                      style: TextStyle(fontSize: 17),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              height: 600,
+                              padding: EdgeInsets.only(top: 20, bottom: 30),
+                              height: 670,
                               child: Stack(
                                 children: [
-                                  Container(
-                                    transform:
-                                        Matrix4.translationValues(0, -55, 0),
-                                    child: Image(
-                                      image: AssetImage(
-                                          'assets/images/preference-top.png'),
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Container(
-                                    transform:
-                                        Matrix4.translationValues(0, 420, 0),
-                                    child: Image(
-                                      image: AssetImage(
-                                          'assets/images/preference-bottom.png'),
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
                                   SingleChildScrollView(
                                     child: Column(
                                       children: [
-                                        // Text(
-                                        //   '---------------------MEAT---------------------',
-                                        //   style: TextStyle(fontSize: 17),
-                                        // ),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -267,16 +235,12 @@ class _AllergyPageState extends State<AllergyPage> {
                                                   'assets/images/onion.jpg',
                                             ),
                                             AllergyFoodBoxCard(
-                                              title: 'shrimp',
+                                              title: 'sea food',
                                               background:
                                                   'assets/images/shrimp.jpg',
                                             ),
                                           ],
                                         ),
-                                        // Text(
-                                        //   '-------------------VEGGIES-------------------',
-                                        //   style: TextStyle(fontSize: 17),
-                                        // ),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -303,9 +267,9 @@ class _AllergyPageState extends State<AllergyPage> {
                                                   'assets/images/carrot.jpg',
                                             ),
                                             AllergyFoodBoxCard(
-                                              title: 'other',
+                                              title: 'peanut',
                                               background:
-                                                  'assets/images/brocroli.jpg',
+                                                  'assets/images/peanut.png',
                                             ),
                                           ],
                                         ),
@@ -337,30 +301,31 @@ class _AllergyPageState extends State<AllergyPage> {
                         ),
                       ),
                       _isLoading
-                          ? Column(
-                              children: [
-                                SizedBox(
-                                  height: 30,
-                                ),
-                                CircularProgressIndicator(
-                                  value: null,
-                                  strokeWidth: 7,
-                                  color: Color.fromRGBO(205, 214, 169, 100),
-                                ),
-                                SizedBox(
-                                  height: 53,
-                                ),
-                              ],
+                          ? Positioned(
+                              top: 650,
+                              child: LoadingButton(),
                             )
-                          : ContinueAndCompleteButton(
-                              onTap: () {
-                                _submitPreAllLists();
-                              },
-                              buttonTitle: 'complete',
+                          : Positioned(
+                              top: 650,
+                              child: ContinueAndCompleteButton(
+                                onTap: () {
+                                  _submitPreAllLists();
+                                },
+                                buttonTitle: 'continue',
+                              ),
                             ),
                     ],
                   ),
                 ),
+// ContinueAndCompleteButton(
+                //               onTap: () {
+                //                 _submitPreAllLists();
+                //               },
+                //               buttonTitle: 'complete',
+                //             ),
+                //     ],
+                //   ),
+                // ),
               ],
             ),
           ),

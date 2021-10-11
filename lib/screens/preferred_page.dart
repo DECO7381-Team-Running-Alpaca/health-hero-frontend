@@ -29,9 +29,9 @@ class _PreferredPageState extends State<PreferredPage> {
                 'Are you sure to skip the food preference selection? You can still edit it later.'),
             actions: [
               TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, AllergyPage.routeName);
-                  },
+                  onPressed: () =>
+                      Navigator.pushNamed(context, AllergyPage.routeName),
+                  // Navigator.pushNamed(context, AllergyPage.routeName),
                   child: Text('YES')),
               TextButton(
                   onPressed: () => Navigator.pop(context), child: Text('NO')),
