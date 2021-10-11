@@ -29,9 +29,9 @@ class _PreferFoodBoxCardState extends State<PreferFoodBoxCard> {
       },
       child: Container(
         // margin: EdgeInsets.all(20),
-        width: 150,
-        height: 150,
-        margin: EdgeInsets.all(12),
+        width: 135,
+        height: 135,
+        margin: EdgeInsets.all(18),
         child: Center(
           child: Stack(
             children: [
@@ -56,7 +56,7 @@ class _PreferFoodBoxCardState extends State<PreferFoodBoxCard> {
                   widget.title.toUpperCase(),
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 20,
+                    fontSize: 17,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
