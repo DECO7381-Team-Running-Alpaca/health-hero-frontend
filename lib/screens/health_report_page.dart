@@ -43,15 +43,12 @@ class _HealthReportPageState extends State<HealthReportPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 5,
-                        ),
                       ],
                     ),
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.only(top: 30, left: 15),
+                  // padding: EdgeInsets.only(left: 15),
                   child: IconButton(
                     onPressed: (){
                       Navigator.pop(context);
