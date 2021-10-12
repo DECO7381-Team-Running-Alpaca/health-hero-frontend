@@ -6,6 +6,8 @@ import 'package:health_hero/utils/helpers/convert_image.dart';
 import 'package:health_hero/utils/helpers/get_pngData.dart';
 import 'package:health_hero/widgets/health_report_module/report_table.dart';
 import 'package:health_hero/models/meal.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class HealthReportPage extends StatefulWidget {
   static const routeName = '/report';
@@ -15,7 +17,6 @@ class HealthReportPage extends StatefulWidget {
 
 class _HealthReportPageState extends State<HealthReportPage> {
   GlobalKey imageKey;
-  Uint8List testBytes;
 
   Widget _sucessdialogue() {
     return AlertDialog(
@@ -48,7 +49,7 @@ class _HealthReportPageState extends State<HealthReportPage> {
             children: [
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.of(context, rootNavigator: true).pop();
                 },
                 child: const Text(
                   'OK',
@@ -64,9 +65,6 @@ class _HealthReportPageState extends State<HealthReportPage> {
       ],
     );
   }
-
-  Widget buildImage(Uint8List bytes) =>
-      bytes != null ? Image.memory(bytes) : Container();
 
   @override
   Widget build(BuildContext context) {
@@ -137,13 +135,19 @@ class _HealthReportPageState extends State<HealthReportPage> {
                     TextButton(
                       onPressed: () async {
                         final imageBytes = await saveImage(imageKey);
-                        setState(() {
-                          this.testBytes = imageBytes;
-                        });
-                        // showDialog(
-                        //   context: context,
-                        //   builder: (context) => _sucessdialogue(),
-                        // );
+                        if (!(await Permission.storage.status.isGranted)) {
+                          await Permission.storage.request();
+                        }
+                        final reportImage = await ImageGallerySaver.saveImage(
+                            Uint8List.fromList(imageBytes),
+                            quality: 60,
+                            name: "my_health_report");
+                        if (reportImage['isSuccess']) {
+                          showDialog(
+                            context: context,
+                            builder: (context) => _sucessdialogue(),
+                          );
+                        }
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -168,7 +172,6 @@ class _HealthReportPageState extends State<HealthReportPage> {
                     ),
                   ],
                 ),
-                buildImage(testBytes),
               ],
             ),
           ),
