@@ -43,5 +43,7 @@
 	<false/>
 	<key>io.flutter.embedded_views_preview</key>
 	<string>YES</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Need access to photo libary to save the image</string>
 </dict>
 </plist>
