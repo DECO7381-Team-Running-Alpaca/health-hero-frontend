@@ -31,6 +31,7 @@ dependencies:
   youtube_player_flutter: ^8.0.0
   permission_handler: ^5.0.1+1
   image_gallery_saver: ^1.7.1
+  fl_chart: ^0.40.0
 
 dev_dependencies:
   flutter_test:

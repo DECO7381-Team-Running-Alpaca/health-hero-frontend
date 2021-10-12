@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health_hero/utils/helpers/convert_image.dart';
 import 'package:health_hero/utils/helpers/get_pngData.dart';
+import 'package:health_hero/widgets/health_report_module/report_chart.dart';
 import 'package:health_hero/widgets/health_report_module/report_table.dart';
 import 'package:health_hero/models/meal.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
@@ -172,6 +173,7 @@ class _HealthReportPageState extends State<HealthReportPage> {
                     ),
                   ],
                 ),
+                LineChartSample1()
               ],
             ),
           ),
