@@ -5,14 +5,13 @@ import 'package:health_hero/widgets/weekly_plan_module/breakfast_lunch_dinner_se
 import '../../widgets/weekly_plan_module/video_player.dart';
 
 class DateMealWidget extends StatelessWidget {
-  final EveryDayMeal everyDayMeal;
+  final Meal everyDayMeal;
 
   const DateMealWidget({Key key, this.everyDayMeal}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // decoration: BoxDecoration(border: Border.all(width: 2)),
       margin: EdgeInsets.only(
         top: 30,
         left: 20,
@@ -50,15 +49,12 @@ class DateMealWidget extends StatelessWidget {
                 children: [
                   BreakfastLunchDinnerSelector(
                     mealTime: 'breakfast',
-                    function: null,
                   ),
                   BreakfastLunchDinnerSelector(
                     mealTime: 'lunch',
-                    function: null,
                   ),
                   BreakfastLunchDinnerSelector(
                     mealTime: 'dinner',
-                    function: null,
                   ),
                 ],
               ),
@@ -89,7 +85,10 @@ class DateMealWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 5),
                     child: Column(
-                      children: [Text(everyDayMeal.mealName), VideoPlayer()],
+                      children: [
+                        Text(everyDayMeal.mealName),
+                        VideoPlayer()
+                      ],
                     ),
                   ),
                   Padding(

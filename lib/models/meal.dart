@@ -1,6 +1,6 @@
 import 'package:flutter/rendering.dart';
 
-class EveryDayMeal {
+class Meal {
   // final String date, title, description, location, duration, punchLine1, punchLine2;
   // final List categoryIds, galleryImages;
   final String date;
@@ -13,7 +13,7 @@ class EveryDayMeal {
   final String directions;
   final List dateId;
 
-  EveryDayMeal({
+  Meal({
     this.date,
     this.ingredients,
     this.calories,
@@ -26,7 +26,7 @@ class EveryDayMeal {
   });
 }
 
-final sun12June = EveryDayMeal(
+final sun12June = Meal(
     date: "Sunday, 12 Jun",
     calories: "3000KCAL",
     mealType: "BREAKFAST",
@@ -38,7 +38,7 @@ final sun12June = EveryDayMeal(
         "Directions: \n1.Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet. 2. consectetur Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur 3.Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet. 4. consectetur Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur",
     dateId: [0]);
 
-final mon13June = EveryDayMeal(
+final mon13June = Meal(
     date: "Monday, 13 Jun",
     calories: "5000KCAL",
     mealType: "BREAKFAST",

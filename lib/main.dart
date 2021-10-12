@@ -10,6 +10,7 @@ import 'package:health_hero/screens/preferred_page.dart';
 import 'package:health_hero/screens/user_auth_screen.dart';
 import './provider/auth.dart';
 import './provider/user.dart';
+import './provider/meals.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,6 +24,11 @@ class MyApp extends StatelessWidget {
           create: null,
           update: (context, auth, prevUser) => User(auth.token, auth.userId,
               prevUser == null ? '' : prevUser.userName),
+        ),
+        ChangeNotifierProxyProvider<Auth, Meals>(
+          create: null,
+          update: (context, auth, preMeals) => Meals(
+              auth.token, auth.userId, preMeals == null ? [] : preMeals.meals),
         ),
       ],
       child: MaterialApp(
@@ -40,7 +46,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: PreferredPage.routeName,
+      initialRoute: LandingScreen.routeName,
       routes: {
         PreferredPage.routeName: (context) => PreferredPage(),
         AllergyPage.routeName: (context) => AllergyPage(),
