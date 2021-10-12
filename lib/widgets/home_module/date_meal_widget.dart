@@ -12,6 +12,7 @@ class DateMealWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // decoration: BoxDecoration(border: Border.all(width: 2)),
       margin: EdgeInsets.only(
         top: 30,
         left: 20,
@@ -49,12 +50,15 @@ class DateMealWidget extends StatelessWidget {
                 children: [
                   BreakfastLunchDinnerSelector(
                     mealTime: 'breakfast',
+                    function: null,
                   ),
                   BreakfastLunchDinnerSelector(
                     mealTime: 'lunch',
+                    function: null,
                   ),
                   BreakfastLunchDinnerSelector(
                     mealTime: 'dinner',
+                    function: null,
                   ),
                 ],
               ),
@@ -85,10 +89,7 @@ class DateMealWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 5),
                     child: Column(
-                      children: [
-                        Text(everyDayMeal.mealName),
-                        VideoPlayer()
-                      ],
+                      children: [Text(everyDayMeal.mealName), VideoPlayer()],
                     ),
                   ),
                   Padding(

@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 
 class BreakfastLunchDinnerSelector extends StatelessWidget {
   String mealTime;
-  BreakfastLunchDinnerSelector({this.mealTime});
+  Function function;
+  BreakfastLunchDinnerSelector({this.mealTime,this.function});
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 105,
       child: OutlinedButton(
-        onPressed: null,
+        onPressed: function,
         child: Text(
           this.mealTime.toUpperCase(),
           style: TextStyle(fontWeight: FontWeight.w900),

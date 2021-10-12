@@ -93,7 +93,7 @@ class _PreferredPageState extends State<PreferredPage> {
                           // Navigator.pushNamed(context, AllergyPage.routeName);
                         },
                         child: Text(
-                          'Skip',
+                          'Skip to Allergy',
                           style: TextStyle(fontSize: 17, color: Colors.black),
                         ),
                       ),
