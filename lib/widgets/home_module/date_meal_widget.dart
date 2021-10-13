@@ -125,7 +125,7 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                               print('finished');
                             });
                           },
-                          child: Text('Get Meals'),
+                          child: Text('Store Meals'),
                         ),
                         TextButton(
                           style: ButtonStyle(
@@ -133,16 +133,16 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                                 MaterialStateProperty.all<Color>(Colors.green),
                           ),
                           onPressed: () {
-                            // setState(() {
-                            //   testMeals =
-                            //       Provider.of<Meals>(context, listen: false)
-                            //           .weeklyMeals;
-                            // });
-                            // print(testMeals[0].dateId);
+                            // Sunday Lunch details
                             print(Provider.of<Meals>(context, listen: false)
-                                .weeklyMeals.length);
+                                .weeklyMeals[0].threeMeals[1]);
+                            
+                            // The id (example is Sunday) u need for switch around days 
+                            // (one element array)
+                            print(Provider.of<Meals>(context, listen: false)
+                                .weeklyMeals[0].dateId);
                           },
-                          child: Text('Store Meals'),
+                          child: Text('Get Meals'),
                         )
                       ],
                     ),

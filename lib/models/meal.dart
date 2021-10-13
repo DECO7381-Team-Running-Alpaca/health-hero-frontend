@@ -16,17 +16,22 @@ class Meal {
   // Have not handled
   final String ytbVideoID;
 
-  Meal({
-    @required this.date,
-    @required this.ingredients,
-    @required this.calories,
-    @required this.mealName,
-    @required this.directions,
-    @required this.mealType,
-    @required this.imageUrl,
-    @required this.dateId,
-    @required this.ytbVideoID
-  });
+  Meal(
+      {@required this.date,
+      @required this.ingredients,
+      @required this.calories,
+      @required this.mealName,
+      @required this.directions,
+      @required this.mealType,
+      @required this.imageUrl,
+      @required this.dateId,
+      @required this.ytbVideoID});
+
+  @override
+  String toString() {
+    final info = 'Mealname: $mealName';
+    return info;
+  }
 }
 
 class DailyMeals {
@@ -60,7 +65,7 @@ final mon13June = Meal(
     directions:
         "Directions: 1.Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet. 2. consectetur Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur 3.Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet. 4. consectetur Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur",
     dateId: [1],
-    ytbVideoID:'bbb');
+    ytbVideoID: 'bbb');
 
 final meals = [
   sun12June,
