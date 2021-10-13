@@ -34,12 +34,12 @@ class DateMealWidget extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                Text(everyDayMeal.calories,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Color.fromRGBO(100, 110, 91, 1),
-                      fontWeight: FontWeight.w700,
-                    )),
+                // Text(everyDayMeal.calories,
+                //     style: TextStyle(
+                //       fontSize: 20,
+                //       color: Color.fromRGBO(100, 110, 91, 1),
+                //       fontWeight: FontWeight.w700,
+                //     )),
               ],
             ),
             Padding(
@@ -74,7 +74,7 @@ class DateMealWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        everyDayMeal.breakfastCal,
+                        everyDayMeal.calories,
                         style: TextStyle(
                           color: Color.fromRGBO(100, 110, 91, 1),
                           fontWeight: FontWeight.w400,

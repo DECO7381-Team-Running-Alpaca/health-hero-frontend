@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_hero/models/meal.dart';
 import 'package:health_hero/screens/health_profile_page.dart';
 import 'package:health_hero/screens/health_report_page.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProxyProvider<Auth, Meals>(
           create: null,
           update: (context, auth, preMeals) => Meals(
-              auth.token, auth.userId, preMeals == null ? [] : preMeals.meals),
+              auth.token, auth.userId, preMeals == null ? new WeeklyMeals() : preMeals.meals),
         ),
       ],
       child: MaterialApp(
