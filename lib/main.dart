@@ -26,11 +26,13 @@ class MyApp extends StatelessWidget {
           update: (context, auth, prevUser) => User(auth.token, auth.userId,
               prevUser == null ? '' : prevUser.userName),
         ),
-        ChangeNotifierProxyProvider<Auth, Meals>(
-          create: null,
-          update: (context, auth, preMeals) => Meals(
-              auth.token, auth.userId, preMeals == null ? new WeeklyMeals() : preMeals.meals),
-        ),
+        // ChangeNotifierProxyProvider<Auth, Meals>(
+        //   create: null,
+        //   update: (context, auth, prevMeal) => Meals(
+        //       auth.token, auth.userId, 
+        //       prevMeal == null ? '' : prevMeal.weekId),
+        // ),
+        ChangeNotifierProvider(create: (context) => Meals()),
       ],
       child: MaterialApp(
         title: 'Health Hero',

@@ -7,3 +7,4 @@ const addPrefs = '$baseURL/preferences';
 const addAllg = '$baseURL/allergies';
 const getPrefs = '$baseURL/preferences';
 const getAllg = '$baseURL/allergies';
+const getDetailPlan = '$baseURL/meal/all';

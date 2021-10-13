@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class Meal {
   // Passed by backend
   final String calories;
@@ -6,28 +8,34 @@ class Meal {
   final String ingredients;
   final String directions;
 
-  // To be added in frontend 
+  // To be added in frontend
   final String date;
   final String mealType;
   final List dateId;
 
+  // Have not handled
+  final String ytbVideoID;
+
   Meal({
-    this.date,
-    this.ingredients,
-    this.calories,
-    this.mealName,
-    this.directions,
-    this.mealType,
-    this.imageUrl,
-    this.dateId,
+    @required this.date,
+    @required this.ingredients,
+    @required this.calories,
+    @required this.mealName,
+    @required this.directions,
+    @required this.mealType,
+    @required this.imageUrl,
+    @required this.dateId,
+    @required this.ytbVideoID
   });
 }
 
-class WeeklyMeals {
-  final List<Meal> dailyMeals;
+class DailyMeals {
+  // length = 3, contains three meals of the day
+  final List<Meal> threeMeals;
+  // starting from 0: Sunday
   final List dateId;
 
-  WeeklyMeals({this.dailyMeals, this.dateId});
+  DailyMeals({@required this.threeMeals, @required this.dateId});
 }
 
 final sun12June = Meal(
@@ -35,22 +43,24 @@ final sun12June = Meal(
     mealType: "BREAKFAST",
     calories: "500KCAL",
     mealName: "LOREM IPSUM DOLO",
-    // image: AssetImage('assets/images/carrot.jpg'),
+    imageUrl: "AssetImage('assets/images/carrot.jpg')",
     ingredients: "Ingredients:\nEgg 100g, Milk 150g, Chicken 150g, Water 200g",
     directions:
         "Directions: \n1.Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet. 2. consectetur Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur 3.Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet. 4. consectetur Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur",
-    dateId: [0]);
+    dateId: [0],
+    ytbVideoID: 'aaa');
 
 final mon13June = Meal(
     date: "Monday, 13 Jun",
     mealType: "BREAKFAST",
     calories: "600KCAL",
     mealName: "LOREM IPSUM DOLO",
-    // image: AssetImage('assets/images/beef.jpg'),
+    imageUrl: "AssetImage('assets/images/beef.jpg')",
     ingredients: "Ingredients:Egg 100g, Milk 150g, Chicken 150g, Water 200g",
     directions:
         "Directions: 1.Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet. 2. consectetur Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur 3.Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet. 4. consectetur Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur",
-    dateId: [1]);
+    dateId: [1],
+    ytbVideoID:'bbb');
 
 final meals = [
   sun12June,

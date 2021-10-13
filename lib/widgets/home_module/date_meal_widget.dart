@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:health_hero/models/meal.dart';
+import 'package:health_hero/provider/meals.dart';
+import 'package:health_hero/utils/services/rest_api_service.dart';
 import 'package:health_hero/widgets/weekly_plan_module/breakfast_lunch_dinner_selector.dart';
+import 'package:provider/provider.dart';
 
 import '../../widgets/weekly_plan_module/video_player.dart';
 
-class DateMealWidget extends StatelessWidget {
+class DateMealWidget extends StatefulWidget {
+  // Change this to recieve the daily meal list (length = 3)
   final Meal everyDayMeal;
 
   const DateMealWidget({Key key, this.everyDayMeal}) : super(key: key);
+
+  @override
+  State<DateMealWidget> createState() => _DateMealWidgetState();
+}
+
+class _DateMealWidgetState extends State<DateMealWidget> {
+  List<DailyMeals> testMeals;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +38,7 @@ class DateMealWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  everyDayMeal.date,
+                  widget.everyDayMeal.date,
                   style: TextStyle(
                     fontSize: 20,
                     color: Color.fromRGBO(100, 110, 91, 1),
@@ -67,14 +78,14 @@ class DateMealWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        everyDayMeal.mealType,
+                        widget.everyDayMeal.mealType,
                         style: TextStyle(
                           color: Color.fromRGBO(100, 110, 91, 1),
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       Text(
-                        everyDayMeal.calories,
+                        widget.everyDayMeal.calories,
                         style: TextStyle(
                           color: Color.fromRGBO(100, 110, 91, 1),
                           fontWeight: FontWeight.w400,
@@ -86,8 +97,8 @@ class DateMealWidget extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 5),
                     child: Column(
                       children: [
-                        Text(everyDayMeal.mealName),
-                        VideoPlayer()
+                        Text(widget.everyDayMeal.mealName),
+                        VideoPlayer(),
                       ],
                     ),
                   ),
@@ -96,11 +107,43 @@ class DateMealWidget extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Text(everyDayMeal.ingredients),
+                        Text(widget.everyDayMeal.ingredients),
                         SizedBox(
                           height: 10,
                         ),
-                        Text(everyDayMeal.directions),
+                        Text(widget.everyDayMeal.directions),
+                        TextButton(
+                          style: ButtonStyle(
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.blue),
+                          ),
+                          onPressed: () async {
+                            // await fetchDetailedPlan();
+                            await Provider.of<Meals>(context, listen: false)
+                                .getWeeklyPlan()
+                                .then((_) {
+                              print('finished');
+                            });
+                          },
+                          child: Text('Get Meals'),
+                        ),
+                        TextButton(
+                          style: ButtonStyle(
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.green),
+                          ),
+                          onPressed: () {
+                            // setState(() {
+                            //   testMeals =
+                            //       Provider.of<Meals>(context, listen: false)
+                            //           .weeklyMeals;
+                            // });
+                            // print(testMeals[0].dateId);
+                            print(Provider.of<Meals>(context, listen: false)
+                                .weeklyMeals.length);
+                          },
+                          child: Text('Store Meals'),
+                        )
                       ],
                     ),
                   ),

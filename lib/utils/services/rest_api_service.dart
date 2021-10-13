@@ -166,3 +166,26 @@ Future<dynamic> fetchUserAttribute(String type) async {
     throw error;
   }
 }
+
+// Fetch details of weekly plan
+Future<dynamic> fetchDetailedPlan() async {
+  try {
+    // Hard coded one
+    final token =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTY2ODQ1OTM4YjBmYzQwYThhYWNjNjYiLCJpYXQiOjE2MzQxMDg1MDUsImV4cCI6MTYzNDYyNjkwNX0.kvwMp9aNs3C6pceBuTqhaMH665bv6HjAESYn9Aoi93A';
+
+    final response = await http.get(
+      Uri.parse(URL.getDetailPlan),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': 'Bearer ' + token,
+      },
+    );
+    final rawResponse = json.decode(response.body);
+    // print(rawResponse['data']['plan']);
+    return rawResponse['data']['plan'];
+  } catch (error) {
+    print(error);
+    throw error;
+  }
+}
