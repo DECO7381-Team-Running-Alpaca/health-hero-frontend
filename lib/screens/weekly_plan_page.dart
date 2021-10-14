@@ -101,8 +101,10 @@ class WeeklyPlanPage extends StatelessWidget {
                 Consumer<AppState>(
                   builder: (context, appState, _) => Column(
                     children: [
+                      // final meals in weeklyMeals
                       for (final meal in meals.where((e) =>
                           e.dateId.contains(appState.selectedCategoryId)))
+                        // This should pass meals.dailyMeals 
                         DateMealWidget(
                           everyDayMeal: meal,
                         )

@@ -1,0 +1,62 @@
+import 'package:flutter/material.dart';
+import 'package:health_hero/utils/helpers/process_plan_data.dart';
+
+import '../models/meal.dart';
+import '../utils/services/rest_api_service.dart';
+
+class Meals with ChangeNotifier {
+  List<DailyMeals> _weeklyMeals = [];
+  // final String _weekId;
+  // final String auth`Token;
+  // final String userId;
+
+  Map<String, List<Meal>> _detailedPlan = {
+    'Sunday': [],
+    'Monday': [],
+    'Tuesday': [],
+    'Wednesday': [],
+    'Thursday': [],
+    'Friday': [],
+    'Saturday': [],
+  };
+
+  // Meals(this.authToken, this.userId, this._weekId);
+
+  List<DailyMeals> get weeklyMeals {
+    return [...this._weeklyMeals];
+  }
+
+  Map<String, List<Meal>> get detailedPlan {
+    return this._detailedPlan;
+  }
+
+  // String get weekId {
+  //   return this._weekId;
+  // }
+
+  Future<void> getWeeklyPlan() async {
+    try {
+      _weeklyMeals = [];
+      await fetchDetailedPlan().then((data) {
+        for (var i = 0; i < data.length; i++) {
+          // Intialise each meal based on response
+          final meal = generateOneMeal(i, data);
+
+          // Add meal to 'neat & clean' container: detailed Plan
+          _detailedPlan[meal.date].add(meal);
+        }
+        // Initialise Daily Meals and add to weekly meals
+        _detailedPlan.forEach((date, meals) {
+          final oneDayMeal =
+              new DailyMeals(threeMeals: meals, dateId: meals[0].dateId);
+          _weeklyMeals.add(oneDayMeal);
+        });
+        // print(_weeklyMeals);
+      });
+      notifyListeners();
+    } catch (error) {
+      print(error);
+      throw error;
+    }
+  }
+}

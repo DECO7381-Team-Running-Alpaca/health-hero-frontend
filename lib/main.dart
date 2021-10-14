@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_hero/models/meal.dart';
 import 'package:health_hero/screens/health_profile_page.dart';
 import 'package:health_hero/screens/health_report_page.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +11,7 @@ import 'package:health_hero/screens/preferred_page.dart';
 import 'package:health_hero/screens/user_auth_screen.dart';
 import './provider/auth.dart';
 import './provider/user.dart';
+import './provider/meals.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,6 +26,13 @@ class MyApp extends StatelessWidget {
           update: (context, auth, prevUser) => User(auth.token, auth.userId,
               prevUser == null ? '' : prevUser.userName),
         ),
+        // ChangeNotifierProxyProvider<Auth, Meals>(
+        //   create: null,
+        //   update: (context, auth, prevMeal) => Meals(
+        //       auth.token, auth.userId, 
+        //       prevMeal == null ? '' : prevMeal.weekId),
+        // ),
+        ChangeNotifierProvider(create: (context) => Meals()),
       ],
       child: MaterialApp(
         title: 'Health Hero',
@@ -40,7 +49,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: PreferredPage.routeName,
+      initialRoute: LandingScreen.routeName,
       routes: {
         PreferredPage.routeName: (context) => PreferredPage(),
         AllergyPage.routeName: (context) => AllergyPage(),

@@ -1,67 +1,83 @@
-import 'package:flutter/rendering.dart';
+import 'package:flutter/foundation.dart';
 
-class EveryDayMeal {
-  // final String date, title, description, location, duration, punchLine1, punchLine2;
-  // final List categoryIds, galleryImages;
-  final String date;
+class Meal {
+  // Passed by backend
   final String calories;
-  final String mealType;
-  final String breakfastCal;
   final String mealName;
-  final AssetImage image;
+  final String imageUrl;
   final String ingredients;
   final String directions;
+
+  // To be added in frontend
+  final String date;
+  final String mealType;
   final List dateId;
 
-  EveryDayMeal({
-    this.date,
-    this.ingredients,
-    this.calories,
-    this.mealName,
-    this.breakfastCal,
-    this.directions,
-    this.mealType,
-    this.image,
-    this.dateId,
-  });
+  // Have not handled
+  final String ytbVideoID;
+
+  Meal(
+      {@required this.date,
+      @required this.ingredients,
+      @required this.calories,
+      @required this.mealName,
+      @required this.directions,
+      @required this.mealType,
+      @required this.imageUrl,
+      @required this.dateId,
+      @required this.ytbVideoID});
+
+  @override
+  String toString() {
+    final info = 'Mealname: $mealName';
+    return info;
+  }
 }
 
-final sun12June = EveryDayMeal(
+class DailyMeals {
+  // length = 3, contains three meals of the day
+  final List<Meal> threeMeals;
+  // starting from 0: Sunday
+  final List dateId;
+
+  DailyMeals({@required this.threeMeals, @required this.dateId});
+}
+
+final sun12June = Meal(
     date: "Sunday, 12 Jun",
-    calories: "3000KCAL",
     mealType: "BREAKFAST",
-    breakfastCal: "500KCAL",
+    calories: "500KCAL",
     mealName: "LOREM IPSUM DOLO",
-    image: AssetImage('assets/images/carrot.jpg'),
+    imageUrl: "AssetImage('assets/images/carrot.jpg')",
     ingredients: "Ingredients:\nEgg 100g, Milk 150g, Chicken 150g, Water 200g",
     directions:
         "Directions: \n1.Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet. 2. consectetur Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur 3.Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet. 4. consectetur Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur",
-    dateId: [0]);
+    dateId: [0],
+    ytbVideoID: 'aaa');
 
-final mon13June = EveryDayMeal(
+final mon13June = Meal(
     date: "Monday, 13 Jun",
-    calories: "5000KCAL",
     mealType: "BREAKFAST",
-    breakfastCal: "600KCAL",
+    calories: "600KCAL",
     mealName: "LOREM IPSUM DOLO",
-    image: AssetImage('assets/images/beef.jpg'),
+    imageUrl: "AssetImage('assets/images/beef.jpg')",
     ingredients: "Ingredients:Egg 100g, Milk 150g, Chicken 150g, Water 200g",
     directions:
         "Directions: 1.Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet. 2. consectetur Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur 3.Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet. 4. consectetur Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet, consectetur",
-    dateId: [1]);
-
-// final fiveKmRunEvent = EveryDayMeal(
-//     imagePath: "assets/event_images/5_km_downtown_run.jpeg",
-//     title: "5 Kilometer Downtown Run",
-//     description: "",
-//     location: "Pleasant Park",
-//     duration: "3h",
-//     punchLine1: "Marathon!",
-//     punchLine2: "The latest fad in foodology, get the inside scoup.",
-//     galleryImages: [],
-//     categoryIds: [0, 1]);
+    dateId: [1],
+    ytbVideoID: 'bbb');
 
 final meals = [
   sun12June,
   mon13June,
 ];
+
+// final monMeals =
+//     WeeklyMeals(dateId: sun12June.dateId, meals: [sun12June, mon13June, sun12June]);
+// final tueMeals =
+//     WeeklyMeals(dateId: mon13June.dateId, meals: [mon13June, sun12June, mon13June]);
+
+// final weeklyMeals = [
+//   monMeals,
+//   tueMeals,
+// ];
