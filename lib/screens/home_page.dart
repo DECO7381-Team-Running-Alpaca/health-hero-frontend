@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:health_hero/provider/meals.dart';
 import 'package:health_hero/widgets/home_module/today_plan.dart';
 import 'package:health_hero/widgets/home_module/tomorrow_plan.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -69,7 +71,20 @@ class HomePage extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: null,
+              onTap: () async {
+                // await fetchDetailedPlan();
+                await Provider.of<Meals>(context, listen: false)
+                    .getWeeklyPlan()
+                    .then((_) {
+                  print('finished');
+                  print(
+                    Provider.of<Meals>(context, listen: false)
+                        .weeklyMeals[0]
+                        .threeMeals[0]
+                        .ytbVideoID,
+                  );
+                });
+              },
               child: Container(
                 transform: Matrix4.translationValues(150, -20, 0),
                 margin: EdgeInsets.only(top: 20),

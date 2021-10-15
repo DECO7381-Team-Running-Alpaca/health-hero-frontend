@@ -60,6 +60,9 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                 children: [
                   BreakfastLunchDinnerSelector(
                     mealTime: 'breakfast',
+                    function: () {
+                      print('object');
+                    },
                   ),
                   BreakfastLunchDinnerSelector(
                     mealTime: 'lunch',
@@ -98,7 +101,7 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                     child: Column(
                       children: [
                         Text(widget.everyDayMeal.mealName),
-                        VideoPlayer(),
+                        VideoPlayer(videoURL: widget.everyDayMeal.ytbVideoID,),
                       ],
                     ),
                   ),
@@ -134,13 +137,19 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                           ),
                           onPressed: () {
                             // Sunday Lunch details
-                            print(Provider.of<Meals>(context, listen: false)
-                                .weeklyMeals[0].threeMeals[1]);
-                            
-                            // The id (example is Sunday) u need for switch around days 
+                            print(
+                              Provider.of<Meals>(context, listen: false)
+                                  .weeklyMeals[0]
+                                  .threeMeals[0],
+                            );
+
+                            // The id (example is Sunday) u need for switch around days
                             // (one element array)
-                            print(Provider.of<Meals>(context, listen: false)
-                                .weeklyMeals[0].dateId);
+                            print(
+                              Provider.of<Meals>(context, listen: false)
+                                  .weeklyMeals[0]
+                                  .dateId,
+                            );
                           },
                           child: Text('Get Meals'),
                         )

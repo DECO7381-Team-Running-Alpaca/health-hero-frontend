@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_hero/provider/app_state.dart';
+import 'package:health_hero/provider/meals.dart';
 import 'package:health_hero/widgets/home_module/date_meal_widget.dart';
 import 'package:health_hero/widgets/weekly_plan_module/day_selector.dart';
 import 'package:provider/provider.dart';
@@ -102,11 +103,14 @@ class WeeklyPlanPage extends StatelessWidget {
                   builder: (context, appState, _) => Column(
                     children: [
                       // final meals in weeklyMeals
-                      for (final meal in meals.where((e) =>
-                          e.dateId.contains(appState.selectedCategoryId)))
-                        // This should pass meals.dailyMeals 
+                      for (final meal in Provider.of<Meals>(context,
+                              listen: false)
+                          .weeklyMeals
+                          .where((e) =>
+                              e.dateId.contains(appState.selectedCategoryId)))
+                        // This should pass meals.dailyMeals
                         DateMealWidget(
-                          everyDayMeal: meal,
+                          everyDayMeal: meal.threeMeals[0],
                         )
                     ],
                   ),
