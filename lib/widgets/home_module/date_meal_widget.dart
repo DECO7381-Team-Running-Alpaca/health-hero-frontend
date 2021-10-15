@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_hero/models/meal.dart';
 import 'package:health_hero/provider/meals.dart';
-import 'package:health_hero/utils/services/rest_api_service.dart';
 import 'package:health_hero/widgets/weekly_plan_module/breakfast_lunch_dinner_selector.dart';
 import 'package:provider/provider.dart';
 
@@ -9,9 +8,10 @@ import '../../widgets/weekly_plan_module/video_player.dart';
 
 class DateMealWidget extends StatefulWidget {
   // Change this to recieve the daily meal list (length = 3)
-  final Meal everyDayMeal;
+  // final Meal everyDayMeal;
+  final DailyMeals dailyMeals;
 
-  const DateMealWidget({Key key, this.everyDayMeal}) : super(key: key);
+  const DateMealWidget({Key key, this.dailyMeals}) : super(key: key);
 
   @override
   State<DateMealWidget> createState() => _DateMealWidgetState();
@@ -19,7 +19,7 @@ class DateMealWidget extends StatefulWidget {
 
 class _DateMealWidgetState extends State<DateMealWidget> {
   List<DailyMeals> testMeals;
-
+  int _daySelector;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,7 +38,7 @@ class _DateMealWidgetState extends State<DateMealWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  widget.everyDayMeal.date,
+                  widget.dailyMeals.threeMeals[_daySelector].date,
                   style: TextStyle(
                     fontSize: 20,
                     color: Color.fromRGBO(100, 110, 91, 1),
@@ -61,14 +61,26 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                   BreakfastLunchDinnerSelector(
                     mealTime: 'breakfast',
                     function: () {
-                      print('object');
+                      setState(() {
+                        _daySelector = 0;
+                      });
                     },
                   ),
                   BreakfastLunchDinnerSelector(
                     mealTime: 'lunch',
+                    function: () {
+                      setState(() {
+                        _daySelector = 1;
+                      });
+                    },
                   ),
                   BreakfastLunchDinnerSelector(
                     mealTime: 'dinner',
+                    function: () {
+                      setState(() {
+                        _daySelector = 2;
+                      });
+                    },
                   ),
                 ],
               ),
@@ -81,14 +93,14 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        widget.everyDayMeal.mealType,
+                        widget.dailyMeals.threeMeals[_daySelector].mealType,
                         style: TextStyle(
                           color: Color.fromRGBO(100, 110, 91, 1),
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       Text(
-                        widget.everyDayMeal.calories,
+                        widget.dailyMeals.threeMeals[_daySelector].calories,
                         style: TextStyle(
                           color: Color.fromRGBO(100, 110, 91, 1),
                           fontWeight: FontWeight.w400,
@@ -100,8 +112,12 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                     padding: const EdgeInsets.only(top: 5),
                     child: Column(
                       children: [
-                        Text(widget.everyDayMeal.mealName),
-                        VideoPlayer(videoURL: widget.everyDayMeal.ytbVideoID,),
+                        Text(
+                            widget.dailyMeals.threeMeals[_daySelector].mealName),
+                        VideoPlayer(
+                          videoURL: widget
+                              .dailyMeals.threeMeals[_daySelector].ytbVideoID,
+                        ),
                       ],
                     ),
                   ),
@@ -110,11 +126,13 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Text(widget.everyDayMeal.ingredients),
+                        Text(widget
+                            .dailyMeals.threeMeals[_daySelector].ingredients),
                         SizedBox(
                           height: 10,
                         ),
-                        Text(widget.everyDayMeal.directions),
+                        Text(widget
+                            .dailyMeals.threeMeals[_daySelector].directions),
                         TextButton(
                           style: ButtonStyle(
                             foregroundColor:

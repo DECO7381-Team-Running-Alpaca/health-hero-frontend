@@ -110,7 +110,7 @@ class WeeklyPlanPage extends StatelessWidget {
                               e.dateId.contains(appState.selectedCategoryId)))
                         // This should pass meals.dailyMeals
                         DateMealWidget(
-                          everyDayMeal: meal.threeMeals[0],
+                          dailyMeals: meal,
                         )
                     ],
                   ),

@@ -81,7 +81,7 @@ class HomePage extends StatelessWidget {
                     Provider.of<Meals>(context, listen: false)
                         .weeklyMeals[0]
                         .threeMeals[0]
-                        .ytbVideoID,
+                        .mealType,
                   );
                 });
               },
