@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
                         Icon(
                           Icons.settings_backup_restore,
                           size: 50,
-                          color: Color.fromRGBO(100, 110, 91, 1),
+                          color: Colors.transparent,
                         )
                       ],
                     ),
@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
               child: Container(
                 margin: EdgeInsets.only(top: 20),
                 // decoration: BoxDecoration(border: Border.all(width: 2)),
-                height: 480,
+                height: 520,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
@@ -68,64 +68,27 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(top: 20),
-              child: Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(
-                      bottom: 10,
+            GestureDetector(
+              onTap: null,
+              child: Container(
+                transform: Matrix4.translationValues(150, -20, 0),
+                margin: EdgeInsets.only(top: 20),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.add_to_photos,
+                      color: Color.fromRGBO(100, 110, 91, 1),
                     ),
-                    child: Text(
-                      'Not eating according to help plan?',
+                    SizedBox(width: 4),
+                    Text(
+                      'Clock In With My Own Recipe',
                       style: TextStyle(
                           color: Color.fromRGBO(100, 110, 91, 1),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700),
                     ),
-                  ),
-                  Container(
-                    transform: Matrix4.translationValues(0, -19, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Stack(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(right: 5),
-                              transform: Matrix4.translationValues(0, 12, 0),
-                              width: 85,
-                              height: 25,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  border: Border.all(
-                                    color: Color.fromRGBO(100, 110, 91, 1),
-                                    width: 1.5,
-                                  )),
-                            ),
-                            TextButton(
-                              onPressed: null,
-                              child: Text(
-                                'Tap here',
-                                style: TextStyle(
-                                    color: Color.fromRGBO(100, 110, 91, 1),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          'to add your own recipe.',
-                          style: TextStyle(
-                              color: Color.fromRGBO(100, 110, 91, 1),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500),
-                        )
-                      ],
-                    ),
-                  )
-                ],
+                  ],
+                ),
               ),
             ),
           ],

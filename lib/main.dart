@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         // ChangeNotifierProxyProvider<Auth, Meals>(
         //   create: null,
         //   update: (context, auth, prevMeal) => Meals(
-        //       auth.token, auth.userId, 
+        //       auth.token, auth.userId,
         //       prevMeal == null ? '' : prevMeal.weekId),
         // ),
         ChangeNotifierProvider(create: (context) => Meals()),
@@ -49,7 +49,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: LandingScreen.routeName,
+      initialRoute: HomeScreen.routeName,
       routes: {
         PreferredPage.routeName: (context) => PreferredPage(),
         AllergyPage.routeName: (context) => AllergyPage(),

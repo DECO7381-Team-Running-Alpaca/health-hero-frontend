@@ -88,6 +88,12 @@ class _TomorrowPlanBoxState extends State<TomorrowPlanBox> {
                   ],
                 ),
                 Container(
+                  margin: EdgeInsets.only(top: 10, bottom: 0),
+                  child: Image(
+                    image: AssetImage('assets/images/home-cutting.png'),
+                  ),
+                ),
+                Container(
                   margin: EdgeInsets.only(top: 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

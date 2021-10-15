@@ -38,7 +38,7 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                       height: 5,
                     ),
                     Text(
-                      'Next meal in 12:00',
+                      'Dinner in 18:00',
                       style: TextStyle(
                         color: Color.fromRGBO(100, 110, 91, 1),
                         fontSize: 16,
@@ -49,9 +49,9 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                 Stack(
                   children: [
                     Container(
-                      transform: Matrix4.translationValues(-10, 6, 0),
+                      transform: Matrix4.translationValues(0, 5, 0),
                       height: 40,
-                      width: 100,
+                      width: 150,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(40),
                         color: Color.fromRGBO(228, 229, 210, 1),
@@ -60,11 +60,11 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                     TextButton(
                       onPressed: () {
                         setState(() {
-                          this.widget.checkClock = !this.widget.checkClock;
+                          widget.checkClock = !widget.checkClock;
                         });
                       },
                       child: Text(
-                        'Clock in',
+                        'Clock in - Dinner',
                         style: TextStyle(
                           color: Color.fromRGBO(100, 109, 93, 1),
                           fontWeight: FontWeight.bold,
@@ -109,9 +109,9 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                                     height: 30,
                                   ),
                                   Text(
-                                    'Lunch - Lorem ipsum dolor',
+                                    'Stir Fry Beef and Vegetables with Rice',
                                     style: TextStyle(
-                                        fontSize: 15,
+                                        fontSize: 13,
                                         fontWeight: FontWeight.bold),
                                   )
                                 ],
@@ -122,7 +122,7 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                       ),
                     ),
                     Offstage(
-                      offstage: this.widget.checkClock,
+                      offstage: widget.checkClock,
                       child: Container(
                         margin: EdgeInsets.only(top: 20),
                         height: 180,
@@ -143,12 +143,25 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                   ],
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 30),
+                  margin: EdgeInsets.only(top: 10, bottom: 10),
+                  child: Image(
+                    image: AssetImage('assets/images/home-cutting.png'),
+                  ),
+                ),
+                Container(
+                  // margin: EdgeInsets.only(top: 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Column(
                         children: [
+                          Container(
+                            width: 130,
+                            child: Text(
+                              'Lunch',
+                            ),
+                          ),
                           Stack(
                             children: [
                               Container(
@@ -183,16 +196,62 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                           Container(
                             width: 150,
                             child: Text(
-                              'Dinner - Lorem ipsum dolor',
+                              'Balsamic Beef Salad',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 10, fontWeight: FontWeight.bold),
                             ),
-                          )
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 5),
+                            height: 17,
+                            child: Row(
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.info,
+                                      size: 10,
+                                    ),
+                                    Text(
+                                      'Not yet clocked',
+                                      style: TextStyle(
+                                        fontSize: 8,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 4,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Clock in',
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.arrow_right,
+                                      size: 20,
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                       Column(
                         children: [
+                          Container(
+                            width: 130,
+                            child: Text(
+                              'Breakfast',
+                            ),
+                          ),
                           Stack(
                             children: [
                               Container(
@@ -211,28 +270,28 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                                 height: 100,
                                 width: 150,
                                 decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.4)),
+                                    color: Colors.black.withOpacity(0.4)),
                               ),
                               Positioned(
                                 top: 32,
                                 left: 60,
-                                child: Image(
-                                  image: AssetImage('assets/icons/play.png'),
-                                  height: 35,
-                                  width: 35,
+                                child: Icon(
+                                  Icons.check_circle_outline,
+                                  color: Colors.white,
+                                  size: 35,
                                 ),
                               )
                             ],
                           ),
                           Container(
-                            width: 150,
+                            // width: 150,
                             child: Text(
-                              'Breakfast - Lorem ipsum',
+                              'Fruity Yoghurt Breakfast Crunch',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 10, fontWeight: FontWeight.bold),
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ],
