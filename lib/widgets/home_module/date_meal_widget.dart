@@ -17,9 +17,10 @@ class DateMealWidget extends StatefulWidget {
   State<DateMealWidget> createState() => _DateMealWidgetState();
 }
 
+int daySelector = 0;
+
 class _DateMealWidgetState extends State<DateMealWidget> {
   List<DailyMeals> testMeals;
-  int _daySelector;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,19 +39,20 @@ class _DateMealWidgetState extends State<DateMealWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  widget.dailyMeals.threeMeals[_daySelector].date,
+                  widget.dailyMeals.threeMeals[daySelector].date,
                   style: TextStyle(
                     fontSize: 20,
                     color: Color.fromRGBO(100, 110, 91, 1),
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                // Text(everyDayMeal.calories,
-                //     style: TextStyle(
-                //       fontSize: 20,
-                //       color: Color.fromRGBO(100, 110, 91, 1),
-                //       fontWeight: FontWeight.w700,
-                //     )),
+                Text(
+                    '${(int.parse(widget.dailyMeals.threeMeals[0].calories) + int.parse(widget.dailyMeals.threeMeals[1].calories) + int.parse(widget.dailyMeals.threeMeals[2].calories)).toString()}KCAL',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Color.fromRGBO(100, 110, 91, 1),
+                      fontWeight: FontWeight.w700,
+                    )),
               ],
             ),
             Padding(
@@ -62,25 +64,28 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                     mealTime: 'breakfast',
                     function: () {
                       setState(() {
-                        _daySelector = 0;
+                        daySelector = 0;
                       });
                     },
+                    buttonID: 0,
                   ),
                   BreakfastLunchDinnerSelector(
                     mealTime: 'lunch',
                     function: () {
                       setState(() {
-                        _daySelector = 1;
+                        daySelector = 1;
                       });
                     },
+                    buttonID: 1,
                   ),
                   BreakfastLunchDinnerSelector(
                     mealTime: 'dinner',
                     function: () {
                       setState(() {
-                        _daySelector = 2;
+                        daySelector = 2;
                       });
                     },
+                    buttonID: 2,
                   ),
                 ],
               ),
@@ -93,14 +98,15 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        widget.dailyMeals.threeMeals[_daySelector].mealType,
+                        widget.dailyMeals.threeMeals[daySelector].mealType
+                            .toUpperCase(),
                         style: TextStyle(
                           color: Color.fromRGBO(100, 110, 91, 1),
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       Text(
-                        widget.dailyMeals.threeMeals[_daySelector].calories,
+                        '${widget.dailyMeals.threeMeals[daySelector].calories}KCAL',
                         style: TextStyle(
                           color: Color.fromRGBO(100, 110, 91, 1),
                           fontWeight: FontWeight.w400,
@@ -112,11 +118,20 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                     padding: const EdgeInsets.only(top: 5),
                     child: Column(
                       children: [
-                        Text(
-                            widget.dailyMeals.threeMeals[_daySelector].mealName),
+                        Container(
+                          margin: EdgeInsets.only(bottom: 10),
+                          child: Text(
+                            widget.dailyMeals.threeMeals[daySelector].mealName,
+                            style: TextStyle(
+                              color: Color.fromRGBO(99, 91, 90, 1),
+                              fontWeight: FontWeight.w700,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
                         VideoPlayer(
                           videoURL: widget
-                              .dailyMeals.threeMeals[_daySelector].ytbVideoID,
+                              .dailyMeals.threeMeals[daySelector].ytbVideoID,
                         ),
                       ],
                     ),
@@ -126,51 +141,78 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Text(widget
-                            .dailyMeals.threeMeals[_daySelector].ingredients),
+                        Text(
+                          'Ingredients:',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromRGBO(99, 91, 90, 1),
+                          ),
+                        ),
+                        Text(
+                          widget.dailyMeals.threeMeals[daySelector].ingredients,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: Color.fromRGBO(0, 0, 0, 0.7),
+                          ),
+                        ),
                         SizedBox(
-                          height: 10,
+                          height: 20,
                         ),
-                        Text(widget
-                            .dailyMeals.threeMeals[_daySelector].directions),
-                        TextButton(
-                          style: ButtonStyle(
-                            foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.blue),
+                        Text(
+                          'Directions:',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromRGBO(99, 91, 90, 1),
                           ),
-                          onPressed: () async {
-                            // await fetchDetailedPlan();
-                            await Provider.of<Meals>(context, listen: false)
-                                .getWeeklyPlan()
-                                .then((_) {
-                              print('finished');
-                            });
-                          },
-                          child: Text('Store Meals'),
                         ),
-                        TextButton(
-                          style: ButtonStyle(
-                            foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.green),
+                        Text(
+                          widget.dailyMeals.threeMeals[daySelector].directions,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            color: Color.fromRGBO(0, 0, 0, 0.7),
                           ),
-                          onPressed: () {
-                            // Sunday Lunch details
-                            print(
-                              Provider.of<Meals>(context, listen: false)
-                                  .weeklyMeals[0]
-                                  .threeMeals[0],
-                            );
-
-                            // The id (example is Sunday) u need for switch around days
-                            // (one element array)
-                            print(
-                              Provider.of<Meals>(context, listen: false)
-                                  .weeklyMeals[0]
-                                  .dateId,
-                            );
-                          },
-                          child: Text('Get Meals'),
+                        ),
+                        SizedBox(
+                          height: 50,
                         )
+                        // TextButton(
+                        //   style: ButtonStyle(
+                        //     foregroundColor:
+                        //         MaterialStateProperty.all<Color>(Colors.blue),
+                        //   ),
+                        //   onPressed: () async {
+                        //     // await fetchDetailedPlan();
+                        //     await Provider.of<Meals>(context, listen: false)
+                        //         .getWeeklyPlan()
+                        //         .then((_) {
+                        //       print('finished');
+                        //     });
+                        //   },
+                        //   child: Text('Store Meals'),
+                        // ),
+                        // TextButton(
+                        //   style: ButtonStyle(
+                        //     foregroundColor:
+                        //         MaterialStateProperty.all<Color>(Colors.green),
+                        //   ),
+                        //   onPressed: () {
+                        //     // Sunday Lunch details
+                        //     print(
+                        //       Provider.of<Meals>(context, listen: false)
+                        //           .weeklyMeals[0]
+                        //           .threeMeals[0],
+                        //     );
+
+                        //     // The id (example is Sunday) u need for switch around days
+                        //     // (one element array)
+                        //     print(
+                        //       Provider.of<Meals>(context, listen: false)
+                        //           .weeklyMeals[0]
+                        //           .dateId,
+                        //     );
+                        //   },
+                        //   child: Text('Get Meals'),
+                        // )
                       ],
                     ),
                   ),

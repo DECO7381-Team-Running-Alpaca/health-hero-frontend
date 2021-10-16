@@ -27,10 +27,24 @@ class WeeklyPlanPage extends StatelessWidget {
                             color: Color.fromRGBO(100, 110, 91, 1),
                             fontWeight: FontWeight.bold),
                       ),
-                      Icon(
-                        Icons.date_range,
-                        size: 50,
-                        color: Color.fromRGBO(100, 110, 91, 1),
+                      GestureDetector(
+                        onTap: null,
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.date_range,
+                              size: 40,
+                              color: Color.fromRGBO(100, 110, 91, 1),
+                            ),
+                            Text(
+                              'Full Plan',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  color: Color.fromRGBO(100, 110, 91, 1),
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
                       )
                     ],
                   ),

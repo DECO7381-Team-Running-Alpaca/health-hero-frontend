@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:health_hero/widgets/home_module/date_meal_widget.dart';
 
 class BreakfastLunchDinnerSelector extends StatelessWidget {
   String mealTime;
   Function function;
-  BreakfastLunchDinnerSelector({this.mealTime,this.function});
+  int buttonID;
+  BreakfastLunchDinnerSelector({this.mealTime, this.function, this.buttonID});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,13 +14,20 @@ class BreakfastLunchDinnerSelector extends StatelessWidget {
         onPressed: function,
         child: Text(
           this.mealTime.toUpperCase(),
-          style: TextStyle(fontWeight: FontWeight.w900),
+          style: TextStyle(
+            fontWeight: FontWeight.w700,
+            color: this.buttonID == daySelector
+                ? Colors.white
+                : Color.fromRGBO(100, 110, 91, 1),
+          ),
         ),
         style: OutlinedButton.styleFrom(
           padding: EdgeInsets.zero,
           minimumSize: Size(124, 35),
-          backgroundColor: Color.fromRGBO(244, 244, 245, 1),
-          onSurface: Color.fromRGBO(100, 110, 91, 1),
+          backgroundColor: this.buttonID == daySelector
+              ? Color.fromRGBO(100, 110, 91, 1)
+              : Color.fromRGBO(244, 244, 245, 1),
+          // onSurface: Color.fromRGBO(100, 110, 91, 1),
           side: BorderSide(
             color: Color.fromRGBO(100, 110, 91, 1),
           ),
