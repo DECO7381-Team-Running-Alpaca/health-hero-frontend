@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:health_hero/provider/meals.dart';
+import 'package:health_hero/utils/helpers/date_handler.dart';
+import 'package:provider/provider.dart';
 
 class TodayPlanBox extends StatefulWidget {
   final dynamic twoDayData;
-  
+
   const TodayPlanBox({Key key, this.twoDayData}) : super(key: key);
 
   @override
@@ -10,12 +13,62 @@ class TodayPlanBox extends StatefulWidget {
 }
 
 class _TodayPlanBoxState extends State<TodayPlanBox> {
-  bool checkClock = true;
+  final today = currentDate('No');
 
-  String _lengthChecker(String title, int limit) => title.length <= limit ? title : title.substring(0, limit) + ' ...';
+  String _lengthChecker(String title, int limit) =>
+      title.length <= limit ? title : title.substring(0, limit) + ' ...';
+
+  Widget displayNotifier(bool status) => Container(
+        margin: EdgeInsets.only(top: 5),
+        height: 17,
+        child: Row(
+          children: [
+            Row(
+              children: [
+                Icon(
+                  Icons.info,
+                  size: 10,
+                ),
+                Text(
+                  'Not yet clocked',
+                  style: TextStyle(
+                    fontSize: 8,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              width: 4,
+            ),
+            // TODO: fix button display bugs
+            TextButton(
+              onPressed: () {},
+              style: TextButton.styleFrom(
+                textStyle: TextStyle(
+                  color: Colors.black,
+                  fontSize: 8,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              child: Text(
+                'Clock-in',
+              ),
+            ),
+            Icon(
+              Icons.arrow_right,
+              size: 20,
+            )
+          ],
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
+    final meal = Provider.of<Meals>(context, listen: false);
+    bool dinnerCheckClock = meal.clockInStatus[today][2];
+    bool breakfastCheckClock = meal.clockInStatus[today][0];
+    bool lunchCheckClock = meal.clockInStatus[today][1];
+
     return Container(
       // padding: EdgeInsets.all(15),
       margin: EdgeInsets.all(13),
@@ -67,8 +120,10 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                     TextButton(
                       onPressed: () {
                         setState(() {
-                          checkClock = !checkClock;
+                          dinnerCheckClock = !dinnerCheckClock;
                         });
+                        Provider.of<Meals>(context, listen: false)
+                            .setClockInStatus(today, 2);
                       },
                       child: Text(
                         'Clock in - Dinner',
@@ -96,7 +151,8 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
-                            image: NetworkImage(widget.twoDayData['todayDinner']['image']),
+                            image: NetworkImage(
+                                widget.twoDayData['todayDinner']['image']),
                             fit: BoxFit.fill,
                           )),
                       child: Stack(
@@ -116,7 +172,10 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                                     height: 30,
                                   ),
                                   Text(
-                                    _lengthChecker(widget.twoDayData['todayDinner']['title'], 34),
+                                    _lengthChecker(
+                                        widget.twoDayData['todayDinner']
+                                            ['title'],
+                                        34),
                                     style: TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.bold),
@@ -129,7 +188,7 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                       ),
                     ),
                     Offstage(
-                      offstage: checkClock,
+                      offstage: dinnerCheckClock,
                       child: Container(
                         margin: EdgeInsets.only(top: 20),
                         height: 180,
@@ -161,96 +220,59 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        children: [
-                          Container(
-                            width: 130,
-                            child: Text(
-                              'Lunch',
-                            ),
+                      Column(children: [
+                        Container(
+                          width: 130,
+                          child: Text(
+                            'Lunch',
                           ),
-                          Stack(
-                            children: [
-                              Container(
+                        ),
+                        Stack(
+                          children: [
+                            Container(
+                              height: 100,
+                              width: 150,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                      widget.twoDayData['todayLunch']['image']),
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            ),
+                            Offstage(
+                              offstage: !lunchCheckClock,
+                              child: Container(
                                 height: 100,
-                                width: 150,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  image: DecorationImage(
-                                    image:
-                                        NetworkImage(widget.twoDayData['todayLunch']['image']),
-                                    fit: BoxFit.fill,
+                                  color: Colors.black.withOpacity(0.5),
+                                ),
+                                child: Container(
+                                  width: 150,
+                                  child: Icon(
+                                    Icons.check_circle_outline,
+                                    color: Colors.white,
+                                    size: 40,
                                   ),
                                 ),
                               ),
-                              Container(
-                                height: 100,
-                                width: 150,
-                                decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.4)),
-                              ),
-                              Positioned(
-                                top: 32,
-                                left: 60,
-                                child: Image(
-                                  image: AssetImage('assets/icons/play.png'),
-                                  height: 35,
-                                  width: 35,
-                                ),
-                              )
-                            ],
+                            )
+                          ],
+                        ),
+                        Container(
+                          width: 150,
+                          child: Text(
+                            _lengthChecker(
+                                widget.twoDayData['todayLunch']['title'], 25),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 10, fontWeight: FontWeight.bold),
                           ),
-                          Container(
-                            width: 150,
-                            child: Text(
-                              _lengthChecker(widget.twoDayData['todayLunch']['title'], 25),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 10, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 5),
-                            height: 17,
-                            child: Row(
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.info,
-                                      size: 10,
-                                    ),
-                                    Text(
-                                      'Not yet clocked',
-                                      style: TextStyle(
-                                        fontSize: 8,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      'Clock in',
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Icon(
-                                      Icons.arrow_right,
-                                      size: 20,
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                        !lunchCheckClock ? displayNotifier(false) : Text(''),
+                      ]),
                       Column(
                         children: [
                           Container(
@@ -267,38 +289,44 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
-                                    image:
-                                        NetworkImage(widget.twoDayData['todayBreakfast']['image']),
+                                    image: NetworkImage(widget
+                                        .twoDayData['todayBreakfast']['image']),
                                     fit: BoxFit.fill,
                                   ),
                                 ),
                               ),
-                              Container(
+                              Offstage(
+                              offstage: !breakfastCheckClock,
+                              child: Container(
                                 height: 100,
-                                width: 150,
                                 decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(0.4)),
-                              ),
-                              Positioned(
-                                top: 32,
-                                left: 60,
-                                child: Icon(
-                                  Icons.check_circle_outline,
-                                  color: Colors.white,
-                                  size: 35,
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.black.withOpacity(0.5),
                                 ),
-                              )
+                                child: Container(
+                                  width: 150,
+                                  child: Icon(
+                                    Icons.check_circle_outline,
+                                    color: Colors.white,
+                                    size: 40,
+                                  ),
+                                ),
+                              ),
+                            ),
                             ],
                           ),
                           Container(
                             // width: 150,
                             child: Text(
-                              _lengthChecker(widget.twoDayData['todayBreakfast']['title'], 25),
+                              _lengthChecker(
+                                  widget.twoDayData['todayBreakfast']['title'],
+                                  25),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 10, fontWeight: FontWeight.bold),
                             ),
                           ),
+                          !breakfastCheckClock ? displayNotifier(false) : Text(''),
                         ],
                       ),
                     ],

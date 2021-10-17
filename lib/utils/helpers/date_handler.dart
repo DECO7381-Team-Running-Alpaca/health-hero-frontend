@@ -9,7 +9,7 @@ String currentDate(String mode) {
   if (mode == "dateRequest") {
     return dateToNum(formatted);
   }
-  return '';
+  return formatted.substring(0, 3);
 }
 
 String dateToNum(String today) {
