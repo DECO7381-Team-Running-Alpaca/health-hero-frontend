@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:health_hero/screens/health_profile_page.dart';
 import 'package:health_hero/screens/health_report_page.dart';
+import 'package:health_hero/screens/login_page.dart';
+import 'package:health_hero/screens/profile_page.dart';
+import 'package:health_hero/screens/sign_up_continue.dart';
+import 'package:health_hero/screens/sign_up_page.dart';
 import 'package:provider/provider.dart';
 
 import 'package:health_hero/screens/allergies_page.dart';
@@ -40,7 +44,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: PreferredPage.routeName,
+      initialRoute: LandingScreen.routeName,
       routes: {
         PreferredPage.routeName: (context) => PreferredPage(),
         AllergyPage.routeName: (context) => AllergyPage(),
@@ -48,6 +52,9 @@ class MyHomePage extends StatelessWidget {
         UserAuthScreen.routeName: (context) => UserAuthScreen(),
         HomeScreen.routeName: (context) => HomeScreen(),
         HealthReportPage.routeName: (context) => HealthReportPage(),
+        SignUpPage.routeName: (context) => SignUpPage(),
+        SignUpContinue.routeName: (context) => SignUpContinue(),
+        LoginPage.routeName: (context) => LoginPage(),
       },
     );
   }
