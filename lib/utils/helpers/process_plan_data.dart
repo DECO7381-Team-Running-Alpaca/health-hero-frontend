@@ -1,6 +1,6 @@
 import '../../models/meal.dart';
 
-Meal generateOneMeal(int mealIndex, dynamic rawData) {
+Meal generateOneMeal(int mealIndex, dynamic rawData)  {
   final mealExtraInfo = calculateDateAndType(mealIndex);
   final date = mealExtraInfo['date'];
   final mealType = mealExtraInfo['mealType'];
@@ -18,7 +18,7 @@ Meal generateOneMeal(int mealIndex, dynamic rawData) {
 
   final ingredients = rawData[mealIndex][0]['ingredients'].join(',');
 
-  final ytbVideoID = 'BSBEUcAyFyk';
+  final ytbVideoID = '';
 
   // print('$date, $mealType, $dateId, $caloires, $mealName, $imageUrl');
   // print(ingredients);

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:health_hero/models/meal.dart';
 import 'package:health_hero/provider/meals.dart';
+import 'package:health_hero/utils/services/rest_api_service.dart';
 import 'package:health_hero/widgets/weekly_plan_module/breakfast_lunch_dinner_selector.dart';
 import 'package:provider/provider.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../widgets/weekly_plan_module/video_player.dart';
 
@@ -20,7 +22,71 @@ class DateMealWidget extends StatefulWidget {
 int daySelector = 0;
 
 class _DateMealWidgetState extends State<DateMealWidget> {
-  List<DailyMeals> testMeals;
+  var _isLoading = false;
+  var videoId = '';
+  // var mealName = '';
+  YoutubePlayerController _videoController;
+  PlayerState _playerState;
+  YoutubeMetaData _videoMetaData;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      _isLoading = true;
+    });
+    setState(() {
+      _isLoading = false;
+      _videoController = YoutubePlayerController(
+        initialVideoId: 'vpwY3nmLLaA',
+        flags: YoutubePlayerFlags(
+          autoPlay: false,
+          mute: false,
+        ),
+      );
+      _playerState = PlayerState.unknown;
+      _videoMetaData = const YoutubeMetaData();
+    });
+    // fetchYoutubeVideo('Apple').then((data) {
+    //   setState(() {
+    //     videoId = data;
+    //     _isLoading = false;
+    //     _videoController = YoutubePlayerController(
+    //       initialVideoId: 'vpwY3nmLLaA',
+    //       flags: YoutubePlayerFlags(
+    //         autoPlay: false,
+    //         mute: false,
+    //       ),
+    //     );
+    //     _playerState = PlayerState.unknown;
+    //     _videoMetaData = const YoutubeMetaData();
+    //   });
+    // });
+  }
+
+  void newListener() {
+    setState(() {
+      _playerState = _videoController.value.playerState;
+      _videoMetaData = _videoController.metadata;
+    });
+  }
+
+  // Future<void> _loadNewVideo(String mealName) async {
+  //   setState(() {
+  //     _isLoading = true;
+  //   });
+
+  //   await fetchYoutubeVideo(mealName).then((data) {
+  //     setState(() {
+  //       videoId = 'eBPsaa0_RtQ';
+  //     });
+  //   }).then((_) {
+  //     setState(() {
+  //       _isLoading = false;
+  //     });
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -65,16 +131,24 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                     function: () {
                       setState(() {
                         daySelector = 0;
+                        // _videoName =
+                        //     widget.dailyMeals.threeMeals[daySelector].mealName;
                       });
                     },
                     buttonID: 0,
                   ),
                   BreakfastLunchDinnerSelector(
                     mealTime: 'lunch',
-                    function: () {
+                    function: () async {
                       setState(() {
                         daySelector = 1;
                       });
+                      // await _loadNewVideo('Apple').then((_) {});
+                      if (_videoController.value.isPlaying) {
+                        _videoController.pause();
+                      }
+                      _videoController.load('eBPsaa0_RtQ');
+                      _videoController.pause();
                     },
                     buttonID: 1,
                   ),
@@ -83,6 +157,8 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                     function: () {
                       setState(() {
                         daySelector = 2;
+                        // _videoName =
+                        //     widget.dailyMeals.threeMeals[daySelector].mealName;
                       });
                     },
                     buttonID: 2,
@@ -129,10 +205,24 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                             ),
                           ),
                         ),
-                        VideoPlayer(
-                          videoURL: widget
-                              .dailyMeals.threeMeals[daySelector].ytbVideoID,
-                        ),
+                        _isLoading
+                            ? Container(
+                                margin: const EdgeInsets.only(bottom: 20.0),
+                                child: CircularProgressIndicator(
+                                  value: null,
+                                  color: Color.fromRGBO(205, 214, 169, 100),
+                                ),
+                              )
+                            : Container(
+                                child: YoutubePlayer(
+                                  controller: _videoController,
+                                  showVideoProgressIndicator: true,
+                                  progressIndicatorColor: Colors.greenAccent,
+                                  onReady: () {
+                                    _videoController.addListener(newListener);
+                                  },
+                                ),
+                              )
                       ],
                     ),
                   ),
@@ -174,22 +264,7 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                         ),
                         SizedBox(
                           height: 50,
-                        )
-                        // TextButton(
-                        //   style: ButtonStyle(
-                        //     foregroundColor:
-                        //         MaterialStateProperty.all<Color>(Colors.blue),
-                        //   ),
-                        //   onPressed: () async {
-                        //     // await fetchDetailedPlan();
-                        //     await Provider.of<Meals>(context, listen: false)
-                        //         .getWeeklyPlan()
-                        //         .then((_) {
-                        //       print('finished');
-                        //     });
-                        //   },
-                        //   child: Text('Store Meals'),
-                        // ),
+                        ),
                         // TextButton(
                         //   style: ButtonStyle(
                         //     foregroundColor:

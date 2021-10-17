@@ -19,3 +19,27 @@ Future<String> getLocalUser() async {
       json.decode(prefs.getString('userData')) as Map<String, Object>;
   return extractedData['token'];
 }
+
+Future<void> storeClockInStatus(Map<String, List<bool>> status) async {
+  final prefs = await SharedPreferences.getInstance();
+
+  if (prefs.containsKey('clockInData')) {
+    prefs.remove("clockInData");
+  }
+
+  final clockInData = json.encode(status);
+  prefs.setString('clockInData', clockInData);
+}
+
+Future<Map<String, List<dynamic>>> getClockInStatus(String date) async {
+  final prefs = await SharedPreferences.getInstance();
+  if (!prefs.containsKey('clockInData')) {
+    return null;
+  }
+
+  final extractedData = json.decode(prefs.getString('clockInData'));
+
+  final formatData = new Map<String, List<dynamic>>.from(extractedData);
+
+  return formatData;
+}

@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 
 class TomorrowPlanBox extends StatefulWidget {
+  final dynamic twoDayData;
+
+  const TomorrowPlanBox({Key key, this.twoDayData}) : super(key: key);
+
   @override
   _TomorrowPlanBoxState createState() => _TomorrowPlanBoxState();
 }
 
 class _TomorrowPlanBoxState extends State<TomorrowPlanBox> {
+  String _lengthChecker(String title, int limit) => title.length <= limit ? title : title.substring(0, limit) + ' ...';
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,7 +59,7 @@ class _TomorrowPlanBoxState extends State<TomorrowPlanBox> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
-                            image: AssetImage('assets/images/main1.jpg'),
+                            image: NetworkImage(widget.twoDayData['tomorrorBreakfast']['image']),
                             fit: BoxFit.cover,
                           )),
                       child: Stack(
@@ -73,7 +79,7 @@ class _TomorrowPlanBoxState extends State<TomorrowPlanBox> {
                                     height: 30,
                                   ),
                                   Text(
-                                    'Lunch - Lorem ipsum dolor',
+                                    _lengthChecker(widget.twoDayData['tomorrorBreakfast']['title'], 34),
                                     style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
@@ -109,7 +115,7 @@ class _TomorrowPlanBoxState extends State<TomorrowPlanBox> {
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
                                     image:
-                                        AssetImage('assets/images/main2.jpg'),
+                                        NetworkImage(widget.twoDayData['tomorrowLunch']['image']),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -134,7 +140,7 @@ class _TomorrowPlanBoxState extends State<TomorrowPlanBox> {
                           Container(
                             width: 150,
                             child: Text(
-                              'Dinner - Lorem ipsum dolor',
+                              _lengthChecker(widget.twoDayData['tomorrowLunch']['title'], 25),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 10, fontWeight: FontWeight.bold),
@@ -153,7 +159,7 @@ class _TomorrowPlanBoxState extends State<TomorrowPlanBox> {
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
                                     image:
-                                        AssetImage('assets/images/main3.jpg'),
+                                        NetworkImage(widget.twoDayData['tomorrowDinner']['image']),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -178,7 +184,7 @@ class _TomorrowPlanBoxState extends State<TomorrowPlanBox> {
                           Container(
                             width: 150,
                             child: Text(
-                              'Breakfast - Lorem ipsum',
+                              _lengthChecker(widget.twoDayData['tomorrowDinner']['title'], 25),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 10, fontWeight: FontWeight.bold),
