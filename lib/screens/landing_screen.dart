@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:health_hero/screens/login_page.dart';
+import 'package:health_hero/screens/sign_up_page.dart';
 import 'package:health_hero/screens/user_auth_screen.dart';
 import 'package:health_hero/utils/services/rest_api_service.dart';
 import 'package:provider/provider.dart';
@@ -18,11 +20,11 @@ class _LandingScreenState extends State<LandingScreen> {
     switch (mode) {
       case AuthMode.Login:
         Navigator.of(ctx)
-            .pushNamed(UserAuthScreen.routeName, arguments: AuthMode.Login);
+            .pushNamed(LoginPage.routeName, arguments: AuthMode.Login);
         break;
       case AuthMode.Signup:
         Navigator.of(ctx)
-            .pushNamed(UserAuthScreen.routeName, arguments: AuthMode.Signup);
+            .pushNamed(SignUpPage.routeName, arguments: AuthMode.Signup);
         break;
       default:
     }

@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health_hero/screens/allergies_page.dart';
 import 'package:health_hero/screens/preferred_page.dart';
+import 'package:health_hero/widgets/user_profile_module/update_allergies_dialog.dart';
+import 'package:health_hero/widgets/user_profile_module/update_preferences_dialog.dart';
 import 'package:health_hero/widgets/user_profile_module/update_email_dialog.dart';
 import 'package:health_hero/widgets/user_profile_module/update_height_dialog.dart';
 import 'package:health_hero/widgets/user_profile_module/update_weight_dialog.dart';
@@ -53,6 +55,14 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void _weightUpdateDialog() {
     showDialog(context: context, builder: (context) => UpdateWeightDialog());
+  }
+
+  void _preferenceDialog() {
+    showDialog(context: context, builder: (context) => FoodPreferencesDialog());
+  }
+
+  void _allergiesDialog() {
+    showDialog(context: context, builder: (context) => FoodAllergiesDialog());
   }
 
   void _getPre() async {
@@ -404,11 +414,9 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       Container(
                         height: 39,
-                        padding: EdgeInsets.only(left: 10, right: 8, top: 5),
+                        padding: EdgeInsets.only(left: 10, right: 8, bottom: 5),
                         child: TextButton(
-                          onPressed: () {
-                            _getPre();
-                          },
+                          onPressed: _preferenceDialog,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -437,9 +445,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: 39,
                         padding: EdgeInsets.only(left: 10, right: 8, bottom: 5),
                         child: TextButton(
-                          onPressed: () {
-                            _getAll();
-                          },
+                          onPressed: _allergiesDialog,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
