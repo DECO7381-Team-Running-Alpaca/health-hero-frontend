@@ -170,9 +170,7 @@ Future<dynamic> fetchUserAttribute(String type) async {
 // Fetch details of weekly plan
 Future<dynamic> fetchDetailedPlan() async {
   try {
-    // Hard coded one
-    final token =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTY2ODQ1OTM4YjBmYzQwYThhYWNjNjYiLCJpYXQiOjE2MzQxMDg1MDUsImV4cCI6MTYzNDYyNjkwNX0.kvwMp9aNs3C6pceBuTqhaMH665bv6HjAESYn9Aoi93A';
+    final token = await getLocalUser();
 
     final response = await http.get(
       Uri.parse(URL.getDetailPlan),
@@ -190,25 +188,48 @@ Future<dynamic> fetchDetailedPlan() async {
   }
 }
 
-//
+// Fetch two day's meals for home page
 Future<dynamic> fetchTwoDayImage(String dateNum) async {
   try {
-    // Hard coded one
-    final token =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTY2ODQ1OTM4YjBmYzQwYThhYWNjNjYiLCJpYXQiOjE2MzQxMDg1MDUsImV4cCI6MTYzNDYyNjkwNX0.kvwMp9aNs3C6pceBuTqhaMH665bv6HjAESYn9Aoi93A';
+    final token = await getLocalUser();
     var body = json.encode({"date": dateNum});
 
-    final response = await http.post(
-      Uri.parse(URL.getTwoDays),
-      headers: {
-        "Content-Type": "application/json",
-        'Authorization': 'Bearer ' + token,
-      },
-      body: body
-    );
+    final response = await http.post(Uri.parse(URL.getTwoDays),
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': 'Bearer ' + token,
+        },
+        body: body);
     final rawResponse = json.decode(response.body);
 
     return rawResponse['data']['plan'];
+  } catch (error) {
+    print(error);
+    throw error;
+  }
+}
+
+// fetch Youtube Id
+Future<dynamic> fetchYoutubeVideo(String keywords) async {
+  try {
+    final response = await http.get(
+      Uri.parse(URL.getYoutubeLink(keywords)),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    );
+    final rawResponse = json.decode(response.body);
+    print(URL.getYoutubeLink(keywords));
+    print(rawResponse);
+
+    var videoID = '';
+    if (rawResponse["items"] == null) {
+      videoID = 'bGgbA3B8eO0';
+    } else {
+      videoID = rawResponse["items"][0]["id"]['videoId'];
+    }
+
+    return videoID;
   } catch (error) {
     print(error);
     throw error;

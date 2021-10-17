@@ -50,13 +50,16 @@ class Meals with ChangeNotifier {
   Future<void> getWeeklyPlan() async {
     try {
       _weeklyMeals = [];
-      await fetchDetailedPlan().then((data) {
+      fetchDetailedPlan().then((data)  {
         for (var i = 0; i < data.length; i++) {
           // Intialise each meal based on response
           final meal = generateOneMeal(i, data);
 
           // Add meal to 'neat & clean' container: detailed Plan
           _detailedPlan[meal.date].add(meal);
+          // await generateOneMeal(i, data).then((meal) {
+          //   _detailedPlan[meal.date].add(meal);
+          // });
         }
 
         // Initialise Daily Meals and add to weekly meals

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:health_hero/models/meal.dart';
 import 'package:health_hero/provider/meals.dart';
+import 'package:health_hero/utils/services/rest_api_service.dart';
 import 'package:health_hero/widgets/weekly_plan_module/breakfast_lunch_dinner_selector.dart';
 import 'package:provider/provider.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../widgets/weekly_plan_module/video_player.dart';
 
@@ -20,7 +22,95 @@ class DateMealWidget extends StatefulWidget {
 int daySelector = 0;
 
 class _DateMealWidgetState extends State<DateMealWidget> {
-  List<DailyMeals> testMeals;
+  var _isLoading = false;
+  var _isRefreshing = false;
+  var _isInit = true;
+  var videoId = '';
+  // YoutubePlayerController _videoController;
+  PlayerState _playerState;
+  YoutubeMetaData _videoMetaData;
+  // var _videoName = '';
+  YoutubePlayerController _videoControllerA;
+  YoutubePlayerController _videoControllerB;
+  YoutubePlayerController _videoControllerC;
+  var _flag;
+  Widget mealVideo;
+
+  @override
+  void initState() {
+    super.initState();
+    _flag = 0;
+    runYoutube('vpwY3nmLLaA');
+    _playerState = PlayerState.unknown;
+    _videoMetaData = const YoutubeMetaData();
+    mealVideo = Container(
+      child: YoutubePlayer(
+        controller: _videoControllerA,
+        showVideoProgressIndicator: true,
+        progressIndicatorColor: Colors.greenAccent,
+        onReady: () {
+          _videoControllerA.addListener(newListenerA);
+        },
+      ),
+    );
+  }
+
+  void runYoutube(String url) {
+    _videoControllerA = YoutubePlayerController(
+      initialVideoId: 'vpwY3nmLLaA',
+      // initialVideoId: widget.videoURL,
+      flags: YoutubePlayerFlags(
+        autoPlay: false,
+        mute: false,
+      ),
+    );
+    _videoControllerB = YoutubePlayerController(
+      initialVideoId: 'B5pKw6flFZE',
+      // initialVideoId: widget.videoURL,
+      flags: YoutubePlayerFlags(
+        autoPlay: false,
+        mute: false,
+      ),
+    );
+    _videoControllerC = YoutubePlayerController(
+      initialVideoId: 'pqr7EmlUyQ4',
+      // initialVideoId: widget.videoURL,
+      flags: YoutubePlayerFlags(
+        autoPlay: false,
+        mute: false,
+      ),
+    );
+  }
+
+  void newListenerA() {
+    setState(() {
+      _playerState = _videoControllerA.value.playerState;
+      _videoMetaData = _videoControllerA.metadata;
+    });
+  }
+
+  void newListenerB() {
+    setState(() {
+      _playerState = _videoControllerB.value.playerState;
+      _videoMetaData = _videoControllerB.metadata;
+    });
+  }
+
+  void newListenerC() {
+    setState(() {
+      _playerState = _videoControllerC.value.playerState;
+      _videoMetaData = _videoControllerC.metadata;
+    });
+  }
+
+  @override
+  void dispose() {
+    _videoControllerA.dispose();
+    _videoControllerB.dispose();
+    _videoControllerC.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -65,6 +155,19 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                     function: () {
                       setState(() {
                         daySelector = 0;
+                        // _videoName =
+                        //     widget.dailyMeals.threeMeals[daySelector].mealName;
+                        mealVideo = Container(
+                          child: YoutubePlayer(
+                            controller: _videoControllerA,
+                            showVideoProgressIndicator: true,
+                            progressIndicatorColor: Colors.greenAccent,
+                            onReady: () {
+                              _videoControllerA.addListener(newListenerA);
+                            },
+                          ),
+                        );
+                        _flag = 0;
                       });
                     },
                     buttonID: 0,
@@ -74,6 +177,24 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                     function: () {
                       setState(() {
                         daySelector = 1;
+                        if (_videoControllerA.value.isPlaying) {
+                          _videoControllerA.pause();
+                        }
+                        _videoControllerA.load('B5pKw6flFZE');
+                        // _videoName =
+                        //     widget.dailyMeals.threeMeals[daySelector].mealName;
+
+                        // mealVideo = Container(
+                        //   child: YoutubePlayer(
+                        //     controller: _videoControllerB,
+                        //     showVideoProgressIndicator: true,
+                        //     progressIndicatorColor: Colors.greenAccent,
+                        //     onReady: () {
+                        //       _videoControllerB.addListener(newListenerB);
+                        //     },
+                        //   ),
+                        // );
+                        _flag = 1;
                       });
                     },
                     buttonID: 1,
@@ -83,6 +204,20 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                     function: () {
                       setState(() {
                         daySelector = 2;
+                        mealVideo = Container(
+                          child: YoutubePlayer(
+                            controller: _videoControllerC,
+                            showVideoProgressIndicator: true,
+                            progressIndicatorColor: Colors.greenAccent,
+                            onReady: () {
+                              _videoControllerC.addListener(newListenerC);
+                            },
+                          ),
+                        );
+                        // _videoName =
+                        //     widget.dailyMeals.threeMeals[daySelector].mealName;
+                        // _flag = 2;
+                        // _videoController.load('B5pKw6flFZE');
                       });
                     },
                     buttonID: 2,
@@ -129,10 +264,26 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                             ),
                           ),
                         ),
-                        VideoPlayer(
-                          videoURL: widget
-                              .dailyMeals.threeMeals[daySelector].ytbVideoID,
-                        ),
+                        // _flag == 0 ? _videoPlayerA : (_flag == 1 ? _videoPlayerB : _videoPlayerC),
+                        _isLoading
+                            ? Container(
+                                margin: const EdgeInsets.only(bottom: 20.0),
+                                child: CircularProgressIndicator(
+                                  value: null,
+                                  color: Color.fromRGBO(205, 214, 169, 100),
+                                ),
+                              )
+                            : mealVideo
+                        // Container(
+                        //     child: YoutubePlayer(
+                        //       controller: _videoController,
+                        //       showVideoProgressIndicator: true,
+                        //       progressIndicatorColor: Colors.greenAccent,
+                        //       onReady: () {
+                        //         _videoController.addListener(newListener);
+                        //       },
+                        //     ),
+                        //   )
                       ],
                     ),
                   ),
@@ -174,22 +325,7 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                         ),
                         SizedBox(
                           height: 50,
-                        )
-                        // TextButton(
-                        //   style: ButtonStyle(
-                        //     foregroundColor:
-                        //         MaterialStateProperty.all<Color>(Colors.blue),
-                        //   ),
-                        //   onPressed: () async {
-                        //     // await fetchDetailedPlan();
-                        //     await Provider.of<Meals>(context, listen: false)
-                        //         .getWeeklyPlan()
-                        //         .then((_) {
-                        //       print('finished');
-                        //     });
-                        //   },
-                        //   child: Text('Store Meals'),
-                        // ),
+                        ),
                         // TextButton(
                         //   style: ButtonStyle(
                         //     foregroundColor:
