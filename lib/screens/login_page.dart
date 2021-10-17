@@ -1,12 +1,8 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:health_hero/screens/sign_up_page.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-import 'package:health_hero/screens/preferred_page.dart';
-import 'package:health_hero/screens/home_screen.dart';
-import 'package:health_hero/screens/landing_screen.dart';
+import '../screens/home_screen.dart';
+import '../screens/sign_up_page.dart';
 import '../provider/auth.dart';
 
 class LoginPage extends StatefulWidget {
@@ -18,7 +14,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   var _mode;
-  bool _isChecked = false;
   bool _isLoading = false;
 
   Map<String, String> _loginData = {'username': '', 'password': ''};
@@ -51,11 +46,11 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     try {
-      // await Provider.of<Auth>(context, listen: false).login(_loginData);
-      // setState(() {
-      //   _loginStatus = Provider.of<Auth>(context, listen: false).message;
-      //   _isLoading = false;
-      // });
+      await Provider.of<Auth>(context, listen: false).login(_loginData);
+      setState(() {
+        _loginStatus = Provider.of<Auth>(context, listen: false).message;
+        _isLoading = false;
+      });
 
       // more elegant way to handle error
       if (_loginStatus != 'You Shall Not Pass!') {

@@ -1,12 +1,9 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:health_hero/screens/sign_up_continue.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-import 'package:health_hero/screens/preferred_page.dart';
-import 'package:health_hero/screens/home_screen.dart';
-import 'package:health_hero/screens/landing_screen.dart';
+import '../screens/sign_up_continue.dart';
+import '../screens/home_screen.dart';
+import '../screens/landing_screen.dart';
 import '../provider/auth.dart';
 
 class SignUpPage extends StatefulWidget {

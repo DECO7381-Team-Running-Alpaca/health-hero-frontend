@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:health_hero/screens/login_page.dart';
-import 'package:health_hero/screens/sign_up_page.dart';
-import 'package:health_hero/screens/user_auth_screen.dart';
-import 'package:health_hero/utils/services/rest_api_service.dart';
-import 'package:provider/provider.dart';
-import '../provider/user.dart';
+
+import '../screens/login_page.dart';
+import '../screens/sign_up_page.dart';
 
 enum AuthMode { Login, Signup }
 
@@ -27,24 +24,6 @@ class _LandingScreenState extends State<LandingScreen> {
             .pushNamed(SignUpPage.routeName, arguments: AuthMode.Signup);
         break;
       default:
-    }
-  }
-
-  void _paTests() async {
-    try {
-      // //1) Add Preferences
-      // List<String> pTestList = ["a", "b", "c"];
-      // await Provider.of<User>(context, listen: false).addPrefs(pTestList);
-
-      // //2) Add Allergies
-      // List<String> aTestList = ["d", "e", "f"];
-      // await Provider.of<User>(context, listen: false).addAllg(aTestList);
-
-      // // 3) Test on get preferences & allergy services
-      // await fetchUserAttribute('preferences').then((data) => print(data));
-      // await fetchUserAttribute('allergies').then((data) => print(data));
-    } catch (e) {
-      print(e);
     }
   }
 
@@ -119,10 +98,9 @@ class _LandingScreenState extends State<LandingScreen> {
                       backgroundColor:
                           MaterialStateProperty.all<Color>(Colors.white),
                     ),
-                    // onPressed: () {
-                    //   _continueAuth(AuthMode.Signup, context);
-                    // },
-                    onPressed: _paTests,
+                    onPressed: () {
+                      _continueAuth(AuthMode.Signup, context);
+                    },
                     child: Text(
                       'SIGN UP',
                       style: TextStyle(
