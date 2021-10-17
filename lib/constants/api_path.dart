@@ -8,3 +8,4 @@ const addAllg = '$baseURL/allergies';
 const getPrefs = '$baseURL/preferences';
 const getAllg = '$baseURL/allergies';
 const getDetailPlan = '$baseURL/meal/all';
+const getTwoDays = '$baseURL/meal/twodays';

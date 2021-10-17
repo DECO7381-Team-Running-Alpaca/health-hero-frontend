@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 
 class TodayPlanBox extends StatefulWidget {
-  bool checkClock = true;
+  final dynamic twoDayData;
+  
+  const TodayPlanBox({Key key, this.twoDayData}) : super(key: key);
+
   @override
   _TodayPlanBoxState createState() => _TodayPlanBoxState();
 }
 
 class _TodayPlanBoxState extends State<TodayPlanBox> {
+  bool checkClock = true;
+
+  String _lengthChecker(String title, int limit) => title.length <= limit ? title : title.substring(0, limit) + ' ...';
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -60,7 +67,7 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                     TextButton(
                       onPressed: () {
                         setState(() {
-                          widget.checkClock = !widget.checkClock;
+                          checkClock = !checkClock;
                         });
                       },
                       child: Text(
@@ -89,8 +96,8 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
-                            image: AssetImage('assets/images/main1.jpg'),
-                            fit: BoxFit.cover,
+                            image: NetworkImage(widget.twoDayData['todayDinner']['image']),
+                            fit: BoxFit.fill,
                           )),
                       child: Stack(
                         children: [
@@ -109,7 +116,7 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                                     height: 30,
                                   ),
                                   Text(
-                                    'Stir Fry Beef and Vegetables with Rice',
+                                    _lengthChecker(widget.twoDayData['todayDinner']['title'], 34),
                                     style: TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.bold),
@@ -122,7 +129,7 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                       ),
                     ),
                     Offstage(
-                      offstage: widget.checkClock,
+                      offstage: checkClock,
                       child: Container(
                         margin: EdgeInsets.only(top: 20),
                         height: 180,
@@ -171,8 +178,8 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
                                     image:
-                                        AssetImage('assets/images/main2.jpg'),
-                                    fit: BoxFit.cover,
+                                        NetworkImage(widget.twoDayData['todayLunch']['image']),
+                                    fit: BoxFit.fill,
                                   ),
                                 ),
                               ),
@@ -196,7 +203,7 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                           Container(
                             width: 150,
                             child: Text(
-                              'Balsamic Beef Salad',
+                              _lengthChecker(widget.twoDayData['todayLunch']['title'], 25),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 10, fontWeight: FontWeight.bold),
@@ -261,8 +268,8 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
                                     image:
-                                        AssetImage('assets/images/main3.jpg'),
-                                    fit: BoxFit.cover,
+                                        NetworkImage(widget.twoDayData['todayBreakfast']['image']),
+                                    fit: BoxFit.fill,
                                   ),
                                 ),
                               ),
@@ -286,7 +293,7 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                           Container(
                             // width: 150,
                             child: Text(
-                              'Fruity Yoghurt Breakfast Crunch',
+                              _lengthChecker(widget.twoDayData['todayBreakfast']['title'], 25),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 10, fontWeight: FontWeight.bold),

@@ -189,3 +189,28 @@ Future<dynamic> fetchDetailedPlan() async {
     throw error;
   }
 }
+
+//
+Future<dynamic> fetchTwoDayImage(String dateNum) async {
+  try {
+    // Hard coded one
+    final token =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTY2ODQ1OTM4YjBmYzQwYThhYWNjNjYiLCJpYXQiOjE2MzQxMDg1MDUsImV4cCI6MTYzNDYyNjkwNX0.kvwMp9aNs3C6pceBuTqhaMH665bv6HjAESYn9Aoi93A';
+    var body = json.encode({"date": dateNum});
+
+    final response = await http.post(
+      Uri.parse(URL.getTwoDays),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': 'Bearer ' + token,
+      },
+      body: body
+    );
+    final rawResponse = json.decode(response.body);
+
+    return rawResponse['data']['plan'];
+  } catch (error) {
+    print(error);
+    throw error;
+  }
+}
