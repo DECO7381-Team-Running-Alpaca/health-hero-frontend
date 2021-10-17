@@ -23,93 +23,69 @@ int daySelector = 0;
 
 class _DateMealWidgetState extends State<DateMealWidget> {
   var _isLoading = false;
-  var _isRefreshing = false;
-  var _isInit = true;
   var videoId = '';
-  // YoutubePlayerController _videoController;
+  // var mealName = '';
+  YoutubePlayerController _videoController;
   PlayerState _playerState;
   YoutubeMetaData _videoMetaData;
-  // var _videoName = '';
-  YoutubePlayerController _videoControllerA;
-  YoutubePlayerController _videoControllerB;
-  YoutubePlayerController _videoControllerC;
-  var _flag;
-  Widget mealVideo;
 
   @override
   void initState() {
     super.initState();
-    _flag = 0;
-    runYoutube('vpwY3nmLLaA');
-    _playerState = PlayerState.unknown;
-    _videoMetaData = const YoutubeMetaData();
-    mealVideo = Container(
-      child: YoutubePlayer(
-        controller: _videoControllerA,
-        showVideoProgressIndicator: true,
-        progressIndicatorColor: Colors.greenAccent,
-        onReady: () {
-          _videoControllerA.addListener(newListenerA);
-        },
-      ),
-    );
-  }
-
-  void runYoutube(String url) {
-    _videoControllerA = YoutubePlayerController(
-      initialVideoId: 'vpwY3nmLLaA',
-      // initialVideoId: widget.videoURL,
-      flags: YoutubePlayerFlags(
-        autoPlay: false,
-        mute: false,
-      ),
-    );
-    _videoControllerB = YoutubePlayerController(
-      initialVideoId: 'B5pKw6flFZE',
-      // initialVideoId: widget.videoURL,
-      flags: YoutubePlayerFlags(
-        autoPlay: false,
-        mute: false,
-      ),
-    );
-    _videoControllerC = YoutubePlayerController(
-      initialVideoId: 'pqr7EmlUyQ4',
-      // initialVideoId: widget.videoURL,
-      flags: YoutubePlayerFlags(
-        autoPlay: false,
-        mute: false,
-      ),
-    );
-  }
-
-  void newListenerA() {
     setState(() {
-      _playerState = _videoControllerA.value.playerState;
-      _videoMetaData = _videoControllerA.metadata;
+      _isLoading = true;
+    });
+    setState(() {
+      _isLoading = false;
+      _videoController = YoutubePlayerController(
+        initialVideoId: 'vpwY3nmLLaA',
+        flags: YoutubePlayerFlags(
+          autoPlay: false,
+          mute: false,
+        ),
+      );
+      _playerState = PlayerState.unknown;
+      _videoMetaData = const YoutubeMetaData();
+    });
+    // fetchYoutubeVideo('Apple').then((data) {
+    //   setState(() {
+    //     videoId = data;
+    //     _isLoading = false;
+    //     _videoController = YoutubePlayerController(
+    //       initialVideoId: 'vpwY3nmLLaA',
+    //       flags: YoutubePlayerFlags(
+    //         autoPlay: false,
+    //         mute: false,
+    //       ),
+    //     );
+    //     _playerState = PlayerState.unknown;
+    //     _videoMetaData = const YoutubeMetaData();
+    //   });
+    // });
+  }
+
+  void newListener() {
+    setState(() {
+      _playerState = _videoController.value.playerState;
+      _videoMetaData = _videoController.metadata;
     });
   }
 
-  void newListenerB() {
-    setState(() {
-      _playerState = _videoControllerB.value.playerState;
-      _videoMetaData = _videoControllerB.metadata;
-    });
-  }
+  // Future<void> _loadNewVideo(String mealName) async {
+  //   setState(() {
+  //     _isLoading = true;
+  //   });
 
-  void newListenerC() {
-    setState(() {
-      _playerState = _videoControllerC.value.playerState;
-      _videoMetaData = _videoControllerC.metadata;
-    });
-  }
-
-  @override
-  void dispose() {
-    _videoControllerA.dispose();
-    _videoControllerB.dispose();
-    _videoControllerC.dispose();
-    super.dispose();
-  }
+  //   await fetchYoutubeVideo(mealName).then((data) {
+  //     setState(() {
+  //       videoId = 'eBPsaa0_RtQ';
+  //     });
+  //   }).then((_) {
+  //     setState(() {
+  //       _isLoading = false;
+  //     });
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -157,45 +133,22 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                         daySelector = 0;
                         // _videoName =
                         //     widget.dailyMeals.threeMeals[daySelector].mealName;
-                        mealVideo = Container(
-                          child: YoutubePlayer(
-                            controller: _videoControllerA,
-                            showVideoProgressIndicator: true,
-                            progressIndicatorColor: Colors.greenAccent,
-                            onReady: () {
-                              _videoControllerA.addListener(newListenerA);
-                            },
-                          ),
-                        );
-                        _flag = 0;
                       });
                     },
                     buttonID: 0,
                   ),
                   BreakfastLunchDinnerSelector(
                     mealTime: 'lunch',
-                    function: () {
+                    function: () async {
                       setState(() {
                         daySelector = 1;
-                        if (_videoControllerA.value.isPlaying) {
-                          _videoControllerA.pause();
-                        }
-                        _videoControllerA.load('B5pKw6flFZE');
-                        // _videoName =
-                        //     widget.dailyMeals.threeMeals[daySelector].mealName;
-
-                        // mealVideo = Container(
-                        //   child: YoutubePlayer(
-                        //     controller: _videoControllerB,
-                        //     showVideoProgressIndicator: true,
-                        //     progressIndicatorColor: Colors.greenAccent,
-                        //     onReady: () {
-                        //       _videoControllerB.addListener(newListenerB);
-                        //     },
-                        //   ),
-                        // );
-                        _flag = 1;
                       });
+                      // await _loadNewVideo('Apple').then((_) {});
+                      if (_videoController.value.isPlaying) {
+                        _videoController.pause();
+                      }
+                      _videoController.load('eBPsaa0_RtQ');
+                      _videoController.pause();
                     },
                     buttonID: 1,
                   ),
@@ -204,20 +157,8 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                     function: () {
                       setState(() {
                         daySelector = 2;
-                        mealVideo = Container(
-                          child: YoutubePlayer(
-                            controller: _videoControllerC,
-                            showVideoProgressIndicator: true,
-                            progressIndicatorColor: Colors.greenAccent,
-                            onReady: () {
-                              _videoControllerC.addListener(newListenerC);
-                            },
-                          ),
-                        );
                         // _videoName =
                         //     widget.dailyMeals.threeMeals[daySelector].mealName;
-                        // _flag = 2;
-                        // _videoController.load('B5pKw6flFZE');
                       });
                     },
                     buttonID: 2,
@@ -264,7 +205,6 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                             ),
                           ),
                         ),
-                        // _flag == 0 ? _videoPlayerA : (_flag == 1 ? _videoPlayerB : _videoPlayerC),
                         _isLoading
                             ? Container(
                                 margin: const EdgeInsets.only(bottom: 20.0),
@@ -273,17 +213,16 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                                   color: Color.fromRGBO(205, 214, 169, 100),
                                 ),
                               )
-                            : mealVideo
-                        // Container(
-                        //     child: YoutubePlayer(
-                        //       controller: _videoController,
-                        //       showVideoProgressIndicator: true,
-                        //       progressIndicatorColor: Colors.greenAccent,
-                        //       onReady: () {
-                        //         _videoController.addListener(newListener);
-                        //       },
-                        //     ),
-                        //   )
+                            : Container(
+                                child: YoutubePlayer(
+                                  controller: _videoController,
+                                  showVideoProgressIndicator: true,
+                                  progressIndicatorColor: Colors.greenAccent,
+                                  onReady: () {
+                                    _videoController.addListener(newListener);
+                                  },
+                                ),
+                              )
                       ],
                     ),
                   ),

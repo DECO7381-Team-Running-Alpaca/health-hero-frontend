@@ -219,8 +219,6 @@ Future<dynamic> fetchYoutubeVideo(String keywords) async {
       },
     );
     final rawResponse = json.decode(response.body);
-    print(URL.getYoutubeLink(keywords));
-    print(rawResponse);
 
     var videoID = '';
     if (rawResponse["items"] == null) {

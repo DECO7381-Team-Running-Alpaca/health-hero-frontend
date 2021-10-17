@@ -56,7 +56,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
   // YoutubePlayerController _videoController;
   void runYoutube(String url) {
     _videoController = YoutubePlayerController(
-      initialVideoId: url,
+      initialVideoId: 'vpwY3nmLLaA',
       // initialVideoId: widget.videoURL,
       flags: YoutubePlayerFlags(
         autoPlay: false,

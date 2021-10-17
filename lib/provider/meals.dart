@@ -52,10 +52,10 @@ class Meals with ChangeNotifier {
       _weeklyMeals = [];
       fetchDetailedPlan().then((data)  {
         for (var i = 0; i < data.length; i++) {
-          // Intialise each meal based on response
+          // // Intialise each meal based on response
           final meal = generateOneMeal(i, data);
 
-          // Add meal to 'neat & clean' container: detailed Plan
+          // // Add meal to 'neat & clean' container: detailed Plan
           _detailedPlan[meal.date].add(meal);
           // await generateOneMeal(i, data).then((meal) {
           //   _detailedPlan[meal.date].add(meal);
