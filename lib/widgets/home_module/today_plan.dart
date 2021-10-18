@@ -65,7 +65,7 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
   @override
   Widget build(BuildContext context) {
     final meal = Provider.of<Meals>(context, listen: false);
-    bool dinnerCheckClock = meal.clockInStatus[today][2];
+    bool dinnerCheckClock = !meal.clockInStatus[today][2];
     bool breakfastCheckClock = meal.clockInStatus[today][0];
     bool lunchCheckClock = meal.clockInStatus[today][1];
 

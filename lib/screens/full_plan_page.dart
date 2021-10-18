@@ -72,25 +72,32 @@ class _FullPlanPageState extends State<FullPlanPage> {
                     ),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.only(top: 10),
-                  // decoration: BoxDecoration(border: Border.all(width: 2)),
-                  height: 640,
-                  child: ListView(
-                    children: [
-                      for (var x in dayList) DetailedOneDay(day: x)
-                    ],
-                  ),
+                Stack(
+                  children: [
+                    // Image(
+                    //   image: AssetImage('assets/images/preference-bottom.png'),
+                    // ),
+                    Container(
+                      padding: EdgeInsets.only(top: 10),
+                      // decoration: BoxDecoration(border: Border.all(width: 2)),
+                      height: 730,
+                      child: ListView(
+                        children: [
+                          for (var x in dayList) DetailedOneDay(day: x)
+                        ],
+                      ),
+                    ),
+                  ],
                 )
               ],
             ),
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavBar(
-        onTap: null,
-        currentIndex: currentIndex,
-      ),
+      // bottomNavigationBar: BottomNavBar(
+      //   onTap: null,
+      //   currentIndex: currentIndex,
+      // ),
     );
   }
 }
