@@ -24,6 +24,8 @@ int daySelector = 0;
 class _DateMealWidgetState extends State<DateMealWidget> {
   var _isLoading = false;
   var videoId = '';
+  String afterSplit = '';
+
   // var mealName = '';
   YoutubePlayerController _videoController;
   PlayerState _playerState;
@@ -89,6 +91,23 @@ class _DateMealWidgetState extends State<DateMealWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.dailyMeals.threeMeals[daySelector].directions.startsWith('<')) {
+      var beforSplit = widget.dailyMeals.threeMeals[daySelector].directions;
+      List after_split_ol = beforSplit.split('<ol>');
+      String join_after_ol = after_split_ol.join();
+      List after_split_li = join_after_ol.split('<li>');
+      String join_after_li = after_split_li.join();
+
+      List after_split_1ol = join_after_li.split('</ol>');
+      String join_after_1ol = after_split_1ol.join();
+      List after_split_1li = join_after_1ol.split('</li>');
+      String join_after_1li = after_split_1li.join();
+
+      afterSplit = join_after_1li;
+    } else {
+      afterSplit = widget.dailyMeals.threeMeals[daySelector].directions;
+    }
+
     return Container(
       margin: EdgeInsets.only(
         top: 30,
@@ -199,9 +218,9 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                           child: Text(
                             widget.dailyMeals.threeMeals[daySelector].mealName,
                             style: TextStyle(
-                              color: Color.fromRGBO(99, 91, 90, 1),
+                              color: Colors.black.withOpacity(0.7),
                               fontWeight: FontWeight.w700,
-                              fontSize: 15,
+                              fontSize: 17,
                             ),
                           ),
                         ),
@@ -234,8 +253,9 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                         Text(
                           'Ingredients:',
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromRGBO(99, 91, 90, 1),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w800,
+                            color: Colors.black.withOpacity(0.7),
                           ),
                         ),
                         Text(
@@ -251,12 +271,13 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                         Text(
                           'Directions:',
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromRGBO(99, 91, 90, 1),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w800,
+                            color: Colors.black.withOpacity(0.7),
                           ),
                         ),
                         Text(
-                          widget.dailyMeals.threeMeals[daySelector].directions,
+                          afterSplit,
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             color: Color.fromRGBO(0, 0, 0, 0.7),

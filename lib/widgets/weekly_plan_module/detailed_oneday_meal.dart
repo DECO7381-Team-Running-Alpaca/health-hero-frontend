@@ -66,14 +66,18 @@ class _DetailedOneDayState extends State<DetailedOneDay> {
                       children: [
                         Text(
                             '${Provider.of<Meals>(context, listen: false).detailedPlan[widget.day][0].calories} Kcal'),
-                        Icon(
-                          Provider.of<Meals>(context, listen: false)
-                                      .clockInStatus[
-                                  (widget.day).substring(0, 3)][0]
-                              ? Icons.check
-                              : Icons.close,
-                          size: 17,
-                        ),
+                        Provider.of<Meals>(context, listen: false)
+                                .clockInStatus[(widget.day).substring(0, 3)][0]
+                            ? Icon(
+                                Icons.check,
+                                color: Colors.green,
+                                size: 17,
+                              )
+                            : Icon(
+                                Icons.close,
+                                color: Colors.red,
+                                size: 17,
+                              ),
                       ],
                     ),
                   ],
@@ -106,14 +110,18 @@ class _DetailedOneDayState extends State<DetailedOneDay> {
                       children: [
                         Text(
                             '${Provider.of<Meals>(context, listen: false).detailedPlan[widget.day][1].calories} Kcal'),
-                        Icon(
-                          Provider.of<Meals>(context, listen: false)
-                                      .clockInStatus[
-                                  (widget.day).substring(0, 3)][1]
-                              ? Icons.check
-                              : Icons.close,
-                          size: 17,
-                        ),
+                        Provider.of<Meals>(context, listen: false)
+                                .clockInStatus[(widget.day).substring(0, 3)][1]
+                            ? Icon(
+                                Icons.check,
+                                color: Colors.green,
+                                size: 17,
+                              )
+                            : Icon(
+                                Icons.close,
+                                color: Colors.red,
+                                size: 17,
+                              ),
                       ],
                     ),
                   ],
@@ -146,14 +154,18 @@ class _DetailedOneDayState extends State<DetailedOneDay> {
                       children: [
                         Text(
                             '${Provider.of<Meals>(context, listen: false).detailedPlan[widget.day][2].calories} Kcal'),
-                        Icon(
-                          Provider.of<Meals>(context, listen: false)
-                                      .clockInStatus[
-                                  (widget.day).substring(0, 3)][2]
-                              ? Icons.check
-                              : Icons.close,
-                          size: 17,
-                        ),
+                        Provider.of<Meals>(context, listen: false)
+                                .clockInStatus[(widget.day).substring(0, 3)][2]
+                            ? Icon(
+                                Icons.check,
+                                color: Colors.green,
+                                size: 17,
+                              )
+                            : Icon(
+                                Icons.close,
+                                color: Colors.red,
+                                size: 17,
+                              ),
                       ],
                     ),
                   ],
