@@ -3,7 +3,6 @@ import 'package:health_hero/provider/meals.dart';
 import 'package:health_hero/utils/helpers/date_handler.dart';
 import 'package:health_hero/widgets/home_module/today_plan.dart';
 import 'package:health_hero/widgets/home_module/tomorrow_plan.dart';
-import 'package:health_hero/utils/helpers/date_handler.dart';
 import 'package:health_hero/utils/services/rest_api_service.dart';
 import 'package:provider/provider.dart';
 

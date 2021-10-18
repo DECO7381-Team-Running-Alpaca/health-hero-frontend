@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_hero/models/meal.dart';
+import 'package:health_hero/screens/full_plan_page.dart';
 import 'package:health_hero/screens/health_profile_page.dart';
 import 'package:health_hero/screens/health_report_page.dart';
 import 'package:health_hero/screens/login_page.dart';
@@ -64,6 +65,7 @@ class MyHomePage extends StatelessWidget {
         SignUpPage.routeName: (context) => SignUpPage(),
         SignUpContinue.routeName: (context) => SignUpContinue(),
         LoginPage.routeName: (context) => LoginPage(),
+        FullPlanPage.routeName: (context) => FullPlanPage(),
       },
     );
   }

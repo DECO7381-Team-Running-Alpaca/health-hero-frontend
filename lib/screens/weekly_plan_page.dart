@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:health_hero/provider/app_state.dart';
 import 'package:health_hero/provider/meals.dart';
+import 'package:health_hero/screens/full_plan_page.dart';
 import 'package:health_hero/widgets/home_module/date_meal_widget.dart';
 import 'package:health_hero/widgets/weekly_plan_module/day_selector.dart';
 import 'package:provider/provider.dart';
-import 'package:health_hero/models/meal.dart';
 
 class WeeklyPlanPage extends StatelessWidget {
   @override
@@ -28,7 +28,9 @@ class WeeklyPlanPage extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       ),
                       GestureDetector(
-                        onTap: null,
+                        onTap: () {
+                          Navigator.pushNamed(context, FullPlanPage.routeName);
+                        },
                         child: Column(
                           children: [
                             Icon(

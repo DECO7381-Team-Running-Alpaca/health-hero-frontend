@@ -50,7 +50,7 @@ class Meals with ChangeNotifier {
   Future<void> getWeeklyPlan() async {
     try {
       _weeklyMeals = [];
-      fetchDetailedPlan().then((data)  {
+      fetchDetailedPlan().then((data) {
         for (var i = 0; i < data.length; i++) {
           // // Intialise each meal based on response
           final meal = generateOneMeal(i, data);
