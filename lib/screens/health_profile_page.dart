@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health_hero/models/meal.dart';
 import 'package:health_hero/models/record.dart';
+import 'package:health_hero/provider/meals.dart';
+import 'package:provider/provider.dart';
 
 import 'health_report_page.dart';
 
@@ -12,15 +14,21 @@ class HealthProfilePage extends StatefulWidget {
 
 class _HealthProfilePageState extends State<HealthProfilePage> {
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    var data = Provider.of<Meals>(context, listen: false).getWeeklyNutritions();
+    print(data);
+  }
 
+  @override
+  Widget build(BuildContext context) {
     int eaten = 0;
     int eatenLeft = 0;
     int totalProtein = 0;
     int totalCarbs = 0;
     int totalFat = 0;
 
-    for(var food in foods){
+    for (var food in foods) {
       eaten += food.calories;
       totalProtein += food.protein;
       totalCarbs += food.carbohydrate;
@@ -66,8 +74,10 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 60, left: 35, right: 35, bottom: 40),
-                  padding: EdgeInsets.only(left: 15, top: 15, right: 15, bottom: 5),
+                  margin:
+                      EdgeInsets.only(top: 60, left: 35, right: 35, bottom: 40),
+                  padding:
+                      EdgeInsets.only(left: 15, top: 15, right: 15, bottom: 5),
                   height: 550,
                   decoration: BoxDecoration(
                     border: Border.all(
@@ -80,7 +90,8 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                     children: [
                       Container(
                         height: 90,
-                        padding: EdgeInsets.only(left: 5, top: 10, right: 5, bottom: 10),
+                        padding: EdgeInsets.only(
+                            left: 5, top: 10, right: 5, bottom: 10),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -103,7 +114,7 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                                   ),
                                 ),
                                 Text(
-                                  sun12June.calories,
+                                  '${sun12June.calories}',
                                   style: TextStyle(
                                     fontSize: 15,
                                     color: Color.fromRGBO(151, 168, 132, 1),
@@ -120,7 +131,8 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                       ),
                       Container(
                         height: 358,
-                        padding: EdgeInsets.only(left: 5, top: 10, right: 5, bottom: 10),
+                        padding: EdgeInsets.only(
+                            left: 5, top: 10, right: 5, bottom: 10),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -143,9 +155,10 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                               ],
                             ),
                             Padding(
-                              padding: EdgeInsets.only(left: 20, top: 5, bottom: 5),
+                              padding:
+                                  EdgeInsets.only(left: 20, top: 5, bottom: 5),
                               child: Text(
-                                  eaten.toString() + ' KCAL',
+                                eaten.toString() + ' KCAL',
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Color.fromRGBO(151, 168, 132, 1),
@@ -158,11 +171,14 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                                 Container(
                                   height: 250,
                                   width: 300,
-                                  padding: EdgeInsets.only(top: 20, bottom: 50, left: 60, right: 60),
+                                  padding: EdgeInsets.only(
+                                      top: 20, bottom: 50, left: 60, right: 60),
                                   child: CircularProgressIndicator(
                                     value: 0.5,
-                                    backgroundColor: Color.fromRGBO(243, 245, 248, 1),
-                                    valueColor: AlwaysStoppedAnimation<Color>(Color.fromRGBO(151, 168, 132, 1)),
+                                    backgroundColor:
+                                        Color.fromRGBO(243, 245, 248, 1),
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Color.fromRGBO(151, 168, 132, 1)),
                                     strokeWidth: 10,
                                   ),
                                 ),
@@ -170,13 +186,15 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                                   height: 220,
                                   width: 300,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
                                         eatenLeft.toString(),
                                         style: TextStyle(
-                                          color: Color.fromRGBO(104, 110, 95, 1),
+                                          color:
+                                              Color.fromRGBO(104, 110, 95, 1),
                                           fontWeight: FontWeight.bold,
                                           fontSize: 15,
                                         ),
@@ -184,14 +202,14 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                                       Text(
                                         'KCAL LEFT',
                                         style: TextStyle(
-                                          color: Color.fromRGBO(104, 110, 95, 1),
+                                          color:
+                                              Color.fromRGBO(104, 110, 95, 1),
                                           fontWeight: FontWeight.bold,
                                           fontSize: 15,
                                         ),
                                       ),
                                     ],
                                   ),
-
                                 ),
                               ],
                             ),
@@ -251,7 +269,8 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                               children: [
                                 Container(
                                   width: 116,
-                                  padding: EdgeInsets.only(left: 20, top: 5, bottom: 5),
+                                  padding: EdgeInsets.only(
+                                      left: 20, top: 5, bottom: 5),
                                   child: Text(
                                     totalProtein.toString() + 'g',
                                     style: TextStyle(
@@ -263,7 +282,8 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                                 ),
                                 Container(
                                   width: 102,
-                                  padding: EdgeInsets.only(left: 20, top: 5, bottom: 5),
+                                  padding: EdgeInsets.only(
+                                      left: 20, top: 5, bottom: 5),
                                   child: Text(
                                     totalCarbs.toString() + 'g',
                                     style: TextStyle(
@@ -275,7 +295,8 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                                 ),
                                 Container(
                                   width: 81,
-                                  padding: EdgeInsets.only(left: 20, top: 5, bottom: 5),
+                                  padding: EdgeInsets.only(
+                                      left: 20, top: 5, bottom: 5),
                                   child: Text(
                                     totalFat.toString() + 'g',
                                     style: TextStyle(
@@ -294,8 +315,9 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                         color: Colors.grey.shade500,
                       ),
                       TextButton(
-                        onPressed: (){
-                          Navigator.of(context).pushNamed(HealthReportPage.routeName);
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(HealthReportPage.routeName);
                         },
                         child: Text(
                           'View Full Report',
@@ -311,12 +333,10 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
               ],
             ),
           ),
-
         ),
       ),
     );
   }
-
 }
 
 

@@ -1,33 +1,30 @@
 import '../../models/meal.dart';
 
-Meal generateOneMeal(int mealIndex, dynamic rawData)  {
+Meal generateOneMeal(int mealIndex, dynamic rawData) {
   final mealExtraInfo = calculateDateAndType(mealIndex);
   final date = mealExtraInfo['date'];
   final mealType = mealExtraInfo['mealType'];
   final dateId = mealExtraInfo['dateId'];
-  final caloires = '500';
+
   final mealName = rawData[mealIndex][0]['title'];
   final imageUrl = rawData[mealIndex][0]['image'];
-
+  final ytbVideoID = rawData[mealIndex][0]['videoId'];
+  final ingredients = rawData[mealIndex][0]['ingredients'].join(',');
   var directions = '';
   if (rawData[mealIndex][0]['instructions'] == null) {
     directions = 'Bugs to be fixed by backend developers';
   } else {
     directions = rawData[mealIndex][0]['instructions'];
   }
+  
+  final calories = rawData[mealIndex][0]['nutrients']['calories'].toDouble();
+  final fat = rawData[mealIndex][0]['nutrients']['fat'].toDouble();
+  final protein = rawData[mealIndex][0]['nutrients']['protein'].toDouble();
+  final carbs = rawData[mealIndex][0]['nutrients']['carbohydrates'].toDouble();
 
-  final ingredients = rawData[mealIndex][0]['ingredients'].join(',');
-
-  final ytbVideoID = '';
-
-  // print('$date, $mealType, $dateId, $caloires, $mealName, $imageUrl');
-  // print(ingredients);
-  // print(directions);
-  // print('____________________');
-
-  return new Meal(
+  var newMeal = new Meal(
     mealName: mealName,
-    calories: caloires,
+    calories: calories,
     imageUrl: imageUrl,
     dateId: dateId,
     mealType: mealType,
@@ -36,6 +33,12 @@ Meal generateOneMeal(int mealIndex, dynamic rawData)  {
     directions: directions,
     ytbVideoID: ytbVideoID,
   );
+
+  newMeal.fat = fat;
+  newMeal.carbs = carbs;
+  newMeal.protein = protein;
+
+  return newMeal;
 }
 
 Map<String, dynamic> calculateDateAndType(int mealIndex) {

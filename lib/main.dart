@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:health_hero/models/meal.dart';
-import 'package:health_hero/screens/full_plan_page.dart';
-import 'package:health_hero/screens/health_profile_page.dart';
-import 'package:health_hero/screens/health_report_page.dart';
-import 'package:health_hero/screens/login_page.dart';
-import 'package:health_hero/screens/profile_page.dart';
-import 'package:health_hero/screens/sign_up_continue.dart';
-import 'package:health_hero/screens/sign_up_page.dart';
 import 'package:provider/provider.dart';
 
-import 'package:health_hero/screens/allergies_page.dart';
-import 'package:health_hero/screens/home_screen.dart';
-import 'package:health_hero/screens/landing_screen.dart';
-import 'package:health_hero/screens/preferred_page.dart';
-import 'package:health_hero/screens/user_auth_screen.dart';
-import './provider/auth.dart';
-import './provider/user.dart';
-import './provider/meals.dart';
+import 'screens/full_plan_page.dart';
+import 'screens/health_report_page.dart';
+import 'screens/login_page.dart';
+import 'screens/sign_up_continue.dart';
+import 'screens/sign_up_page.dart';
+import 'screens/allergies_page.dart';
+import 'screens/home_screen.dart';
+import 'screens/landing_screen.dart';
+import 'screens/preferred_page.dart';
+import 'screens/user_auth_screen.dart';
+import 'provider/auth.dart';
+import 'provider/user.dart';
+import 'provider/meals.dart';
 
 void main() => runApp(MyApp());
 
