@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:health_hero/provider/meals.dart';
-import 'package:health_hero/provider/user.dart';
-import 'package:health_hero/utils/helpers/date_handler.dart';
-import 'package:health_hero/widgets/home_module/today_plan.dart';
-import 'package:health_hero/widgets/home_module/tomorrow_plan.dart';
-import 'package:health_hero/utils/services/rest_api_service.dart';
 import 'package:provider/provider.dart';
+
+import '../widgets/home_module/today_plan.dart';
+import '../widgets/home_module/tomorrow_plan.dart';
+import '../provider/meals.dart';
+import '../provider/user.dart';
+import '../utils/services/rest_api_service.dart';
+import '../utils/helpers/date_handler.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -50,6 +51,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final calories = Provider.of<Meals>(context, listen: false)
+        .getWeeklyNutritions()['calories'];
+
     return Container(
       child: Center(
         child: Column(
@@ -82,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                     Container(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        'You have consumed 3500 calories today',
+                        'You have consumed $calories calories today',
                         style: TextStyle(
                           color: Color.fromRGBO(100, 110, 91, 1),
                           fontSize: 16,

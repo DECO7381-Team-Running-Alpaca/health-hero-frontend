@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:health_hero/models/meal.dart';
-import 'package:health_hero/provider/meals.dart';
-import 'package:health_hero/utils/services/rest_api_service.dart';
-import 'package:health_hero/widgets/weekly_plan_module/breakfast_lunch_dinner_selector.dart';
-import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:provider/provider.dart';
 
-import '../../widgets/weekly_plan_module/video_player.dart';
+import '../../models/meal.dart';
+import '../../provider/meals.dart';
+import '../../utils/helpers/date_handler.dart';
+import '../../utils/services/rest_api_service.dart';
+import '../weekly_plan_module/breakfast_lunch_dinner_selector.dart';
 
 class DateMealWidget extends StatefulWidget {
   // Change this to recieve the daily meal list (length = 3)

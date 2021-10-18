@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:health_hero/provider/app_state.dart';
-import 'package:health_hero/provider/meals.dart';
-import 'package:health_hero/screens/full_plan_page.dart';
-import 'package:health_hero/widgets/home_module/date_meal_widget.dart';
-import 'package:health_hero/widgets/weekly_plan_module/day_selector.dart';
 import 'package:provider/provider.dart';
+
+import '../screens/full_plan_page.dart';
+import '../widgets/home_module/date_meal_widget.dart';
+import '../widgets/weekly_plan_module/day_selector.dart';
+import '../provider/app_state.dart';
+import '../provider/meals.dart';
+import '../utils/helpers/date_handler.dart';
 
 class WeeklyPlanPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final weeklyList = generateWeekList();
     return Container(
       child: Column(
         children: [
@@ -79,37 +82,37 @@ class WeeklyPlanPage extends StatelessWidget {
                         DaySelector(
                           selfIndex: 0,
                           day: 'SUN',
-                          date: 12,
+                          date: weeklyList['Sun'],
                         ),
                         DaySelector(
                           selfIndex: 1,
                           day: 'MON',
-                          date: 13,
+                          date: weeklyList['Mon'],
                         ),
                         DaySelector(
                           selfIndex: 2,
                           day: 'TUE',
-                          date: 14,
+                          date: weeklyList['Tue'],
                         ),
                         DaySelector(
                           selfIndex: 3,
                           day: 'WED',
-                          date: 15,
+                          date: weeklyList['Wed'],
                         ),
                         DaySelector(
                           selfIndex: 4,
                           day: 'THU',
-                          date: 16,
+                          date: weeklyList['Thu'],
                         ),
                         DaySelector(
                           selfIndex: 5,
                           day: 'FRI',
-                          date: 17,
+                          date: weeklyList['Fri'],
                         ),
                         DaySelector(
                           selfIndex: 6,
                           day: 'SAT',
-                          date: 18,
+                          date: weeklyList['Sat'],
                         ),
                       ],
                     ),
