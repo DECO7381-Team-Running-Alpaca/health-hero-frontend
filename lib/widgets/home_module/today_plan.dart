@@ -18,49 +18,43 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
   String _lengthChecker(String title, int limit) =>
       title.length <= limit ? title : title.substring(0, limit) + ' ...';
 
-  Widget displayNotifier(bool status) => Container(
-        margin: EdgeInsets.only(top: 5),
-        height: 17,
-        child: Row(
-          children: [
-            Row(
-              children: [
-                Icon(
-                  Icons.info,
-                  size: 10,
-                ),
-                Text(
-                  'Not yet clocked',
-                  style: TextStyle(
-                    fontSize: 8,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              width: 4,
-            ),
-            // TODO: fix button display bugs
-            TextButton(
-              onPressed: () {},
-              style: TextButton.styleFrom(
-                textStyle: TextStyle(
-                  color: Colors.black,
-                  fontSize: 8,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              child: Text(
-                'Clock-in',
-              ),
-            ),
-            Icon(
-              Icons.arrow_right,
-              size: 20,
-            )
-          ],
-        ),
-      );
+  // Widget displayNotifier(int type) => Container(
+  //       margin: EdgeInsets.only(top: 5),
+  //       height: 17,
+  //       child: Row(
+  //         children: [
+  //           Row(
+  //             children: [
+  //               Icon(
+  //                 Icons.info,
+  //                 size: 10,
+  //               ),
+  //               Text(
+  //                 'Not yet clocked',
+  //                 style: TextStyle(
+  //                   fontSize: 8,
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //           ElevatedButton(
+  //           style: ElevatedButton.styleFrom(
+  //             textStyle: const TextStyle(fontSize: 8, fontWeight: FontWeight.bold,),
+  //             primary: Color.fromRGBO(228, 229, 210, 1),
+  //             onPrimary: Color.fromRGBO(100, 109, 93, 1),
+  //             shadowColor: Color.fromRGBO(228, 229, 210, 1),
+  //           ),
+  //           onPressed: () {
+  //           },
+  //           child: const Text('Clock-in'),
+  //         ),
+  //           Icon(
+  //             Icons.arrow_right,
+  //             size: 20,
+  //           )
+  //         ],
+  //       ),
+  //     );
 
   @override
   Widget build(BuildContext context) {
@@ -271,7 +265,57 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                                 fontSize: 10, fontWeight: FontWeight.bold),
                           ),
                         ),
-                        !lunchCheckClock ? displayNotifier(false) : Text(''),
+                        !lunchCheckClock
+                            ? Container(
+                                margin: EdgeInsets.only(top: 5),
+                                height: 17,
+                                child: Row(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.info,
+                                          size: 10,
+                                        ),
+                                        Text(
+                                          'Not yet clocked',
+                                          style: TextStyle(
+                                            fontSize: 8,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        textStyle: const TextStyle(
+                                          fontSize: 8,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        primary:
+                                            Color.fromRGBO(228, 229, 210, 1),
+                                        onPrimary:
+                                            Color.fromRGBO(100, 109, 93, 1),
+                                        shadowColor:
+                                            Color.fromRGBO(228, 229, 210, 1),
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          lunchCheckClock = !lunchCheckClock;
+                                        });
+                                        Provider.of<Meals>(context,
+                                                listen: false)
+                                            .setClockInStatus(today, 1);
+                                      },
+                                      child: const Text('Clock-in'),
+                                    ),
+                                    Icon(
+                                      Icons.arrow_right,
+                                      size: 20,
+                                    )
+                                  ],
+                                ),
+                              )
+                            : Text(''),
                       ]),
                       Column(
                         children: [
@@ -296,23 +340,23 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                                 ),
                               ),
                               Offstage(
-                              offstage: !breakfastCheckClock,
-                              child: Container(
-                                height: 100,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.black.withOpacity(0.5),
-                                ),
+                                offstage: !breakfastCheckClock,
                                 child: Container(
-                                  width: 150,
-                                  child: Icon(
-                                    Icons.check_circle_outline,
-                                    color: Colors.white,
-                                    size: 40,
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.black.withOpacity(0.5),
+                                  ),
+                                  child: Container(
+                                    width: 150,
+                                    child: Icon(
+                                      Icons.check_circle_outline,
+                                      color: Colors.white,
+                                      size: 40,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
                             ],
                           ),
                           Container(
@@ -326,7 +370,58 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                                   fontSize: 10, fontWeight: FontWeight.bold),
                             ),
                           ),
-                          !breakfastCheckClock ? displayNotifier(false) : Text(''),
+                          !breakfastCheckClock
+                              ? Container(
+                                  margin: EdgeInsets.only(top: 5),
+                                  height: 17,
+                                  child: Row(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.info,
+                                            size: 10,
+                                          ),
+                                          Text(
+                                            'Not yet clocked',
+                                            style: TextStyle(
+                                              fontSize: 8,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          textStyle: const TextStyle(
+                                            fontSize: 8,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          primary:
+                                              Color.fromRGBO(228, 229, 210, 1),
+                                          onPrimary:
+                                              Color.fromRGBO(100, 109, 93, 1),
+                                          shadowColor:
+                                              Color.fromRGBO(228, 229, 210, 1),
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            breakfastCheckClock =
+                                                !breakfastCheckClock;
+                                          });
+                                          Provider.of<Meals>(context,
+                                                  listen: false)
+                                              .setClockInStatus(today, 0);
+                                        },
+                                        child: const Text('Clock-in'),
+                                      ),
+                                      Icon(
+                                        Icons.arrow_right,
+                                        size: 20,
+                                      )
+                                    ],
+                                  ),
+                                )
+                              : Text(''),
                         ],
                       ),
                     ],

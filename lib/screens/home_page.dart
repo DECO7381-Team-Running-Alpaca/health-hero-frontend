@@ -110,20 +110,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
             GestureDetector(
-              // onTap: () async {
-              //   // await fetchDetailedPlan();
-              //   await Provider.of<Meals>(context, listen: false)
-              //       .getWeeklyPlan()
-              //       .then((_) {
-              //     print('finished');
-              //     print(
-              //       Provider.of<Meals>(context, listen: false)
-              //           .weeklyMeals[0]
-              //           .threeMeals[0]
-              //           .mealType,
-              //     );
-              //   });
-              // },
               child: Container(
                 transform: Matrix4.translationValues(150, -20, 0),
                 margin: EdgeInsets.only(top: 20),
