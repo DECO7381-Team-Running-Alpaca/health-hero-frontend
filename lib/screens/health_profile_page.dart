@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:health_hero/models/meal.dart';
 import 'package:health_hero/models/record.dart';
+import 'package:health_hero/provider/meals.dart';
+import 'package:provider/provider.dart';
 
 import 'health_report_page.dart';
 
@@ -11,6 +13,13 @@ class HealthProfilePage extends StatefulWidget {
 }
 
 class _HealthProfilePageState extends State<HealthProfilePage> {
+  @override
+  void initState() {
+    super.initState();
+    var data = Provider.of<Meals>(context, listen: false).getWeeklyNutritions();
+    print(data);
+  }
+
   @override
   Widget build(BuildContext context) {
     int eaten = 0;

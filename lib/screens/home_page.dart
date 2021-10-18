@@ -20,17 +20,29 @@ class _HomePageState extends State<HomePage> {
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      setState(() {
-        _isLoading = true;
-      });
-      Provider.of<Meals>(context, listen: false).getWeeklyPlan().then((_) {
+      if (Provider.of<Meals>(context, listen: false).weeklyMeals.length == 0) {
+        setState(() {
+          _isLoading = true;
+        });
+        Provider.of<Meals>(context, listen: false).getWeeklyPlan().then((_) {
+          fetchTwoDayImage(currentDate("dateRequest")).then((data) {
+            setState(() {
+              _isLoading = false;
+              twoDayData = data;
+            });
+          });
+        });
+      } else {
+        setState(() {
+          _isLoading = true;
+        });
         fetchTwoDayImage(currentDate("dateRequest")).then((data) {
           setState(() {
             _isLoading = false;
             twoDayData = data;
           });
         });
-      });
+      }
     }
     _isInit = false;
     super.didChangeDependencies();

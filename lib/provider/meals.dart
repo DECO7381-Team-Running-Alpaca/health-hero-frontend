@@ -47,6 +47,38 @@ class Meals with ChangeNotifier {
     storeClockInStatus(this._clockInStatus);
   }
 
+  Map<String, String> getWeeklyNutritions() {
+    Map<String, String> weeklyReport;
+    double caloriesW = 0;
+    double proteinW = 0;
+    double carbW = 0;
+    double fatW = 0;
+
+    this._detailedPlan.forEach((date, meals) {
+      // there is a clockin status today
+      if (_clockInStatus[date.substring(0, 3)].contains(true)) {
+        // check whether there is a clock in
+        for (var i = 0; i < meals.length; i++) {
+          if (_clockInStatus[date.substring(0, 3)][i]) {
+            // Update sum of nutritions
+            caloriesW += meals[i].calories;
+            proteinW += meals[i].protein;
+            carbW += meals[i].carbs;
+            fatW += meals[i].fat;
+          }
+        }
+      }
+    });
+
+    weeklyReport = {
+      'calories': caloriesW.toStringAsFixed(2),
+      'protein': proteinW.toStringAsFixed(2),
+      'carb': carbW.toStringAsFixed(2),
+      'fat': fatW.toStringAsFixed(2),
+    };
+    return weeklyReport;
+  }
+
   Future<void> getWeeklyPlan() async {
     try {
       _weeklyMeals = [];
