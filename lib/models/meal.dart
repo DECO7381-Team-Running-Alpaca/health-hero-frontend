@@ -1,19 +1,18 @@
 import 'package:flutter/foundation.dart';
 
 class Meal {
-  // Passed by backend
-  final String calories;
+  final double calories;
   final String mealName;
   final String imageUrl;
   final String ingredients;
   final String directions;
+  double protein = 0.00;
+  double carbs = 0.00;
+  double fat = 0.00;
 
-  // To be added in frontend
   final String date;
   final String mealType;
   final List dateId;
-
-  // Have not handled
   final String ytbVideoID;
 
   Meal(
@@ -46,7 +45,7 @@ class DailyMeals {
 final sun12June = Meal(
     date: "Sunday, 12 Jun",
     mealType: "BREAKFAST",
-    calories: "500KCAL",
+    calories: 500.00,
     mealName: "LOREM IPSUM DOLO",
     imageUrl: "AssetImage('assets/images/carrot.jpg')",
     ingredients: "Ingredients:\nEgg 100g, Milk 150g, Chicken 150g, Water 200g",
@@ -58,7 +57,7 @@ final sun12June = Meal(
 final mon13June = Meal(
     date: "Monday, 13 Jun",
     mealType: "BREAKFAST",
-    calories: "600KCAL",
+    calories: 600.00,
     mealName: "LOREM IPSUM DOLO",
     imageUrl: "AssetImage('assets/images/beef.jpg')",
     ingredients: "Ingredients:Egg 100g, Milk 150g, Chicken 150g, Water 200g",

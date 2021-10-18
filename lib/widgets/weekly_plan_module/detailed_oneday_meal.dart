@@ -28,7 +28,7 @@ class _DetailedOneDayState extends State<DetailedOneDay> {
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  'Total: ${int.parse(Provider.of<Meals>(context, listen: false).detailedPlan[widget.day][0].calories) + int.parse(Provider.of<Meals>(context, listen: false).detailedPlan[widget.day][1].calories) + int.parse(Provider.of<Meals>(context, listen: false).detailedPlan[widget.day][2].calories)}Kcal',
+                  'Total: ${(Provider.of<Meals>(context, listen: false).detailedPlan[widget.day][0].calories) + Provider.of<Meals>(context, listen: false).detailedPlan[widget.day][1].calories + Provider.of<Meals>(context, listen: false).detailedPlan[widget.day][2].calories}Kcal',
                   style: TextStyle(
                       fontSize: 20,
                       color: Color.fromRGBO(100, 110, 91, 1),

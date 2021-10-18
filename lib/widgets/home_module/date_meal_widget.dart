@@ -132,7 +132,7 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                   ),
                 ),
                 Text(
-                    '${(int.parse(widget.dailyMeals.threeMeals[0].calories) + int.parse(widget.dailyMeals.threeMeals[1].calories) + int.parse(widget.dailyMeals.threeMeals[2].calories)).toString()}KCAL',
+                    '${(widget.dailyMeals.threeMeals[0].calories + widget.dailyMeals.threeMeals[1].calories + widget.dailyMeals.threeMeals[2].calories).toStringAsFixed(2)}KCAL',
                     style: TextStyle(
                       fontSize: 20,
                       color: Color.fromRGBO(100, 110, 91, 1),

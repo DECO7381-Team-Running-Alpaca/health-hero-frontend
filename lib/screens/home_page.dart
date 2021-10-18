@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_hero/provider/meals.dart';
+import 'package:health_hero/provider/user.dart';
 import 'package:health_hero/utils/helpers/date_handler.dart';
 import 'package:health_hero/widgets/home_module/today_plan.dart';
 import 'package:health_hero/widgets/home_module/tomorrow_plan.dart';
@@ -50,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Hello, User',
+                          'Hello, ${Provider.of<User>(context, listen: false).userName}',
                           style: TextStyle(
                               fontSize: 30,
                               color: Color.fromRGBO(100, 110, 91, 1),
