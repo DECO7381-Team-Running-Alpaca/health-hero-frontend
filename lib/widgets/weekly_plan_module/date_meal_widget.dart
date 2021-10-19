@@ -6,7 +6,7 @@ import '../../models/meal.dart';
 import '../../provider/meals.dart';
 import '../../utils/helpers/date_handler.dart';
 import '../../utils/services/rest_api_service.dart';
-import '../weekly_plan_module/breakfast_lunch_dinner_selector.dart';
+import 'breakfast_lunch_dinner_selector.dart';
 
 class DateMealWidget extends StatefulWidget {
   // Change this to recieve the daily meal list (length = 3)
@@ -23,6 +23,7 @@ int daySelector = 0;
 
 class _DateMealWidgetState extends State<DateMealWidget> {
   var _isLoading = false;
+  var _videoLoading = false;
   var videoId = '';
   String afterSplit = '';
 
@@ -40,7 +41,7 @@ class _DateMealWidgetState extends State<DateMealWidget> {
     setState(() {
       _isLoading = false;
       _videoController = YoutubePlayerController(
-        initialVideoId: 'vpwY3nmLLaA',
+        initialVideoId: widget.dailyMeals.threeMeals[0].ytbVideoID,
         flags: YoutubePlayerFlags(
           autoPlay: false,
           mute: false,
@@ -150,24 +151,28 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                     function: () {
                       setState(() {
                         daySelector = 0;
-                        // _videoName =
-                        //     widget.dailyMeals.threeMeals[daySelector].mealName;
                       });
+                      if (_videoController.value.isPlaying) {
+                        _videoController.pause();
+                      }
+                      _videoController
+                          .load(widget.dailyMeals.threeMeals[0].ytbVideoID);
+                      
                     },
                     buttonID: 0,
                   ),
                   BreakfastLunchDinnerSelector(
                     mealTime: 'lunch',
-                    function: () async {
+                    function: () {
                       setState(() {
                         daySelector = 1;
                       });
-                      // await _loadNewVideo('Apple').then((_) {});
                       if (_videoController.value.isPlaying) {
                         _videoController.pause();
                       }
-                      _videoController.load('eBPsaa0_RtQ');
-                      _videoController.pause();
+                      _videoController
+                          .load(widget.dailyMeals.threeMeals[1].ytbVideoID);
+                      
                     },
                     buttonID: 1,
                   ),
@@ -176,9 +181,13 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                     function: () {
                       setState(() {
                         daySelector = 2;
-                        // _videoName =
-                        //     widget.dailyMeals.threeMeals[daySelector].mealName;
                       });
+                      if (_videoController.value.isPlaying) {
+                        _videoController.pause();
+                      }
+                      _videoController
+                          .load(widget.dailyMeals.threeMeals[2].ytbVideoID);
+                      
                     },
                     buttonID: 2,
                   ),
@@ -240,6 +249,7 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                                   onReady: () {
                                     _videoController.addListener(newListener);
                                   },
+                                  
                                 ),
                               )
                       ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health_hero/widgets/home_module/date_meal_widget.dart';
+import 'package:health_hero/widgets/weekly_plan_module/date_meal_widget.dart';
 
 class BreakfastLunchDinnerSelector extends StatelessWidget {
   String mealTime;

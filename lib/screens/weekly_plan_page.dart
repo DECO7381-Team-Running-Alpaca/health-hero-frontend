@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../screens/full_plan_page.dart';
-import '../widgets/home_module/date_meal_widget.dart';
+import '../widgets/weekly_plan_module/date_meal_widget.dart';
 import '../widgets/weekly_plan_module/day_selector.dart';
 import '../provider/app_state.dart';
 import '../provider/meals.dart';
