@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:health_hero/utils/helpers/sentence_linter.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-import 'package:provider/provider.dart';
 
 import '../../models/meal.dart';
-import '../../provider/meals.dart';
-import '../../utils/helpers/date_handler.dart';
 import '../../utils/services/rest_api_service.dart';
-import '../weekly_plan_module/breakfast_lunch_dinner_selector.dart';
+import './breakfast_lunch_dinner_selector.dart';
 
 class DateMealWidget extends StatefulWidget {
-  // Change this to recieve the daily meal list (length = 3)
-  // final Meal everyDayMeal;
   final DailyMeals dailyMeals;
 
   const DateMealWidget({Key key, this.dailyMeals}) : super(key: key);
@@ -23,10 +19,9 @@ int daySelector = 0;
 
 class _DateMealWidgetState extends State<DateMealWidget> {
   var _isLoading = false;
+  var _videoLoading = false;
   var videoId = '';
-  String afterSplit = '';
 
-  // var mealName = '';
   YoutubePlayerController _videoController;
   PlayerState _playerState;
   YoutubeMetaData _videoMetaData;
@@ -35,12 +30,8 @@ class _DateMealWidgetState extends State<DateMealWidget> {
   void initState() {
     super.initState();
     setState(() {
-      _isLoading = true;
-    });
-    setState(() {
-      _isLoading = false;
       _videoController = YoutubePlayerController(
-        initialVideoId: 'vpwY3nmLLaA',
+        initialVideoId: widget.dailyMeals.threeMeals[0].ytbVideoID,
         flags: YoutubePlayerFlags(
           autoPlay: false,
           mute: false,
@@ -49,21 +40,11 @@ class _DateMealWidgetState extends State<DateMealWidget> {
       _playerState = PlayerState.unknown;
       _videoMetaData = const YoutubeMetaData();
     });
-    // fetchYoutubeVideo('Apple').then((data) {
-    //   setState(() {
-    //     videoId = data;
-    //     _isLoading = false;
-    //     _videoController = YoutubePlayerController(
-    //       initialVideoId: 'vpwY3nmLLaA',
-    //       flags: YoutubePlayerFlags(
-    //         autoPlay: false,
-    //         mute: false,
-    //       ),
-    //     );
-    //     _playerState = PlayerState.unknown;
-    //     _videoMetaData = const YoutubeMetaData();
-    //   });
-    // });
+
+    fetchRandomMeal().then((meal) {
+      // Careful: this meal has a random date and mealType
+      print(meal.mealName);
+    });
   }
 
   void newListener() {
@@ -73,40 +54,11 @@ class _DateMealWidgetState extends State<DateMealWidget> {
     });
   }
 
-  // Future<void> _loadNewVideo(String mealName) async {
-  //   setState(() {
-  //     _isLoading = true;
-  //   });
-
-  //   await fetchYoutubeVideo(mealName).then((data) {
-  //     setState(() {
-  //       videoId = 'eBPsaa0_RtQ';
-  //     });
-  //   }).then((_) {
-  //     setState(() {
-  //       _isLoading = false;
-  //     });
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
-    if (widget.dailyMeals.threeMeals[daySelector].directions.startsWith('<')) {
-      var beforSplit = widget.dailyMeals.threeMeals[daySelector].directions;
-      List after_split_ol = beforSplit.split('<ol>');
-      String join_after_ol = after_split_ol.join();
-      List after_split_li = join_after_ol.split('<li>');
-      String join_after_li = after_split_li.join();
-
-      List after_split_1ol = join_after_li.split('</ol>');
-      String join_after_1ol = after_split_1ol.join();
-      List after_split_1li = join_after_1ol.split('</li>');
-      String join_after_1li = after_split_1li.join();
-
-      afterSplit = join_after_1li;
-    } else {
-      afterSplit = widget.dailyMeals.threeMeals[daySelector].directions;
-    }
+    double futureWeeklyCalories = widget.dailyMeals.threeMeals[0].calories +
+      widget.dailyMeals.threeMeals[1].calories +
+      widget.dailyMeals.threeMeals[2].calories;
 
     return Container(
       margin: EdgeInsets.only(
@@ -132,7 +84,7 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                   ),
                 ),
                 Text(
-                    '${(widget.dailyMeals.threeMeals[0].calories + widget.dailyMeals.threeMeals[1].calories + widget.dailyMeals.threeMeals[2].calories).toStringAsFixed(2)}KCAL',
+                    '${futureWeeklyCalories.toStringAsFixed(2)}KCAL',
                     style: TextStyle(
                       fontSize: 20,
                       color: Color.fromRGBO(100, 110, 91, 1),
@@ -150,23 +102,27 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                     function: () {
                       setState(() {
                         daySelector = 0;
-                        // _videoName =
-                        //     widget.dailyMeals.threeMeals[daySelector].mealName;
                       });
+                      if (_videoController.value.isPlaying) {
+                        _videoController.pause();
+                      }
+                      _videoController
+                          .load(widget.dailyMeals.threeMeals[0].ytbVideoID);
+                      _videoController.pause();
                     },
                     buttonID: 0,
                   ),
                   BreakfastLunchDinnerSelector(
                     mealTime: 'lunch',
-                    function: () async {
+                    function: () {
                       setState(() {
                         daySelector = 1;
                       });
-                      // await _loadNewVideo('Apple').then((_) {});
                       if (_videoController.value.isPlaying) {
                         _videoController.pause();
                       }
-                      _videoController.load('eBPsaa0_RtQ');
+                      _videoController
+                          .load(widget.dailyMeals.threeMeals[1].ytbVideoID);
                       _videoController.pause();
                     },
                     buttonID: 1,
@@ -176,9 +132,13 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                     function: () {
                       setState(() {
                         daySelector = 2;
-                        // _videoName =
-                        //     widget.dailyMeals.threeMeals[daySelector].mealName;
                       });
+                      if (_videoController.value.isPlaying) {
+                        _videoController.pause();
+                      }
+                      _videoController
+                          .load(widget.dailyMeals.threeMeals[2].ytbVideoID);
+                      _videoController.pause();
                     },
                     buttonID: 2,
                   ),
@@ -277,7 +237,8 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                           ),
                         ),
                         Text(
-                          afterSplit,
+                          formatInstruction(widget
+                              .dailyMeals.threeMeals[daySelector].directions),
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             color: Color.fromRGBO(0, 0, 0, 0.7),
@@ -286,29 +247,6 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                         SizedBox(
                           height: 50,
                         ),
-                        // TextButton(
-                        //   style: ButtonStyle(
-                        //     foregroundColor:
-                        //         MaterialStateProperty.all<Color>(Colors.green),
-                        //   ),
-                        //   onPressed: () {
-                        //     // Sunday Lunch details
-                        //     print(
-                        //       Provider.of<Meals>(context, listen: false)
-                        //           .weeklyMeals[0]
-                        //           .threeMeals[0],
-                        //     );
-
-                        //     // The id (example is Sunday) u need for switch around days
-                        //     // (one element array)
-                        //     print(
-                        //       Provider.of<Meals>(context, listen: false)
-                        //           .weeklyMeals[0]
-                        //           .dateId,
-                        //     );
-                        //   },
-                        //   child: Text('Get Meals'),
-                        // )
                       ],
                     ),
                   ),

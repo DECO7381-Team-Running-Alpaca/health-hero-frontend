@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
-
+import 'package:health_hero/utils/helpers/process_plan_data.dart';
 import 'package:http/http.dart' as http;
 
-import '../services/local_storage_servcie.dart';
+import '../../models/meal.dart';
 import '../../constants/api_path.dart' as URL;
+import '../services/local_storage_servcie.dart';
 
 Future<Map<String, String>> authLogin(Map<String, String> loginData) async {
   var body = json.encode({
@@ -194,15 +195,34 @@ Future<dynamic> fetchTwoDayImage(String dateNum) async {
     final token = await getLocalUser();
     var body = json.encode({"date": dateNum});
 
-    final response = await http.post(Uri.parse(URL.getTwoDays),
-        headers: {
-          "Content-Type": "application/json",
-          'Authorization': 'Bearer ' + token,
-        },
-        body: body);
+    final response = await http.post(
+      Uri.parse(URL.getTwoDays),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': 'Bearer ' + token,
+      },
+      body: body,
+    );
     final rawResponse = json.decode(response.body);
 
     return rawResponse['data']['plan'];
+  } catch (error) {
+    print(error);
+    throw error;
+  }
+}
+
+Future<Meal> fetchRandomMeal() async {
+  try {
+    final response = await http.get(
+      Uri.parse(URL.getRandomMeal),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    );
+    final rawResponse = json.decode(response.body);
+
+    return createRandomMeal(rawResponse['data']);
   } catch (error) {
     print(error);
     throw error;

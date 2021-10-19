@@ -1,1 +1,0 @@
-// all the relative path towards assests 
