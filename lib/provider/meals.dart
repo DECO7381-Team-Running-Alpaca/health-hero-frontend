@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:health_hero/utils/helpers/date_handler.dart';
-import 'package:health_hero/utils/helpers/process_plan_data.dart';
-import 'package:health_hero/utils/services/local_storage_servcie.dart';
 
 import '../models/meal.dart';
+import '../utils/helpers/date_handler.dart';
+import '../utils/helpers/process_plan_data.dart';
+import '../utils/services/local_storage_servcie.dart';
 import '../utils/services/rest_api_service.dart';
 
 class Meals with ChangeNotifier {
@@ -89,9 +89,6 @@ class Meals with ChangeNotifier {
 
           // // Add meal to 'neat & clean' container: detailed Plan
           _detailedPlan[meal.date].add(meal);
-          // await generateOneMeal(i, data).then((meal) {
-          //   _detailedPlan[meal.date].add(meal);
-          // });
         }
 
         // Initialise Daily Meals and add to weekly meals
