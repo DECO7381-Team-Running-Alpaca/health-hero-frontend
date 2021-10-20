@@ -6,14 +6,11 @@ import '../utils/services/local_storage_servcie.dart';
 
 class Auth with ChangeNotifier {
   String _token;
-  // To be handled with expire date
-  // DateTime _expireDate;
   String _userId;
-  Timer _countTime;
   String _message;
+  String _userName;
 
   String get token {
-    // To be fufilled with expiration date.
     return _token;
   }
 
@@ -25,17 +22,22 @@ class Auth with ChangeNotifier {
     return _userId;
   }
 
+  String get userName {
+    return _userName;
+  }
+
   Future<void> login(Map<String, String> loginData) async {
     try {
       await authLogin(loginData).then((authData) {
         _message = authData['message'];
         _token = authData['token'];
         _userId = authData['userId'];
+        _userName = loginData['username'];
       }).catchError((e) {
         throw e;
       });
-      
       notifyListeners();
+
       await storeUserLocally(_token, _userId);
     } catch (error) {
       throw error;
@@ -48,10 +50,13 @@ class Auth with ChangeNotifier {
         _message = authData['message'];
         _token = authData['token'];
         _userId = authData['userId'];
+        _userName = signupData['username'];
       }).catchError((e) {
         throw e;
       });
       notifyListeners();
+
+      await storeUserLocally(_token, _userId);
     } catch (error) {
       throw error;
     }

@@ -103,5 +103,24 @@ String dateToNumNormal(String today) {
   }
 }
 
-
+String abbrToFull(String today) {
+  switch (today.substring(0, 3)) {
+    case 'Sun':
+      return 'Sunday';
+    case 'Mon':
+      return 'Monday';
+    case 'Tue':
+      return 'Tuesday';
+    case 'Wed':
+      return 'Wednesday';
+    case 'Thu':
+      return 'Thursday';
+    case 'Fri':
+      return 'Friday';
+    case 'Sat':
+      return 'Saturday';
+    default:
+      return 'Can not defined';
+  }
+}
 

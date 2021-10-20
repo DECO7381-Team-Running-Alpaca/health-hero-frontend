@@ -42,9 +42,16 @@ class Meals with ChangeNotifier {
     return this._clockInStatus;
   }
 
-  void setClockInStatus(String date, int type) {
-    this._clockInStatus[date][type] = !this._clockInStatus[date][type];
-    storeClockInStatus(this._clockInStatus);
+  double get dailyCalories {
+    var todayStatus = this._clockInStatus[today];
+    double dailyCalories = 0;
+
+    for (var i = 0; i < todayStatus.length; i++) {
+      if (todayStatus[i]) {
+        dailyCalories += this._detailedPlan[abbrToFull(today)][i].calories;
+      }
+    }
+    return dailyCalories;
   }
 
   Map<String, String> getWeeklyNutritions() {
@@ -77,6 +84,11 @@ class Meals with ChangeNotifier {
       'fat': fatW.toStringAsFixed(2),
     };
     return weeklyReport;
+  }
+
+  void setClockInStatus(String date, int type) {
+    this._clockInStatus[date][type] = !this._clockInStatus[date][type];
+    storeClockInStatus(this._clockInStatus);
   }
 
   Future<void> getWeeklyPlan() async {

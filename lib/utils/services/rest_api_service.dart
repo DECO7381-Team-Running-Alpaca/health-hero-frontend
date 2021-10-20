@@ -221,6 +221,7 @@ Future<Meal> fetchRandomMeal() async {
       },
     );
     final rawResponse = json.decode(response.body);
+    print(rawResponse);
 
     return createRandomMeal(rawResponse['data']);
   } catch (error) {

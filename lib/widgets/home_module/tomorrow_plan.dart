@@ -79,7 +79,7 @@ class _TomorrowPlanBoxState extends State<TomorrowPlanBox> {
                                     height: 30,
                                   ),
                                   Text(
-                                    _lengthChecker(widget.twoDayData['tomorrorBreakfast']['title'], 34),
+                                    _lengthChecker(widget.twoDayData['tomorrorBreakfast']['title'], 29),
                                     style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),

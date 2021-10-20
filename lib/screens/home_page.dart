@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../widgets/home_module/today_plan.dart';
 import '../widgets/home_module/tomorrow_plan.dart';
 import '../provider/meals.dart';
-import '../provider/user.dart';
+import '../provider/auth.dart';
 import '../utils/services/rest_api_service.dart';
 import '../utils/helpers/date_handler.dart';
 
@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   var twoDayData;
 
   @override
-  void didChangeDependencies() {
+  void didChangeDependencies() {                 
     if (_isInit) {
       if (Provider.of<Meals>(context, listen: false).weeklyMeals.length == 0) {
         setState(() {
@@ -51,9 +51,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final calories = Provider.of<Meals>(context, listen: false)
-        .getWeeklyNutritions()['calories'];
-
     return Container(
       child: Center(
         child: Column(
@@ -67,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Hello, ${Provider.of<User>(context, listen: false).userName}',
+                          'Hello, ${Provider.of<Auth>(context, listen: false).userName}',
                           style: TextStyle(
                               fontSize: 30,
                               color: Color.fromRGBO(100, 110, 91, 1),
@@ -86,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                     Container(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        'You have consumed $calories calories today',
+                        'You have consumed ${Provider.of<Meals>(context).dailyCalories} calories today',
                         style: TextStyle(
                           color: Color.fromRGBO(100, 110, 91, 1),
                           fontSize: 16,
