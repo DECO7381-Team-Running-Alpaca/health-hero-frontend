@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:health_hero/provider/meals.dart';
-import 'package:health_hero/utils/helpers/date_handler.dart';
 import 'package:provider/provider.dart';
+
+import '../../provider/meals.dart';
+import '../../utils/helpers/date_handler.dart';
 
 class TodayPlanBox extends StatefulWidget {
   final dynamic twoDayData;
@@ -17,44 +18,6 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
 
   String _lengthChecker(String title, int limit) =>
       title.length <= limit ? title : title.substring(0, limit) + ' ...';
-
-  // Widget displayNotifier(int type) => Container(
-  //       margin: EdgeInsets.only(top: 5),
-  //       height: 17,
-  //       child: Row(
-  //         children: [
-  //           Row(
-  //             children: [
-  //               Icon(
-  //                 Icons.info,
-  //                 size: 10,
-  //               ),
-  //               Text(
-  //                 'Not yet clocked',
-  //                 style: TextStyle(
-  //                   fontSize: 8,
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //           ElevatedButton(
-  //           style: ElevatedButton.styleFrom(
-  //             textStyle: const TextStyle(fontSize: 8, fontWeight: FontWeight.bold,),
-  //             primary: Color.fromRGBO(228, 229, 210, 1),
-  //             onPrimary: Color.fromRGBO(100, 109, 93, 1),
-  //             shadowColor: Color.fromRGBO(228, 229, 210, 1),
-  //           ),
-  //           onPressed: () {
-  //           },
-  //           child: const Text('Clock-in'),
-  //         ),
-  //           Icon(
-  //             Icons.arrow_right,
-  //             size: 20,
-  //           )
-  //         ],
-  //       ),
-  //     );
 
   @override
   Widget build(BuildContext context) {

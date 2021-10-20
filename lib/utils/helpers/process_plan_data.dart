@@ -1,6 +1,56 @@
 import '../../models/meal.dart';
 import '../helpers/date_handler.dart';
 
+Meal generateNewMeal(int mealIndex, dynamic rawData) {
+  final mealExtraInfo = calculateDateAndType(mealIndex);
+  final date = mealExtraInfo['date'];
+  final mealType = mealExtraInfo['mealType'];
+  final dateId = mealExtraInfo['dateId'];
+
+  final mealName = rawData[mealIndex]['title'];
+  final imageUrl = rawData[mealIndex]['image'];
+
+  var ytbVideoID;
+  if (rawData[mealIndex]['videoId'] == null) {
+    ytbVideoID = 'Fp2li-mzcyc';
+  } else {
+    ytbVideoID = rawData[mealIndex]['videoId'];
+  }
+
+  final ingredients = rawData[mealIndex]['ingredients'].join(',');
+
+  var directions = '';
+  if (rawData[mealIndex]['instructions'] == '') {
+    directions =
+        'Cube your plantain, fry and set aside.Chop your vegetables into your salad bowl and tossIn a pan, heat up vegetable oil and stir fry your shrimps and season. Allow to coolToss in your plantain and shrimps once cool into your bowl of vegetables.Sprinkle the parmesan cheese over the saladDrizzle your dressing over and serve cool.  ';
+  } else {
+    directions = rawData[mealIndex]['instructions'];
+  }
+
+  final calories = rawData[mealIndex]['nutrients']['calories'].toDouble();
+  final fat = rawData[mealIndex]['nutrients']['fat'].toDouble();
+  final protein = rawData[mealIndex]['nutrients']['protein'].toDouble();
+  final carbs = rawData[mealIndex]['nutrients']['carbohydrates'].toDouble();
+
+  var newMeal = new Meal(
+    mealName: mealName,
+    calories: calories,
+    imageUrl: imageUrl,
+    dateId: dateId,
+    mealType: mealType,
+    date: date,
+    ingredients: ingredients,
+    directions: directions,
+    ytbVideoID: ytbVideoID,
+  );
+
+  newMeal.fat = fat;
+  newMeal.carbs = carbs;
+  newMeal.protein = protein;
+
+  return newMeal;
+}
+
 Meal createRandomMeal(dynamic rawData) {
   final date = 'random';
   final mealType = 'random';
@@ -34,7 +84,14 @@ Meal generateOneMeal(int mealIndex, dynamic rawData) {
 
   final mealName = rawData[mealIndex][0]['title'];
   final imageUrl = rawData[mealIndex][0]['image'];
-  final ytbVideoID = rawData[mealIndex][0]['videoId'];
+
+  String ytbVideoID;
+  if (rawData[mealIndex][0]['videoId'] == null) {
+    ytbVideoID = 'Fp2li-mzcyc';
+  } else {
+    ytbVideoID = "${rawData[mealIndex]['videoId']}";
+  }
+
   final ingredients = rawData[mealIndex][0]['ingredients'].join(',');
   var directions = '';
   if (rawData[mealIndex][0]['instructions'] == null) {
@@ -42,7 +99,7 @@ Meal generateOneMeal(int mealIndex, dynamic rawData) {
   } else {
     directions = rawData[mealIndex][0]['instructions'];
   }
-  
+
   final calories = rawData[mealIndex][0]['nutrients']['calories'].toDouble();
   final fat = rawData[mealIndex][0]['nutrients']['fat'].toDouble();
   final protein = rawData[mealIndex][0]['nutrients']['protein'].toDouble();
@@ -87,4 +144,3 @@ String numToType(int num) {
       return 'Can not defined';
   }
 }
-

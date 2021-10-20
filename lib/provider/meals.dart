@@ -42,9 +42,17 @@ class Meals with ChangeNotifier {
     return this._clockInStatus;
   }
 
-  void setClockInStatus(String date, int type) {
-    this._clockInStatus[date][type] = !this._clockInStatus[date][type];
-    storeClockInStatus(this._clockInStatus);
+  double get dailyCalories {
+    var todayStatus = this._clockInStatus[today];
+    double dailyCalories = 0;
+    if (!this._detailedPlan.isEmpty) {
+      for (var i = 0; i < todayStatus.length; i++) {
+        if (todayStatus[i]) {
+          dailyCalories += this._detailedPlan[abbrToFull(today)][i].calories;
+        }
+      }
+    }
+    return dailyCalories;
   }
 
   Map<String, String> getWeeklyNutritions() {
@@ -79,11 +87,26 @@ class Meals with ChangeNotifier {
     return weeklyReport;
   }
 
+  void setClockInStatus(String date, int type) {
+    this._clockInStatus[date][type] = !this._clockInStatus[date][type];
+    storeClockInStatus(this._clockInStatus);
+  }
+
   Future<void> getWeeklyPlan() async {
-    try {
+    // try {
       _weeklyMeals = [];
-      fetchDetailedPlan().then((data) {
-        for (var i = 0; i < data.length; i++) {
+      _detailedPlan = {
+        'Sunday': [],
+        'Monday': [],
+        'Tuesday': [],
+        'Wednesday': [],
+        'Thursday': [],
+        'Friday': [],
+        'Saturday': [],
+      };
+      
+      await fetchDetailedPlan().then((data) {
+        for (int i = 0; i < data.length; i++) {
           // // Intialise each meal based on response
           final meal = generateOneMeal(i, data);
 
@@ -115,6 +138,39 @@ class Meals with ChangeNotifier {
         }
       });
       notifyListeners();
+    // } catch (error) {
+    //   print(error);
+    //   throw error;
+    // }
+  }
+
+  Future<void> generateBrandNewPlan() async {
+    try {
+      _weeklyMeals = [];
+      _detailedPlan = {
+        'Sunday': [],
+        'Monday': [],
+        'Tuesday': [],
+        'Wednesday': [],
+        'Thursday': [],
+        'Friday': [],
+        'Saturday': [],
+      };
+      
+      await createWeeklyPlan().then((data) {
+        for (var i = 0; i < data.length; i++) {
+          final meal = generateNewMeal(i, data);
+          _detailedPlan[meal.date].add(meal);
+        }
+
+        _detailedPlan.forEach((date, meals) {
+          final oneDayMeal =
+              new DailyMeals(threeMeals: meals, dateId: meals[0].dateId);
+          _weeklyMeals.add(oneDayMeal);
+        });
+      });
+
+      await storeClockInStatus(this._clockInStatus);
     } catch (error) {
       print(error);
       throw error;

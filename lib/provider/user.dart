@@ -83,7 +83,6 @@ class User with ChangeNotifier {
             _preferences.add(data[i] as String);
           }
         }
-        print('provider add preference output:' + _preferences.toString());
       });
 
       notifyListeners();
@@ -102,7 +101,6 @@ class User with ChangeNotifier {
             _allergies.add(data[i] as String);
           }
         }
-        print('provider add preference output:' + _allergies.toString());
       });
       notifyListeners();
     } catch (error) {
@@ -119,7 +117,6 @@ class User with ChangeNotifier {
         for (var i = 0; i < data.length; i++) {
           _preferences.add(data[i] as String);
         }
-        print(_preferences);
       });
       notifyListeners();
     } catch (error) {
@@ -136,7 +133,6 @@ class User with ChangeNotifier {
         for (var i = 0; i < data.length; i++) {
           _allergies.add(data[i] as String);
         }
-        print('provider get allergy list: ' + _allergies.toString());
       });
       notifyListeners();
     } catch (error) {

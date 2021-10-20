@@ -29,6 +29,10 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
     'weight': ''
   };
 
+  String get userName {
+    return _signupData['username'];
+  }
+
   String _loginStatus = '';
 
   double _deviceheight = 0;

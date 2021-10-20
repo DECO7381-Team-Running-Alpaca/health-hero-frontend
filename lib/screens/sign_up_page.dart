@@ -95,7 +95,6 @@ class _SignUpPageState extends State<SignUpPage> {
       if (_loginStatus != 'Please make sure that body is well organized.') {
         Navigator.push(context, MaterialPageRoute(
             builder: (context) => SignUpContinue(data: data)));
-        print(data);
       }
     } catch (error) {
       setState(() {
