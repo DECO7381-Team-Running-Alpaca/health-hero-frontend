@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "749288474373",
+    "project_id": "health-hero-notification",
+    "storage_bucket": "health-hero-notification.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749288474373:android:e386423a8a0968443e996c",
+        "android_client_info": {
+          "package_name": "com.healthhero.pushnotification"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "749288474373-6n5hgj5qeg9p20hfvvcktn75h8kcr4ct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa-9Htyb6lJseWI11xg6MMqot1ZTnrzx4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "749288474373-6n5hgj5qeg9p20hfvvcktn75h8kcr4ct.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
