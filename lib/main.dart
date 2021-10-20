@@ -11,12 +11,12 @@ import 'screens/home_screen.dart';
 import 'screens/landing_screen.dart';
 import 'screens/preferred_page.dart';
 import 'screens/user_auth_screen.dart';
+import 'screens/notification_tester.dart';
 import 'provider/auth.dart';
 import 'provider/user.dart';
 import 'provider/meals.dart';
 
 void main() => runApp(MyApp());
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: LandingScreen.routeName,
+      initialRoute: NotificationTester.routeName,
       routes: {
         PreferredPage.routeName: (context) => PreferredPage(),
         AllergyPage.routeName: (context) => AllergyPage(),
@@ -57,6 +57,7 @@ class MyHomePage extends StatelessWidget {
         SignUpContinue.routeName: (context) => SignUpContinue(),
         LoginPage.routeName: (context) => LoginPage(),
         FullPlanPage.routeName: (context) => FullPlanPage(),
+        NotificationTester.routeName: (context) => NotificationTester(),
       },
     );
   }

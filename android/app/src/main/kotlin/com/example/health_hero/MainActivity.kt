@@ -1,4 +1,4 @@
-package com.example.health_hero
+package com.healthhero.pushnotification
 
 import io.flutter.embedding.android.FlutterActivity
 

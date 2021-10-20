@@ -15,7 +15,6 @@ class _NotificationTesterState extends State<NotificationTester> {
   @override
   void initState() {
     super.initState();
-
     _firebaseMessaging.configure(
       onMessage: (message) async{
         setState(() {
