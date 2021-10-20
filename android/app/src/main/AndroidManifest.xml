@@ -9,7 +9,7 @@
      android:name="android.permission.WRITE_EXTERNAL_STORAGE"
      android:maxSdkVersion="18" />
     <application
-        android:name="io.flutter.app.FlutterApplication"
+        android:name="com.healthhero.pushnotification.Application"
         android:requestLegacyExternalStorage="true"
         android:label="health_hero"
         android:icon="@mipmap/ic_launcher"
