@@ -55,7 +55,7 @@ class Auth with ChangeNotifier {
         throw e;
       });
       notifyListeners();
-
+      
       await storeUserLocally(_token, _userId);
     } catch (error) {
       throw error;

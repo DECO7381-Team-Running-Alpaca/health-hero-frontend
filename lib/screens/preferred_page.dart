@@ -312,7 +312,6 @@ class _PreferredPageState extends State<PreferredPage> {
                         child: ContinueAndCompleteButton(
                           onTap: () {
                             Navigator.pushNamed(context, AllergyPage.routeName);
-                            print(selectedPreferList);
                           },
                           buttonTitle: 'continue',
                         ),

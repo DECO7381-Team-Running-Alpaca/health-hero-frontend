@@ -19,12 +19,13 @@ class _HomePageState extends State<HomePage> {
   var twoDayData;
 
   @override
-  void didChangeDependencies() {                 
+  void didChangeDependencies() {
     if (_isInit) {
-      if (Provider.of<Meals>(context, listen: false).weeklyMeals.length == 0) {
-        setState(() {
+      setState(() {
           _isLoading = true;
         });
+        
+      if (Provider.of<Meals>(context, listen: false).weeklyMeals.length == 0) {
         Provider.of<Meals>(context, listen: false).getWeeklyPlan().then((_) {
           fetchTwoDayImage(currentDate("dateRequest")).then((data) {
             setState(() {
@@ -34,9 +35,6 @@ class _HomePageState extends State<HomePage> {
           });
         });
       } else {
-        setState(() {
-          _isLoading = true;
-        });
         fetchTwoDayImage(currentDate("dateRequest")).then((data) {
           setState(() {
             _isLoading = false;
@@ -46,6 +44,7 @@ class _HomePageState extends State<HomePage> {
       }
     }
     _isInit = false;
+    createWeeklyPlan();
     super.didChangeDependencies();
   }
 

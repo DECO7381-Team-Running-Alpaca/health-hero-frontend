@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:health_hero/models/meal.dart';
 import 'package:health_hero/provider/auth.dart';
+import 'package:health_hero/provider/meals.dart';
 import 'package:health_hero/provider/user.dart';
 import 'package:health_hero/screens/home_screen.dart';
 import 'package:health_hero/screens/preferred_page.dart';
@@ -29,14 +31,14 @@ class _AllergyPageState extends State<AllergyPage> {
           .addPrefs(selectedPreferList);
       await Provider.of<User>(context, listen: false)
           .addAllg(selectedAllergyList);
-      setState(() {
-        _isLoading = false;
+      await Provider.of<Meals>(context, listen: false)
+          .generateBrandNewPlan()
+          .then((_) {
+        setState(() {
+          _isLoading = false;
+        });
+        Navigator.pushNamed(context, HomeScreen.routeName);
       });
-      print('Prefer:');
-      print(selectedPreferList);
-      print('Allergy:');
-      print(selectedAllergyList);
-      Navigator.pushNamed(context, HomeScreen.routeName);
     } catch (error) {
       setState(() {
         _isLoading = false;

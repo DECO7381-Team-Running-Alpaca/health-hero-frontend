@@ -16,7 +16,6 @@ class SignUpContinue extends StatefulWidget {
 }
 
 class _SignUpContinueState extends State<SignUpContinue> {
-
   final _formKey = GlobalKey<FormState>();
   bool _isChecked = false;
   bool _isLoading = false;
@@ -62,7 +61,8 @@ class _SignUpContinueState extends State<SignUpContinue> {
       _signupData['weight'] = _weightController.text;
     });
     try {
-      await Provider.of<Auth>(context, listen: false).signup(_signupData);
+      await Provider.of<Auth>(context, listen: false)
+          .signup(_signupData);
       setState(() {
         _loginStatus = Provider.of<Auth>(context, listen: false).message;
         _isLoading = false;
@@ -71,7 +71,6 @@ class _SignUpContinueState extends State<SignUpContinue> {
       // more elegant way to handle error
       if (_loginStatus != 'Please make sure that body is well organized.') {
         Navigator.of(context).pushNamed(PreferredPage.routeName);
-        print(_signupData);
       }
     } catch (error) {
       setState(() {
@@ -93,9 +92,8 @@ class _SignUpContinueState extends State<SignUpContinue> {
             children: [
               Container(
                 width: _devicewidth,
-                height: mode == false
-                    ? _deviceheight * 0.62
-                    : _deviceheight * 0.70,
+                height:
+                    mode == false ? _deviceheight * 0.62 : _deviceheight * 0.70,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(44),
@@ -127,17 +125,19 @@ class _SignUpContinueState extends State<SignUpContinue> {
                             TextButton(
                               style: ButtonStyle(
                                 backgroundColor: pressStatusMale
-                                    ? MaterialStateProperty.all(Color.fromRGBO(151, 168, 132, 1))
-                                    : MaterialStateProperty.all(Color.fromRGBO(244, 244, 244, 1)),
-                                minimumSize: MaterialStateProperty.all(Size(119, 31)),
+                                    ? MaterialStateProperty.all(
+                                        Color.fromRGBO(151, 168, 132, 1))
+                                    : MaterialStateProperty.all(
+                                        Color.fromRGBO(244, 244, 244, 1)),
+                                minimumSize:
+                                    MaterialStateProperty.all(Size(119, 31)),
                                 shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
                                       side: BorderSide(
                                         width: 1,
                                         color: Color.fromRGBO(103, 110, 94, 1),
                                       ),
-                                      borderRadius: BorderRadius.circular(4)
-                                  ),
+                                      borderRadius: BorderRadius.circular(4)),
                                 ),
                               ),
                               onPressed: () {
@@ -149,8 +149,9 @@ class _SignUpContinueState extends State<SignUpContinue> {
                               child: Text(
                                 'Male',
                                 style: pressStatusMale
-                                  ? TextStyle(color: Colors.white)
-                                  : TextStyle(color: Color.fromRGBO(103, 110, 94, 1)),
+                                    ? TextStyle(color: Colors.white)
+                                    : TextStyle(
+                                        color: Color.fromRGBO(103, 110, 94, 1)),
                               ),
                             ),
                             SizedBox(
@@ -159,17 +160,19 @@ class _SignUpContinueState extends State<SignUpContinue> {
                             TextButton(
                               style: ButtonStyle(
                                 backgroundColor: pressStatusFemale
-                                    ? MaterialStateProperty.all(Color.fromRGBO(151, 168, 132, 1))
-                                    : MaterialStateProperty.all(Color.fromRGBO(244, 244, 244, 1)),
-                                minimumSize: MaterialStateProperty.all(Size(119, 31)),
+                                    ? MaterialStateProperty.all(
+                                        Color.fromRGBO(151, 168, 132, 1))
+                                    : MaterialStateProperty.all(
+                                        Color.fromRGBO(244, 244, 244, 1)),
+                                minimumSize:
+                                    MaterialStateProperty.all(Size(119, 31)),
                                 shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
                                       side: BorderSide(
                                         width: 1,
                                         color: Color.fromRGBO(103, 110, 94, 1),
                                       ),
-                                      borderRadius: BorderRadius.circular(4)
-                                  ),
+                                      borderRadius: BorderRadius.circular(4)),
                                 ),
                               ),
                               onPressed: () {
@@ -182,7 +185,8 @@ class _SignUpContinueState extends State<SignUpContinue> {
                                 'Female',
                                 style: pressStatusFemale
                                     ? TextStyle(color: Colors.white)
-                                    : TextStyle(color: Color.fromRGBO(103, 110, 94, 1)),
+                                    : TextStyle(
+                                        color: Color.fromRGBO(103, 110, 94, 1)),
                               ),
                             ),
                           ],
@@ -212,17 +216,19 @@ class _SignUpContinueState extends State<SignUpContinue> {
                             TextButton(
                               style: ButtonStyle(
                                 backgroundColor: pressStatusLoss
-                                    ? MaterialStateProperty.all(Color.fromRGBO(151, 168, 132, 1))
-                                    : MaterialStateProperty.all(Color.fromRGBO(244, 244, 244, 1)),
-                                minimumSize: MaterialStateProperty.all(Size(119, 31)),
+                                    ? MaterialStateProperty.all(
+                                        Color.fromRGBO(151, 168, 132, 1))
+                                    : MaterialStateProperty.all(
+                                        Color.fromRGBO(244, 244, 244, 1)),
+                                minimumSize:
+                                    MaterialStateProperty.all(Size(119, 31)),
                                 shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
                                       side: BorderSide(
                                         width: 1,
                                         color: Color.fromRGBO(103, 110, 94, 1),
                                       ),
-                                      borderRadius: BorderRadius.circular(4)
-                                  ),
+                                      borderRadius: BorderRadius.circular(4)),
                                 ),
                               ),
                               onPressed: () {
@@ -236,7 +242,8 @@ class _SignUpContinueState extends State<SignUpContinue> {
                                 'Lose Weight',
                                 style: pressStatusLoss
                                     ? TextStyle(color: Colors.white)
-                                    : TextStyle(color: Color.fromRGBO(103, 110, 94, 1)),
+                                    : TextStyle(
+                                        color: Color.fromRGBO(103, 110, 94, 1)),
                               ),
                             ),
                             SizedBox(
@@ -245,17 +252,19 @@ class _SignUpContinueState extends State<SignUpContinue> {
                             TextButton(
                               style: ButtonStyle(
                                 backgroundColor: pressStatusKeep
-                                    ? MaterialStateProperty.all(Color.fromRGBO(151, 168, 132, 1))
-                                    : MaterialStateProperty.all(Color.fromRGBO(244, 244, 244, 1)),
-                                minimumSize: MaterialStateProperty.all(Size(119, 31)),
+                                    ? MaterialStateProperty.all(
+                                        Color.fromRGBO(151, 168, 132, 1))
+                                    : MaterialStateProperty.all(
+                                        Color.fromRGBO(244, 244, 244, 1)),
+                                minimumSize:
+                                    MaterialStateProperty.all(Size(119, 31)),
                                 shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
                                       side: BorderSide(
                                         width: 1,
                                         color: Color.fromRGBO(103, 110, 94, 1),
                                       ),
-                                      borderRadius: BorderRadius.circular(4)
-                                  ),
+                                      borderRadius: BorderRadius.circular(4)),
                                 ),
                               ),
                               onPressed: () {
@@ -269,7 +278,8 @@ class _SignUpContinueState extends State<SignUpContinue> {
                                 'Keep In Shape',
                                 style: pressStatusKeep
                                     ? TextStyle(color: Colors.white)
-                                    : TextStyle(color: Color.fromRGBO(103, 110, 94, 1)),
+                                    : TextStyle(
+                                        color: Color.fromRGBO(103, 110, 94, 1)),
                               ),
                             ),
                           ],
@@ -282,258 +292,283 @@ class _SignUpContinueState extends State<SignUpContinue> {
                     Container(
                       child: mode == false
                           ? Form(
-                            key: _formKey,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Container(
-                                    width: 328,
-                                    height: 56,
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'Height',
-                                          style: TextStyle(
-                                            color: Color.fromRGBO(103, 110, 94, 1),
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 25,
-                                        ),
-                                        Container(
-                                          width: 250,
-                                          decoration: BoxDecoration(
-                                            color: Color.fromRGBO(244, 244, 244, 1),
-                                            borderRadius: new BorderRadius.only(
-                                              topRight: Radius.circular(4),
-                                              topLeft: Radius.circular(4),
+                              key: _formKey,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(5),
+                                    child: Container(
+                                      width: 328,
+                                      height: 56,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'Height',
+                                            style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  103, 110, 94, 1),
+                                              fontSize: 16,
                                             ),
                                           ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(10),
-                                            child: TextFormField(
-                                              decoration: InputDecoration(
-                                                border: InputBorder.none,
-                                                suffixText: 'cm',
+                                          SizedBox(
+                                            width: 25,
+                                          ),
+                                          Container(
+                                            width: 250,
+                                            decoration: BoxDecoration(
+                                              color: Color.fromRGBO(
+                                                  244, 244, 244, 1),
+                                              borderRadius:
+                                                  new BorderRadius.only(
+                                                topRight: Radius.circular(4),
+                                                topLeft: Radius.circular(4),
                                               ),
-                                              keyboardType: TextInputType.number,
-                                              controller: _heightController,
-                                              validator: (value) =>
-                                              value.isEmpty || value == null
-                                                  ? 'Height cannot be empty!'
-                                                  : null,
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(10),
+                                              child: TextFormField(
+                                                decoration: InputDecoration(
+                                                  border: InputBorder.none,
+                                                  suffixText: 'cm',
+                                                ),
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                controller: _heightController,
+                                                validator: (value) => value
+                                                            .isEmpty ||
+                                                        value == null
+                                                    ? 'Height cannot be empty!'
+                                                    : null,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(
-                              height: 20,
-                            ),
-                                Padding(
-                              padding: const EdgeInsets.all(5),
-                              child: Container(
-                                width: 328,
-                                height: 56,
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Weight',
-                                      style: TextStyle(
-                                        color: Color.fromRGBO(103, 110, 94, 1),
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 25,
-                                    ),
-                                    Container(
-                                      width: 250,
-                                      decoration: BoxDecoration(
-                                        color: Color.fromRGBO(244, 244, 244, 1),
-                                        borderRadius: new BorderRadius.only(
-                                          topRight: Radius.circular(4),
-                                          topLeft: Radius.circular(4),
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(10),
-                                        child: TextFormField(
-                                          decoration: InputDecoration(
-                                            border: InputBorder.none,
-                                            suffixText: 'kg',
-                                          ),
-                                          keyboardType: TextInputType.number,
-                                          controller: _weightController,
-                                          validator: (value) =>
-                                          value.isEmpty || value == null
-                                              ? 'Weight cannot be empty!'
-                                              : null,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                              ],
-                            ),
-                          )
-                          : Form(
-                            key: _formKey,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Container(
-                                    width: 328,
-                                    height: 56,
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'Height',
-                                          style: TextStyle(
-                                            color: Color.fromRGBO(103, 110, 94, 1),
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 25,
-                                        ),
-                                        Container(
-                                          width: 250,
-                                          decoration: BoxDecoration(
-                                            color: Color.fromRGBO(244, 244, 244, 1),
-                                            borderRadius: new BorderRadius.only(
-                                              topRight: Radius.circular(4),
-                                              topLeft: Radius.circular(4),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(5),
+                                    child: Container(
+                                      width: 328,
+                                      height: 56,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'Weight',
+                                            style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  103, 110, 94, 1),
+                                              fontSize: 16,
                                             ),
                                           ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(10),
-                                            child: TextFormField(
-                                              decoration: InputDecoration(
-                                                border: InputBorder.none,
-                                                suffixText: 'cm',
+                                          SizedBox(
+                                            width: 25,
+                                          ),
+                                          Container(
+                                            width: 250,
+                                            decoration: BoxDecoration(
+                                              color: Color.fromRGBO(
+                                                  244, 244, 244, 1),
+                                              borderRadius:
+                                                  new BorderRadius.only(
+                                                topRight: Radius.circular(4),
+                                                topLeft: Radius.circular(4),
                                               ),
-                                              keyboardType: TextInputType.number,
-                                              controller: _heightController,
-                                              validator: (value) =>
-                                              value.isEmpty || value == null
-                                                  ? 'Height cannot be empty!'
-                                                  : null,
                                             ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                              ),
-                            ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Container(
-                                    width: 328,
-                                    height: 56,
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'Weight',
-                                          style: TextStyle(
-                                            color: Color.fromRGBO(103, 110, 94, 1),
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 25,
-                                        ),
-                                        Container(
-                                          width: 250,
-                                          decoration: BoxDecoration(
-                                            color: Color.fromRGBO(244, 244, 244, 1),
-                                            borderRadius: new BorderRadius.only(
-                                              topRight: Radius.circular(4),
-                                              topLeft: Radius.circular(4),
-                                            ),
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(10),
-                                            child: TextFormField(
-                                              decoration: InputDecoration(
-                                                border: InputBorder.none,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(10),
+                                              child: TextFormField(
+                                                decoration: InputDecoration(
+                                                  border: InputBorder.none,
                                                   suffixText: 'kg',
+                                                ),
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                controller: _weightController,
+                                                validator: (value) => value
+                                                            .isEmpty ||
+                                                        value == null
+                                                    ? 'Weight cannot be empty!'
+                                                    : null,
                                               ),
-                                              keyboardType: TextInputType.number,
-                                              controller: _weightController,
-                                              validator: (value) =>
-                                              value.isEmpty || value == null
-                                                  ? 'Weight cannot be empty!'
-                                                  : null,
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(5),
-                                  child: Container(
-                                    width: 330,
-                                    height: 56,
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          'Target Weight',
-                                          style: TextStyle(
-                                            color: Color.fromRGBO(103, 110, 94, 1),
-                                            fontSize: 16,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 25,
-                                        ),
-                                        Container(
-                                          width: 200,
-                                          decoration: BoxDecoration(
-                                            color: Color.fromRGBO(244, 244, 244, 1),
-                                            borderRadius: new BorderRadius.only(
-                                              topRight: Radius.circular(4),
-                                              topLeft: Radius.circular(4),
+                                ],
+                              ),
+                            )
+                          : Form(
+                              key: _formKey,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(5),
+                                    child: Container(
+                                      width: 328,
+                                      height: 56,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'Height',
+                                            style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  103, 110, 94, 1),
+                                              fontSize: 16,
                                             ),
                                           ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(10),
-                                            child: TextFormField(
-                                              decoration: InputDecoration(
-                                                border: InputBorder.none,
-                                                suffixText: 'kg',
+                                          SizedBox(
+                                            width: 25,
+                                          ),
+                                          Container(
+                                            width: 250,
+                                            decoration: BoxDecoration(
+                                              color: Color.fromRGBO(
+                                                  244, 244, 244, 1),
+                                              borderRadius:
+                                                  new BorderRadius.only(
+                                                topRight: Radius.circular(4),
+                                                topLeft: Radius.circular(4),
                                               ),
-                                              keyboardType: TextInputType.number,
-                                              controller: _targetController,
-                                              validator: (value) =>
-                                              value.isEmpty || value == null
-                                                  ? 'Target weight cannot be empty!'
-                                                  : null,
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(10),
+                                              child: TextFormField(
+                                                decoration: InputDecoration(
+                                                  border: InputBorder.none,
+                                                  suffixText: 'cm',
+                                                ),
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                controller: _heightController,
+                                                validator: (value) => value
+                                                            .isEmpty ||
+                                                        value == null
+                                                    ? 'Height cannot be empty!'
+                                                    : null,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(5),
+                                    child: Container(
+                                      width: 328,
+                                      height: 56,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'Weight',
+                                            style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  103, 110, 94, 1),
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 25,
+                                          ),
+                                          Container(
+                                            width: 250,
+                                            decoration: BoxDecoration(
+                                              color: Color.fromRGBO(
+                                                  244, 244, 244, 1),
+                                              borderRadius:
+                                                  new BorderRadius.only(
+                                                topRight: Radius.circular(4),
+                                                topLeft: Radius.circular(4),
+                                              ),
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(10),
+                                              child: TextFormField(
+                                                decoration: InputDecoration(
+                                                  border: InputBorder.none,
+                                                  suffixText: 'kg',
+                                                ),
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                controller: _weightController,
+                                                validator: (value) => value
+                                                            .isEmpty ||
+                                                        value == null
+                                                    ? 'Weight cannot be empty!'
+                                                    : null,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(5),
+                                    child: Container(
+                                      width: 330,
+                                      height: 56,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            'Target Weight',
+                                            style: TextStyle(
+                                              color: Color.fromRGBO(
+                                                  103, 110, 94, 1),
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 25,
+                                          ),
+                                          Container(
+                                            width: 200,
+                                            decoration: BoxDecoration(
+                                              color: Color.fromRGBO(
+                                                  244, 244, 244, 1),
+                                              borderRadius:
+                                                  new BorderRadius.only(
+                                                topRight: Radius.circular(4),
+                                                topLeft: Radius.circular(4),
+                                              ),
+                                            ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(10),
+                                              child: TextFormField(
+                                                decoration: InputDecoration(
+                                                  border: InputBorder.none,
+                                                  suffixText: 'kg',
+                                                ),
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                controller: _targetController,
+                                                validator: (value) => value
+                                                            .isEmpty ||
+                                                        value == null
+                                                    ? 'Target weight cannot be empty!'
+                                                    : null,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 40),
@@ -551,13 +586,12 @@ class _SignUpContinueState extends State<SignUpContinue> {
                                     builder: (context) {
                                       return AlertDialog(
                                         content: Padding(
-                                          padding:
-                                          const EdgeInsets.only(
+                                          padding: const EdgeInsets.only(
                                             top: 20,
                                           ),
                                           child: Wrap(
-                                              alignment: WrapAlignment
-                                                  .spaceAround,
+                                              alignment:
+                                                  WrapAlignment.spaceAround,
                                               spacing: 8.0,
                                               runSpacing: 1,
                                               children: [
@@ -569,27 +603,31 @@ class _SignUpContinueState extends State<SignUpContinue> {
                                                   "I authorize Health Hero to collect",
                                                 ),
                                                 Text(
-                                                  "and use my information.",)
+                                                  "and use my information.",
+                                                )
                                               ]),
                                         ),
                                         actions: [
                                           Container(
-                                            padding: EdgeInsets.only(left: 40, right: 40),
+                                            padding: EdgeInsets.only(
+                                                left: 40, right: 40),
                                             child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 TextButton(
                                                   onPressed: () {
                                                     setState(() {
                                                       _isChecked = true;
                                                     });
-                                                    Navigator.of(context)
-                                                        .pop();
+                                                    Navigator.of(context).pop();
                                                   },
                                                   child: const Text(
                                                     'Yes',
                                                     style: TextStyle(
-                                                      color: Color.fromRGBO(103, 110, 94, 1),
+                                                      color: Color.fromRGBO(
+                                                          103, 110, 94, 1),
                                                     ),
                                                   ),
                                                 ),
@@ -598,13 +636,13 @@ class _SignUpContinueState extends State<SignUpContinue> {
                                                     setState(() {
                                                       _isChecked = false;
                                                     });
-                                                    Navigator.of(context)
-                                                        .pop();
+                                                    Navigator.of(context).pop();
                                                   },
                                                   child: const Text(
                                                     'No',
                                                     style: TextStyle(
-                                                      color: Color.fromRGBO(103, 110, 94, 1),
+                                                      color: Color.fromRGBO(
+                                                          103, 110, 94, 1),
                                                     ),
                                                   ),
                                                 ),
@@ -633,27 +671,26 @@ class _SignUpContinueState extends State<SignUpContinue> {
                     ),
                     _isLoading
                         ? CircularProgressIndicator(
-                      value: null,
-                      strokeWidth: 7,
-                      color: Color.fromRGBO(205, 214, 169, 100),
-                    )
+                            value: null,
+                            strokeWidth: 7,
+                            color: Color.fromRGBO(205, 214, 169, 100),
+                          )
                         : Container(
-                      decoration: BoxDecoration(
-                          color:
-                          Color.fromRGBO(205, 214, 169, 100)),
-                      height: 56,
-                      width: 328,
-                      child: FlatButton(
-                        onPressed: _submitSignupData,
-                        child: Text(
-                          'CONTINUE',
-                          style: TextStyle(
-                            color: Colors.black45,
-                            fontSize: 20,
+                            decoration: BoxDecoration(
+                                color: Color.fromRGBO(205, 214, 169, 100)),
+                            height: 56,
+                            width: 328,
+                            child: FlatButton(
+                              onPressed: _submitSignupData,
+                              child: Text(
+                                'CONTINUE',
+                                style: TextStyle(
+                                  color: Colors.black45,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -663,7 +700,8 @@ class _SignUpContinueState extends State<SignUpContinue> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context).pushNamed(LoginPage.routeName);
+                            Navigator.of(context)
+                                .pushNamed(LoginPage.routeName);
                           },
                           child: Text(
                             'Log In',

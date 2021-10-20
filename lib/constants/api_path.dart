@@ -9,7 +9,8 @@ const getPrefs = '$baseURL/preferences';
 const getAllg = '$baseURL/allergies';
 const getDetailPlan = '$baseURL/meal/all';
 const getTwoDays = '$baseURL/meal/twodays';
-const getRandomMeal = '$baseURL/meal/get';
+const getRandomMeal = '$baseURL/meal/random';
+const createMeals = '$baseURL/meal';
 
 String getYoutubeLink(String keywords) {
   return 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=$keywords&';
