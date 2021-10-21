@@ -69,6 +69,12 @@ class _DateMealWidgetState extends State<DateMealWidget> {
       setState(() {
         widget.dailyMeals.threeMeals[daySelector] = meal;
         _isMealLoading = false;
+        if (_videoController.value.isPlaying) {
+          _videoController.pause();
+        }
+        _videoController
+            .load(widget.dailyMeals.threeMeals[daySelector].ytbVideoID);
+        _videoController.pause();
       });
     });
   }
