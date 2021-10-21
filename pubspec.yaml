@@ -18,7 +18,7 @@ dependencies:
   image_gallery_saver: ^1.7.1
   fl_chart: ^0.40.0
   intl: ^0.17.0
-  tflite: 1.1.2
+  # tflite: 1.1.2
   image_picker: 0.7.4
   quiver: ^3.0.1+1
   image: ^3.0.8

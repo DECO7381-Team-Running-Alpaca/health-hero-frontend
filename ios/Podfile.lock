@@ -16,10 +16,6 @@ PODS:
     - Flutter
   - shared_preferences (0.0.1):
     - Flutter
-  - TensorFlowLiteC (2.2.0)
-  - tflite (1.1.2):
-    - Flutter
-    - TensorFlowLiteC
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -28,12 +24,10 @@ DEPENDENCIES:
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
-  - tflite (from `.symlinks/plugins/tflite/ios`)
 
 SPEC REPOS:
   trunk:
     - OrderedSet
-    - TensorFlowLiteC
 
 EXTERNAL SOURCES:
   Flutter:
@@ -48,8 +42,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/permission_handler/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
-  tflite:
-    :path: ".symlinks/plugins/tflite/ios"
 
 SPEC CHECKSUMS:
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
@@ -59,8 +51,6 @@ SPEC CHECKSUMS:
   OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
   permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
-  TensorFlowLiteC: b3ab9e867b0b71052ca102a32a786555b330b02e
-  tflite: 7acd11db0915e2d90ab90474413068568eb605f0
 
 PODFILE CHECKSUM: a75497545d4391e2d394c3668e20cfb1c2bbd4aa
 
