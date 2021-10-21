@@ -8,6 +8,7 @@ import 'package:health_hero/widgets/health_report_module/report_chart.dart';
 import 'package:health_hero/widgets/health_report_module/report_table.dart';
 import 'package:health_hero/models/meal.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class HealthReportPage extends StatefulWidget {
@@ -18,6 +19,7 @@ class HealthReportPage extends StatefulWidget {
 
 class _HealthReportPageState extends State<HealthReportPage> {
   GlobalKey imageKey;
+  var today = DateTime.now();
 
   Widget _sucessdialogue() {
     return AlertDialog(
@@ -74,7 +76,7 @@ class _HealthReportPageState extends State<HealthReportPage> {
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/homeBackGround.jpg'),
+              image: AssetImage('assets/images/background-75%.jpg'),
               fit: BoxFit.cover,
             ),
           ),
@@ -117,7 +119,7 @@ class _HealthReportPageState extends State<HealthReportPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      sun12June.date + ' - ' + mon13June.date + ' 2021',
+                    DateFormat.MMMd().format(DateTime(today.year, today.month, today.day - today.weekday)) + ' - ' + DateFormat.yMMMd().format(today),
                       style: TextStyle(
                         fontSize: 20,
                         color: Color.fromRGBO(103, 110, 94, 1),

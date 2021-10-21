@@ -95,12 +95,21 @@ class _HomePageState extends State<HomePage> {
             ),
             _isLoading
                 ? Container(
-                    margin: const EdgeInsets.only(bottom: 20.0),
-                    child: CircularProgressIndicator(
-                      value: null,
-                      color: Color.fromRGBO(205, 214, 169, 100),
+                    margin: const EdgeInsets.only(top: 20, bottom: 20.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircularProgressIndicator(
+                          value: null,
+                          color: Color.fromRGBO(205, 214, 169, 100),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text('Loading...Please wait'),
+                      ],
                     ),
-                  )
+                )
                 : Container(
                     child: Container(
                       margin: EdgeInsets.only(top: 20),

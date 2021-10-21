@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:health_hero/models/meal.dart';
 import 'package:health_hero/models/record.dart';
 import 'package:health_hero/provider/meals.dart';
+import 'package:health_hero/utils/helpers/date_handler.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import 'health_report_page.dart';
@@ -13,34 +15,25 @@ class HealthProfilePage extends StatefulWidget {
 }
 
 class _HealthProfilePageState extends State<HealthProfilePage> {
+  Map<String, String> weeklyReport = {};
+  var today = DateTime.now();
+
   @override
   void initState() {
     super.initState();
-    var data = Provider.of<Meals>(context, listen: false).getWeeklyNutritions();
-    print(data);
+    weeklyReport = Provider.of<Meals>(context, listen: false).getWeeklyNutritions();
+    print(weeklyReport['calories']);
   }
 
   @override
   Widget build(BuildContext context) {
-    int eaten = 0;
-    int eatenLeft = 0;
-    int totalProtein = 0;
-    int totalCarbs = 0;
-    int totalFat = 0;
-
-    for (var food in foods) {
-      eaten += food.calories;
-      totalProtein += food.protein;
-      totalCarbs += food.carbohydrate;
-      totalFat += food.fat;
-    }
 
     return MaterialApp(
       home: Scaffold(
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/homeBackGround.jpg'),
+              image: AssetImage('assets/images/background-75%.jpg'),
               fit: BoxFit.cover,
             ),
           ),
@@ -96,7 +89,7 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              sun12June.date + ' - ' + mon13June.date + ' 2021',
+                            DateFormat.MMMd().format(DateTime(today.year, today.month, today.day - today.weekday)) + ' - ' + DateFormat.yMMMd().format(today),
                               style: TextStyle(
                                 fontSize: 15,
                               ),
@@ -114,7 +107,7 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                                   ),
                                 ),
                                 Text(
-                                  '${sun12June.calories}',
+                                  '2000.00 KCAL',
                                   style: TextStyle(
                                     fontSize: 15,
                                     color: Color.fromRGBO(151, 168, 132, 1),
@@ -158,7 +151,7 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                               padding:
                                   EdgeInsets.only(left: 20, top: 5, bottom: 5),
                               child: Text(
-                                eaten.toString() + ' KCAL',
+                                weeklyReport['calories'] + ' KCAL',
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Color.fromRGBO(151, 168, 132, 1),
@@ -174,7 +167,7 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                                   padding: EdgeInsets.only(
                                       top: 20, bottom: 50, left: 60, right: 60),
                                   child: CircularProgressIndicator(
-                                    value: 0.5,
+                                    value: double.parse(weeklyReport['calories']) / 2000,
                                     backgroundColor:
                                         Color.fromRGBO(243, 245, 248, 1),
                                     valueColor: AlwaysStoppedAnimation<Color>(
@@ -191,7 +184,7 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        eatenLeft.toString(),
+                                        (2000 - double.parse(weeklyReport['calories'])).toStringAsFixed(2),
                                         style: TextStyle(
                                           color:
                                               Color.fromRGBO(104, 110, 95, 1),
@@ -272,7 +265,7 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                                   padding: EdgeInsets.only(
                                       left: 20, top: 5, bottom: 5),
                                   child: Text(
-                                    totalProtein.toString() + 'g',
+                                    weeklyReport['protein'] + 'g',
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: Color.fromRGBO(151, 168, 132, 1),
@@ -285,7 +278,7 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                                   padding: EdgeInsets.only(
                                       left: 20, top: 5, bottom: 5),
                                   child: Text(
-                                    totalCarbs.toString() + 'g',
+                                    weeklyReport['carb'] + 'g',
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: Color.fromRGBO(151, 168, 132, 1),
@@ -298,7 +291,7 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                                   padding: EdgeInsets.only(
                                       left: 20, top: 5, bottom: 5),
                                   child: Text(
-                                    totalFat.toString() + 'g',
+                                    weeklyReport['fat'] + 'g',
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: Color.fromRGBO(151, 168, 132, 1),
