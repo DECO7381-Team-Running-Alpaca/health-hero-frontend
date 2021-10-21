@@ -62,3 +62,6 @@ Map<String, String> segmentClasses = {
   '[192, 192, 192, 255]': 'Dining Tools',
   '[192, 64, 64, 255]': 'Other Food'
 };
+
+final rgbaCodes = segmentClasses.keys.toList();
+final foodClasses = segmentClasses.values.toList();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_hero/screens/scan_page.dart';
 import 'package:provider/provider.dart';
 
 import '/screens/full_plan_page.dart';
@@ -45,7 +46,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: LandingScreen.routeName,
+      initialRoute: ScanPage.routeName,
       routes: {
         PreferredPage.routeName: (context) => PreferredPage(),
         AllergyPage.routeName: (context) => AllergyPage(),
@@ -57,6 +58,7 @@ class MyHomePage extends StatelessWidget {
         SignUpContinue.routeName: (context) => SignUpContinue(),
         LoginPage.routeName: (context) => LoginPage(),
         FullPlanPage.routeName: (context) => FullPlanPage(),
+        ScanPage.routeName: (context) => ScanPage()
       },
     );
   }
