@@ -29,7 +29,8 @@ class _ScanPageState extends State<ScanPage> {
 
   void _loadModel() async {
     await Tflite.loadModel(
-        model: 'assets/models/model.tflite', labels: 'assets/models/labels.txt');
+        model: 'assets/models/model.tflite',
+        labels: 'assets/models/labels.txt');
   }
 
   void _findFoodSegment(File image) async {
@@ -45,7 +46,9 @@ class _ScanPageState extends State<ScanPage> {
       _results = calculateClasses(rawResult);
       _loading = false;
     });
-    print(calculateClasses(rawResult));
+    print(_results);
+    print(findValidSegment(_results)[0]);
+    print(findValidSegment(_results)[1]);
   }
 
   void _selectImages(String mode) async {

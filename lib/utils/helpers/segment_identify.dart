@@ -4,16 +4,16 @@ import 'package:image/image.dart';
 import '../../constants/segment_label.dart';
 
 Map<dynamic, dynamic> calculateClasses(dynamic output) {
-  var outputraw;
+  var rawOutput;
   // decode the Unitlist8 pixel by pixel
-  outputraw = decodePng(output);
-  if (outputraw != null) {
+  rawOutput = decodePng(output);
+  if (rawOutput != null) {
     // transfer to bytes
-    outputraw = outputraw.getBytes(format: Format.rgba);
+    rawOutput = rawOutput.getBytes(format: Format.rgba);
   }
 
   // noble way to iteration 512*512 image
-  Iterable<List<int>> pixels = partition(outputraw, 4);
+  Iterable<List<int>> pixels = partition(rawOutput, 4);
 
   Map outputClasses = {};
   int count = 0;
@@ -36,11 +36,33 @@ Map<dynamic, dynamic> calculateClasses(dynamic output) {
     },
   );
 
-  // format the results withe percentage: 
+  // format the results withe percentage:
   outputClasses.forEach((key, value) {
     double percentage = value / (512 * 512);
     outputClasses[key] = double.parse((percentage * 100).toStringAsFixed(2));
   });
 
   return outputClasses;
+}
+
+List<Map<dynamic, dynamic>> findValidSegment(Map rawResult) {
+  var validSegment = {};
+  var irreleventSegment = {};
+
+  rawResult.forEach((key, percent) {
+    // add food irrelevent item
+    if ((key == 'Background' ||
+        key == 'Food Containers' ||
+        key == 'Dining Tools' && percent >= 1)) {
+      irreleventSegment[key] = percent;
+    } else {
+      // excludes minimal segment
+      if (percent >= 1) {
+        validSegment[key] = percent;
+      }
+    }
+  });
+
+  // 0: valid, 1:surface
+  return [validSegment, irreleventSegment];
 }
