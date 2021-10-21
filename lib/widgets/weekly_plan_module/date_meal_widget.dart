@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:health_hero/provider/meals.dart';
+import 'package:health_hero/provider/user.dart';
 import 'package:health_hero/utils/helpers/sentence_linter.dart';
+import 'package:health_hero/widgets/prefer_allergy_module/loading_circle.dart';
+import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../models/meal.dart';
@@ -19,6 +23,7 @@ int daySelector = 0;
 
 class _DateMealWidgetState extends State<DateMealWidget> {
   var _isLoading = false;
+  var _isMealLoading = false;
   var _videoLoading = false;
   var videoId = '';
 
@@ -54,11 +59,25 @@ class _DateMealWidgetState extends State<DateMealWidget> {
     });
   }
 
+  void _changeMeal() async {
+    setState(() {
+      _isMealLoading = true;
+    });
+    fetchRandomMeal().then((meal) {
+      // Careful: this meal has a random date and mealType
+      print(meal.mealName);
+      setState(() {
+        widget.dailyMeals.threeMeals[daySelector] = meal;
+        _isMealLoading = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double futureWeeklyCalories = widget.dailyMeals.threeMeals[0].calories +
-      widget.dailyMeals.threeMeals[1].calories +
-      widget.dailyMeals.threeMeals[2].calories;
+        widget.dailyMeals.threeMeals[1].calories +
+        widget.dailyMeals.threeMeals[2].calories;
 
     return Container(
       margin: EdgeInsets.only(
@@ -83,8 +102,7 @@ class _DateMealWidgetState extends State<DateMealWidget> {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                Text(
-                    '${futureWeeklyCalories.toStringAsFixed(2)}KCAL',
+                Text('${futureWeeklyCalories.toStringAsFixed(2)}KCAL',
                     style: TextStyle(
                       fontSize: 20,
                       color: Color.fromRGBO(100, 110, 91, 1),
@@ -149,25 +167,58 @@ class _DateMealWidgetState extends State<DateMealWidget> {
               padding: const EdgeInsets.only(top: 20),
               child: Column(
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        widget.dailyMeals.threeMeals[daySelector].mealType
-                            .toUpperCase(),
-                        style: TextStyle(
-                          color: Color.fromRGBO(100, 110, 91, 1),
-                          fontWeight: FontWeight.w600,
+                  Container(
+                    // decoration: BoxDecoration(border: Border.all(width: 2)),
+                    child: Stack(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text(
+                              widget.dailyMeals.threeMeals[daySelector].mealType
+                                  .toUpperCase(),
+                              style: TextStyle(
+                                color: Color.fromRGBO(100, 110, 91, 1),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Text(
+                              '${widget.dailyMeals.threeMeals[daySelector].calories}KCAL',
+                              style: TextStyle(
+                                color: Color.fromRGBO(100, 110, 91, 1),
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      Text(
-                        '${widget.dailyMeals.threeMeals[daySelector].calories}KCAL',
-                        style: TextStyle(
-                          color: Color.fromRGBO(100, 110, 91, 1),
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
+                        Container(
+                          height: 40,
+                          transform: Matrix4.translationValues(230, 0, 0),
+                          child: _isMealLoading
+                              ? Container(
+                                  transform:
+                                      Matrix4.translationValues(80, 0, 0),
+                                  child: CircularProgressIndicator(
+                                    color: Color.fromRGBO(100, 110, 91, 0.5),
+                                  ),
+                                )
+                              : TextButton.icon(
+                                  onPressed: () {
+                                    _changeMeal();
+                                  },
+                                  icon: Icon(
+                                    Icons.edit,
+                                    color: Color.fromRGBO(100, 110, 91, 1),
+                                  ),
+                                  label: Text(
+                                    'Change This Plan',
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(100, 110, 91, 1),
+                                    ),
+                                  )),
+                        )
+                      ],
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 5),
