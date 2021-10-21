@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../screens/login_page.dart';
-import '../screens/sign_up_page.dart';
+import './login_page.dart';
+import './sign_up_page.dart';
 
 enum AuthMode { Login, Signup }
 

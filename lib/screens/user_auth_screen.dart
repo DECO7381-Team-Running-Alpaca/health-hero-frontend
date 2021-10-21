@@ -1,12 +1,10 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-import 'package:health_hero/screens/preferred_page.dart';
-import 'package:health_hero/screens/home_screen.dart';
-import 'package:health_hero/screens/landing_screen.dart';
 import '../provider/auth.dart';
+import './preferred_page.dart';
+import './home_screen.dart';
+import './landing_screen.dart';
 
 class UserAuthScreen extends StatefulWidget {
   static const routeName = '/auth';

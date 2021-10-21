@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'screens/full_plan_page.dart';
-import 'screens/health_report_page.dart';
-import 'screens/login_page.dart';
-import 'screens/sign_up_continue.dart';
-import 'screens/sign_up_page.dart';
-import 'screens/allergies_page.dart';
-import 'screens/home_screen.dart';
-import 'screens/landing_screen.dart';
-import 'screens/preferred_page.dart';
-import 'screens/user_auth_screen.dart';
-import 'provider/auth.dart';
-import 'provider/user.dart';
-import 'provider/meals.dart';
+import '/screens/full_plan_page.dart';
+import '/screens/health_report_page.dart';
+import '/screens/login_page.dart';
+import '/screens/sign_up_continue.dart';
+import '/screens/sign_up_page.dart';
+import '/screens/allergies_page.dart';
+import '/screens/home_screen.dart';
+import '/screens/landing_screen.dart';
+import '/screens/preferred_page.dart';
+import '/screens/user_auth_screen.dart';
+// import './screens/scan_page.dart';
+import './screens/scan_meal_screen.dart';
+import '/provider/auth.dart';
+import '/provider/user.dart';
+import '/provider/meals.dart';
 
 void main() => runApp(MyApp());
 
@@ -45,7 +47,8 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: LandingScreen.routeName,
+      // initialRoute: ScanPage.routeName,
+      initialRoute: ScanMealScrenn.routeName,
       routes: {
         PreferredPage.routeName: (context) => PreferredPage(),
         AllergyPage.routeName: (context) => AllergyPage(),
@@ -57,6 +60,8 @@ class MyHomePage extends StatelessWidget {
         SignUpContinue.routeName: (context) => SignUpContinue(),
         LoginPage.routeName: (context) => LoginPage(),
         FullPlanPage.routeName: (context) => FullPlanPage(),
+        ScanMealScrenn.routeName: (context) => ScanMealScrenn(),
+        // ScanPage.routeName: (context) => ScanPage()
       },
     );
   }

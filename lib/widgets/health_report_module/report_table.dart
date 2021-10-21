@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:health_hero/models/record.dart';
+
+import '../../models/record.dart';
 
 class ReportTable extends StatefulWidget {
   @override

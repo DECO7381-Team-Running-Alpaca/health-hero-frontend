@@ -34,7 +34,7 @@ List<int> pascalVOCLabelColors = [
   Color.fromARGB(255, 192, 64, 64).value, // other_food
 ];
 
-var segmentClasses = {
+Map<String, String> segmentClasses = {
   '[0, 0, 0, 255]': 'Background',
   '[128, 0, 0, 255]': 'Leafy Greens',
   '[0, 128, 0, 255]': 'Stem Vegetables',
@@ -62,3 +62,6 @@ var segmentClasses = {
   '[192, 192, 192, 255]': 'Dining Tools',
   '[192, 64, 64, 255]': 'Other Food'
 };
+
+final rgbaCodes = segmentClasses.keys.toList();
+final foodClasses = segmentClasses.values.toList();

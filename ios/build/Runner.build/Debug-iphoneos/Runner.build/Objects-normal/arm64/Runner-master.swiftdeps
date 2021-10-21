@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)"
+options: "f094c3f47305ca019e1b6fe74f82c1b83d02a5225301a80168bcbdb7dc29f3a0"
+build_start_time: [1634814093, 40570974]
+build_end_time: [1634814093, 143281936]
+inputs:
+  "/Users/vincentlee/Desktop/Workspace/health-hero/ios/Runner/AppDelegate.swift": !private [1628773139, 127075195]
