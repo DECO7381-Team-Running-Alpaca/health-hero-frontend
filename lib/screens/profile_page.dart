@@ -1,16 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:health_hero/screens/allergies_page.dart';
-import 'package:health_hero/screens/preferred_page.dart';
-import 'package:health_hero/widgets/user_profile_module/update_allergies_dialog.dart';
-import 'package:health_hero/widgets/user_profile_module/update_preferences_dialog.dart';
-import 'package:health_hero/widgets/user_profile_module/update_email_dialog.dart';
-import 'package:health_hero/widgets/user_profile_module/update_height_dialog.dart';
-import 'package:health_hero/widgets/user_profile_module/update_weight_dialog.dart';
 import 'package:provider/provider.dart';
 
+import '../widgets/user_profile_module/update_allergies_dialog.dart';
+import '../widgets/user_profile_module/update_preferences_dialog.dart';
+import '../widgets/user_profile_module/update_email_dialog.dart';
+import '../widgets/user_profile_module/update_height_dialog.dart';
+import '../widgets/user_profile_module/update_weight_dialog.dart';
 import '../widgets/user_profile_module/update_password_dialog.dart';
 import '../provider/user.dart';
+import './allergies_page.dart';
+import './preferred_page.dart';
 
 class ProfilePage extends StatefulWidget {
   @override

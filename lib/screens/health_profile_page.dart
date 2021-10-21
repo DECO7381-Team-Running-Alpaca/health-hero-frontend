@@ -1,13 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:health_hero/models/meal.dart';
-import 'package:health_hero/models/record.dart';
-import 'package:health_hero/provider/meals.dart';
-import 'package:health_hero/utils/helpers/date_handler.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import 'health_report_page.dart';
+
+import '../provider/meals.dart';
+import './health_report_page.dart';
 
 class HealthProfilePage extends StatefulWidget {
   @override
@@ -22,7 +19,6 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
   void initState() {
     super.initState();
     weeklyReport = Provider.of<Meals>(context, listen: false).getWeeklyNutritions();
-    print(weeklyReport['calories']);
   }
 
   @override
@@ -101,13 +97,13 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Total Calories',
+                                  'Weekly upper limit',
                                   style: TextStyle(
                                     fontSize: 15,
                                   ),
                                 ),
                                 Text(
-                                  '2000.00 KCAL',
+                                  '14000 CAL',
                                   style: TextStyle(
                                     fontSize: 15,
                                     color: Color.fromRGBO(151, 168, 132, 1),
@@ -167,7 +163,7 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                                   padding: EdgeInsets.only(
                                       top: 20, bottom: 50, left: 60, right: 60),
                                   child: CircularProgressIndicator(
-                                    value: double.parse(weeklyReport['calories']) / 2000,
+                                    value: double.parse(weeklyReport['calories']) / 14000,
                                     backgroundColor:
                                         Color.fromRGBO(243, 245, 248, 1),
                                     valueColor: AlwaysStoppedAnimation<Color>(
@@ -184,7 +180,7 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        (2000 - double.parse(weeklyReport['calories'])).toStringAsFixed(2),
+                                        (14000 - double.parse(weeklyReport['calories'])).toStringAsFixed(2),
                                         style: TextStyle(
                                           color:
                                               Color.fromRGBO(104, 110, 95, 1),
@@ -193,7 +189,7 @@ class _HealthProfilePageState extends State<HealthProfilePage> {
                                         ),
                                       ),
                                       Text(
-                                        'KCAL LEFT',
+                                        'CAL LEFT',
                                         style: TextStyle(
                                           color:
                                               Color.fromRGBO(104, 110, 95, 1),

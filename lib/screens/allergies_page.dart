@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:health_hero/models/meal.dart';
-import 'package:health_hero/provider/auth.dart';
-import 'package:health_hero/provider/meals.dart';
-import 'package:health_hero/provider/user.dart';
-import 'package:health_hero/screens/home_screen.dart';
-import 'package:health_hero/screens/preferred_page.dart';
-import 'package:health_hero/widgets/prefer_allergy_module/allergy_food_box.dart';
-import 'package:health_hero/widgets/prefer_allergy_module/continue_and_complete_button.dart';
-import 'package:health_hero/widgets/prefer_allergy_module/loading_circle.dart';
 import 'package:provider/provider.dart';
+
+import '../provider/meals.dart';
+import '../provider/user.dart';
+import '../widgets/prefer_allergy_module/allergy_food_box.dart';
+import '../widgets/prefer_allergy_module/continue_and_complete_button.dart';
+import '../widgets/prefer_allergy_module/loading_circle.dart';
+import './home_screen.dart';
+import './preferred_page.dart';
 
 class AllergyPage extends StatefulWidget {
   static const routeName = '/allergy';

@@ -1,15 +1,13 @@
 import 'dart:typed_data';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:health_hero/utils/helpers/convert_image.dart';
-import 'package:health_hero/utils/helpers/get_pngData.dart';
-import 'package:health_hero/widgets/health_report_module/report_chart.dart';
-import 'package:health_hero/widgets/health_report_module/report_table.dart';
-import 'package:health_hero/models/meal.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter/material.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+
+import '../utils/helpers/convert_image.dart';
+import '../utils/helpers/get_pngData.dart';
+import '../widgets/health_report_module/report_chart.dart';
+import '../widgets/health_report_module/report_table.dart';
 
 class HealthReportPage extends StatefulWidget {
   static const routeName = '/report';
