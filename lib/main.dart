@@ -11,7 +11,6 @@ import '/screens/home_screen.dart';
 import '/screens/landing_screen.dart';
 import '/screens/preferred_page.dart';
 import '/screens/user_auth_screen.dart';
-// import './screens/scan_page.dart';
 import './screens/scan_meal_screen.dart';
 import '/provider/auth.dart';
 import '/provider/user.dart';
@@ -48,7 +47,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       // initialRoute: ScanPage.routeName,
-      initialRoute: ScanMealScrenn.routeName,
+      initialRoute: LandingScreen.routeName,
       routes: {
         PreferredPage.routeName: (context) => PreferredPage(),
         AllergyPage.routeName: (context) => AllergyPage(),
@@ -61,7 +60,6 @@ class MyHomePage extends StatelessWidget {
         LoginPage.routeName: (context) => LoginPage(),
         FullPlanPage.routeName: (context) => FullPlanPage(),
         ScanMealScrenn.routeName: (context) => ScanMealScrenn(),
-        // ScanPage.routeName: (context) => ScanPage()
       },
     );
   }

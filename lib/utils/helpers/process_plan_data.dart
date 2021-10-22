@@ -17,7 +17,12 @@ Meal generateNewMeal(int mealIndex, dynamic rawData) {
     ytbVideoID = rawData[mealIndex]['videoId'];
   }
 
-  final ingredients = rawData[mealIndex]['ingredients'].join(',');
+  var ingredients;
+  if (rawData[mealIndex]['ingredients'] == null) {
+    ingredients = ['Apple', 'Banana', 'Cranberry', 'Durian'];
+  } else {
+    ingredients = rawData[mealIndex]['ingredients'].join(',');
+  }
 
   var directions = '';
   if (rawData[mealIndex]['instructions'] == '') {
@@ -89,7 +94,7 @@ Meal generateOneMeal(int mealIndex, dynamic rawData) {
   if (rawData[mealIndex][0]['videoId'] == null) {
     ytbVideoID = 'Fp2li-mzcyc';
   } else {
-    ytbVideoID = "${rawData[mealIndex]['videoId']}";
+    ytbVideoID = "${rawData[mealIndex][0]['videoId']}";
   }
 
   final ingredients = rawData[mealIndex][0]['ingredients'].join(',');

@@ -1,9 +1,6 @@
-import 'package:flutter/material.dart';
-
 class Record {}
 
-
-class foodSources {
+class FoodSources {
   final String name;
   final int fat;
   final int dietaryFibre;
@@ -11,7 +8,7 @@ class foodSources {
   final int carbohydrate;
   final int calories;
 
-  foodSources({
+  FoodSources({
     this.name,
     this.fat,
     this.dietaryFibre,
@@ -23,8 +20,8 @@ class foodSources {
 
 }
 
-final List<foodSources> foods = [
-  foodSources(
+final List<FoodSources> foods = [
+  FoodSources(
     name: 'Butter',
     fat: 300,
     dietaryFibre: 0,
@@ -32,7 +29,7 @@ final List<foodSources> foods = [
     carbohydrate: 0,
     calories: 0,
   ),
-  foodSources(
+  FoodSources(
     name: 'Salad',
     fat: 200,
     dietaryFibre: 0,
@@ -40,7 +37,7 @@ final List<foodSources> foods = [
     carbohydrate: 0,
     calories: 0,
   ),
-  foodSources(
+  FoodSources(
     name: 'Fries',
     fat: 100,
     dietaryFibre: 0,
@@ -48,7 +45,7 @@ final List<foodSources> foods = [
     carbohydrate: 0,
     calories: 0,
   ),
-  foodSources(
+  FoodSources(
     name: 'Strawberry',
     fat: 0,
     dietaryFibre: 1000,
@@ -56,7 +53,7 @@ final List<foodSources> foods = [
     carbohydrate: 0,
     calories: 0,
   ),
-  foodSources(
+  FoodSources(
     name: 'Banana',
     fat: 0,
     dietaryFibre: 2000,
@@ -64,7 +61,7 @@ final List<foodSources> foods = [
     carbohydrate: 0,
     calories: 0,
   ),
-  foodSources(
+  FoodSources(
     name: 'Milk',
     fat: 0,
     dietaryFibre: 0,
@@ -72,7 +69,7 @@ final List<foodSources> foods = [
     carbohydrate: 0,
     calories: 0,
   ),
-  foodSources(
+  FoodSources(
     name: 'Tuna',
     fat: 0,
     dietaryFibre: 0,
@@ -80,7 +77,7 @@ final List<foodSources> foods = [
     carbohydrate: 0,
     calories: 0,
   ),
-  foodSources(
+  FoodSources(
     name: 'Fish',
     fat: 0,
     dietaryFibre: 0,
@@ -88,7 +85,7 @@ final List<foodSources> foods = [
     carbohydrate: 0,
     calories: 0,
   ),
-  foodSources(
+  FoodSources(
     name: 'Honey',
     fat: 0,
     dietaryFibre: 0,

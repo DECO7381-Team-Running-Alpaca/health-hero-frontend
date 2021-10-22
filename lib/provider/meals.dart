@@ -45,7 +45,7 @@ class Meals with ChangeNotifier {
   double get dailyCalories {
     var todayStatus = this._clockInStatus[today];
     double dailyCalories = 0;
-    if (!this._detailedPlan.isEmpty) {
+    if (this._detailedPlan.isNotEmpty) {
       for (var i = 0; i < todayStatus.length; i++) {
         if (todayStatus[i]) {
           dailyCalories += this._detailedPlan[abbrToFull(today)][i].calories;
