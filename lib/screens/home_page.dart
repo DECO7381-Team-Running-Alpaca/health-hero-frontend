@@ -7,7 +7,7 @@ import '../provider/meals.dart';
 import '../provider/auth.dart';
 import '../utils/services/rest_api_service.dart';
 import '../utils/helpers/date_handler.dart';
-import './scan_meal_screen.dart';
+// import './scan_meal_screen.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -144,7 +144,7 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(width: 4),
                     TextButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, ScanMealScrenn.routeName);
+                        // Navigator.pushNamed(context, ScanMealScrenn.routeName);
                       },
                       child: Text(
                         "Check my meal's nutrients",
