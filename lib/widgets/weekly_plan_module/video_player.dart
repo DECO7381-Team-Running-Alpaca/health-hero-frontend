@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:health_hero/utils/services/rest_api_service.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoPlayer extends StatefulWidget {
@@ -16,34 +15,6 @@ class _VideoPlayerState extends State<VideoPlayer> {
   YoutubePlayerController _videoController;
   PlayerState _playerState;
   YoutubeMetaData _videoMetaData;
-
-  // @override
-  // void didChangeDependencies() {
-  // if (_isInit) {
-  // setState(() {
-  //   _isLoading = true;
-  // });
-  // fetchYoutubeVideo(widget.videoURL).then((data) {
-  //   setState(() {
-  //     _isLoading = false;
-  //     videoId = data;
-  //     _videoController = YoutubePlayerController(
-  //       initialVideoId: videoId,
-  //       // initialVideoId: widget.videoURL,
-  //       flags: YoutubePlayerFlags(
-  //         autoPlay: false,
-  //         mute: false,
-  //       ),
-  //     );
-  //     _playerState = PlayerState.unknown;
-  //     _videoMetaData = const YoutubeMetaData();
-  //   });
-  // });
-  // }
-
-  // _isInit = false;
-  // super.didChangeDependencies();
-  // }
 
   @override
   void initState() {

@@ -42,7 +42,7 @@ class Meals with ChangeNotifier {
     return this._clockInStatus;
   }
 
-  double get dailyCalories {
+  String get dailyCalories {
     var todayStatus = this._clockInStatus[today];
     double dailyCalories = 0;
     if (this._detailedPlan.isNotEmpty) {
@@ -52,7 +52,7 @@ class Meals with ChangeNotifier {
         }
       }
     }
-    return dailyCalories;
+    return dailyCalories.toStringAsFixed(2);
   }
 
   Map<String, String> getWeeklyNutritions() {
