@@ -93,7 +93,7 @@ class _SignUpContinueState extends State<SignUpContinue> {
               Container(
                 width: _devicewidth,
                 height:
-                    mode == false ? _deviceheight * 0.62 : _deviceheight * 0.70,
+                    mode == false ? _deviceheight * 0.62 : _deviceheight * 0.70 - 30,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(44),
