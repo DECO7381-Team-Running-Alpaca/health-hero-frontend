@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/services/rest_api_service.dart';
 import '../utils/services/local_storage_servcie.dart';
@@ -60,5 +61,14 @@ class Auth with ChangeNotifier {
     } catch (error) {
       throw error;
     }
+  }
+
+  Future<void> logout() async {
+    _token = null;
+    _userId = null;
+    notifyListeners();
+
+    final prefs = await SharedPreferences.getInstance();
+    prefs.clear();
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:health_hero/provider/auth.dart';
+import 'package:health_hero/screens/landing_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/user_profile_module/update_allergies_dialog.dart';
@@ -65,20 +67,12 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   void _getPre() async {
-    // setState(() {
-    //   _isLoading = true;
-    // });
-
     try {
       await Provider.of<User>(context, listen: false).getPrefs();
       selectedPreferList =
           Provider.of<User>(context, listen: false).preferences;
 
       Navigator.pushNamed(context, PreferredPage.routeName);
-
-      // setState(() {
-      //   _isLoading = false;
-      // });
     } catch (error) {
       setState(() {
         _isLoading = false;
@@ -88,19 +82,11 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   void _getAll() async {
-    // setState(() {
-    //   _isLoading = true;
-    // });
-
     try {
       await Provider.of<User>(context, listen: false).getAllg();
       selectedAllergyList = Provider.of<User>(context, listen: false).allergies;
 
       Navigator.pushNamed(context, AllergyPage.routeName);
-
-      // setState(() {
-      //   _isLoading = false;
-      // });
     } catch (error) {
       throw error;
     }
@@ -481,12 +467,22 @@ class _ProfilePageState extends State<ProfilePage> {
                           borderRadius: BorderRadius.circular(40)),
                     ),
                   ),
-                  child: Text(
-                    'SIGN OUT',
-                    style: TextStyle(
-                      color: Color.fromRGBO(100, 109, 93, 1),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
+                  child: TextButton(
+                    onPressed: () async {
+                      await Provider.of<Auth>(context, listen: false)
+                          .logout()
+                          .then((_) {
+                        Navigator.of(context)
+                            .pushNamed(LandingScreen.routeName);
+                      });
+                    },
+                    child: Text(
+                      'SIGN OUT',
+                      style: TextStyle(
+                        color: Color.fromRGBO(100, 109, 93, 1),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
                     ),
                   ),
                 ),
