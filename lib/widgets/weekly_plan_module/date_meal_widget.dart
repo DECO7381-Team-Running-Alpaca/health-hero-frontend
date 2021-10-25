@@ -45,11 +45,6 @@ class _DateMealWidgetState extends State<DateMealWidget> {
       _playerState = PlayerState.unknown;
       _videoMetaData = const YoutubeMetaData();
     });
-
-    fetchRandomMeal().then((meal) {
-      // Careful: this meal has a random date and mealType
-      print(meal.mealName);
-    });
   }
 
   void newListener() {
@@ -64,8 +59,6 @@ class _DateMealWidgetState extends State<DateMealWidget> {
       _isMealLoading = true;
     });
     fetchRandomMeal().then((meal) {
-      // Careful: this meal has a random date and mealType
-      print(meal.mealName);
       setState(() {
         widget.dailyMeals.threeMeals[daySelector] = meal;
         _isMealLoading = false;

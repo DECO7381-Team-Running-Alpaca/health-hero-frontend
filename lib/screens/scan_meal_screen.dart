@@ -57,9 +57,6 @@ class _ScanMealScrennState extends State<ScanMealScrenn> {
       _isLoading = false;
       _rawImageData = rawResult;
     });
-
-    print(_results);
-    print(_surfaceResults);
   }
 
   void _selectImages(String mode) async {

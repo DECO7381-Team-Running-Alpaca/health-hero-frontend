@@ -93,7 +93,7 @@ class Meals with ChangeNotifier {
   }
 
   Future<void> getWeeklyPlan() async {
-    // try {
+    try {
       _weeklyMeals = [];
       _detailedPlan = {
         'Sunday': [],
@@ -138,10 +138,10 @@ class Meals with ChangeNotifier {
         }
       });
       notifyListeners();
-    // } catch (error) {
-    //   print(error);
-    //   throw error;
-    // }
+    } catch (error) {
+      print(error);
+      throw error;
+    }
   }
 
   Future<void> generateBrandNewPlan() async {
