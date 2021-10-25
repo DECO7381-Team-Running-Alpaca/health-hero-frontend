@@ -11,7 +11,7 @@ import '/screens/home_screen.dart';
 import '/screens/landing_screen.dart';
 import '/screens/preferred_page.dart';
 import '/screens/user_auth_screen.dart';
-// import './screens/scan_meal_screen.dart';
+import './screens/scan_meal_screen.dart';
 import '/provider/auth.dart';
 import '/provider/user.dart';
 import '/provider/meals.dart';
@@ -59,7 +59,7 @@ class MyHomePage extends StatelessWidget {
         SignUpContinue.routeName: (context) => SignUpContinue(),
         LoginPage.routeName: (context) => LoginPage(),
         FullPlanPage.routeName: (context) => FullPlanPage(),
-        // ScanMealScrenn.routeName: (context) => ScanMealScrenn(),
+        ScanMealScrenn.routeName: (context) => ScanMealScrenn(),
       },
     );
   }

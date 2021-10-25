@@ -173,7 +173,7 @@ class _HealthReportPageState extends State<HealthReportPage> {
                     ),
                   ],
                 ),
-                LineChartSample1()
+                // LineChartSample1()
               ],
             ),
           ),
