@@ -19,6 +19,9 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
   String _lengthChecker(String title, int limit) =>
       title.length <= limit ? title : title.substring(0, limit) + ' ...';
 
+  ImageProvider<Object> _safeImageWideget(String url) =>
+      url == null ? AssetImage('../../../assets/images/main2.jpg') : NetworkImage(url);
+
   @override
   Widget build(BuildContext context) {
     final meal = Provider.of<Meals>(context, listen: false);
@@ -108,7 +111,7 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
-                            image: NetworkImage(
+                            image: _safeImageWideget(
                                 widget.twoDayData['todayDinner']['image']),
                             fit: BoxFit.fill,
                           )),
@@ -192,7 +195,7 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 image: DecorationImage(
-                                  image: NetworkImage(
+                                  image: _safeImageWideget(
                                       widget.twoDayData['todayLunch']['image']),
                                   fit: BoxFit.fill,
                                 ),
@@ -296,7 +299,7 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
-                                    image: NetworkImage(widget
+                                    image: _safeImageWideget(widget
                                         .twoDayData['todayBreakfast']['image']),
                                     fit: BoxFit.fill,
                                   ),

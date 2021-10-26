@@ -6,7 +6,6 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 import '../utils/helpers/convert_image.dart';
 import '../utils/helpers/get_pngData.dart';
-import '../widgets/health_report_module/report_chart.dart';
 import '../widgets/health_report_module/report_table.dart';
 
 class HealthReportPage extends StatefulWidget {
@@ -35,7 +34,7 @@ class _HealthReportPageState extends State<HealthReportPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'The email has been sent successfully.',
+              'Save to your gallery successfully.',
               style: TextStyle(
                 color: Color.fromRGBO(103, 110, 94, 1),
               ),
@@ -159,7 +158,7 @@ class _HealthReportPageState extends State<HealthReportPage> {
                             size: 20,
                           ),
                           Text(
-                            'Send report to E-mail',
+                            'Save Report to Gallery',
                             style: TextStyle(
                               color: Color.fromRGBO(100, 109, 93, 1),
                               fontSize: 14,

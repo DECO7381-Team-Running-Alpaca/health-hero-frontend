@@ -12,6 +12,9 @@ class TomorrowPlanBox extends StatefulWidget {
 class _TomorrowPlanBoxState extends State<TomorrowPlanBox> {
   String _lengthChecker(String title, int limit) => title.length <= limit ? title : title.substring(0, limit) + ' ...';
 
+  ImageProvider<Object> _safeImageWideget(String url) =>
+      url == null ? AssetImage('/assets/images/main1.jpg') : NetworkImage(url);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -59,7 +62,7 @@ class _TomorrowPlanBoxState extends State<TomorrowPlanBox> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
-                            image: NetworkImage(widget.twoDayData['tomorrorBreakfast']['image']),
+                            image: _safeImageWideget(widget.twoDayData['tomorrorBreakfast']['image']),
                             fit: BoxFit.cover,
                           )),
                       child: Stack(
@@ -115,7 +118,7 @@ class _TomorrowPlanBoxState extends State<TomorrowPlanBox> {
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
                                     image:
-                                        NetworkImage(widget.twoDayData['tomorrowLunch']['image']),
+                                        _safeImageWideget(widget.twoDayData['tomorrowLunch']['image']),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -159,7 +162,7 @@ class _TomorrowPlanBoxState extends State<TomorrowPlanBox> {
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
                                     image:
-                                        NetworkImage(widget.twoDayData['tomorrowDinner']['image']),
+                                        _safeImageWideget(widget.twoDayData['tomorrowDinner']['image']),
                                     fit: BoxFit.cover,
                                   ),
                                 ),

@@ -39,10 +39,10 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       _isLoading = true;
       _loginStatus = '';
-      // _loginData['username'] = _lUserController.text;
-      // _loginData['password'] = _lPasswordController.text;
-      _loginData['username'] = 'aatest';
-      _loginData['password'] = 'AAaa77';
+      _loginData['username'] = _lUserController.text;
+      _loginData['password'] = _lPasswordController.text;
+      // _loginData['username'] = 'aatest';
+      // _loginData['password'] = 'AAaa77';
     });
 
     try {

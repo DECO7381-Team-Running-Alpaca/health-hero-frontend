@@ -299,7 +299,7 @@ Widget _segmentItem(String label, Map results) => Container(
         color: Color(pascalVOCLabelColors[foodClasses.indexOf(label)]),
       ),
       child: Text(
-        '$label: ${results[label]}',
+        '$label: ${results[label]}%',
         style: TextStyle(
           color: Colors.white,
         ),

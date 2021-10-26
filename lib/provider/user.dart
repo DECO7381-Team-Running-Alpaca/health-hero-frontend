@@ -60,6 +60,12 @@ class User with ChangeNotifier {
               message = "Password Update Successfully.";
             }
             break;
+          case "weight":
+            {
+              this._weight = updateInfo[info];
+              message = "Weight Update Successfully.";
+            }
+            break;
           default:
             {
               message = '$info update fail';
