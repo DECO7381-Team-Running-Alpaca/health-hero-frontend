@@ -37,7 +37,7 @@ Future<Map<String, String>> authSignup(Map<String, String> signupData) async {
   var body = json.encode({
     "user_name": signupData['username'],
     "password": signupData['password'],
-    "email": "testf@test.com",
+    "email": signupData['email'],
     "weight": signupData['weight'],
     "height": signupData['height'],
   });

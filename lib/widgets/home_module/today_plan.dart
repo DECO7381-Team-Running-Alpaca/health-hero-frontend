@@ -112,7 +112,7 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
                             image: _safeImageWideget(
-                                widget.twoDayData['todayDinner']['image']),
+                                widget.twoDayData['tomorrowDinner']['image']),
                             fit: BoxFit.fill,
                           )),
                       child: Stack(
@@ -133,9 +133,9 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                                   ),
                                   Text(
                                     _lengthChecker(
-                                        widget.twoDayData['todayDinner']
+                                        widget.twoDayData['tomorrowDinner']
                                             ['title'],
-                                        34),
+                                        25),
                                     style: TextStyle(
                                         fontSize: 13,
                                         fontWeight: FontWeight.bold),
@@ -196,7 +196,7 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                                 borderRadius: BorderRadius.circular(10),
                                 image: DecorationImage(
                                   image: _safeImageWideget(
-                                      widget.twoDayData['todayLunch']['image']),
+                                      widget.twoDayData['tomorrowLunch']['image']),
                                   fit: BoxFit.fill,
                                 ),
                               ),
@@ -225,7 +225,7 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                           width: 150,
                           child: Text(
                             _lengthChecker(
-                                widget.twoDayData['todayLunch']['title'], 25),
+                                widget.twoDayData['tomorrowLunch']['title'], 20),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 10, fontWeight: FontWeight.bold),
@@ -300,7 +300,7 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
                                     image: _safeImageWideget(widget
-                                        .twoDayData['todayBreakfast']['image']),
+                                        .twoDayData['tomorrorBreakfast']['image']),
                                     fit: BoxFit.fill,
                                   ),
                                 ),
@@ -329,8 +329,8 @@ class _TodayPlanBoxState extends State<TodayPlanBox> {
                             // width: 150,
                             child: Text(
                               _lengthChecker(
-                                  widget.twoDayData['todayBreakfast']['title'],
-                                  25),
+                                  widget.twoDayData['tomorrorBreakfast']['title'],
+                                  20),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 10, fontWeight: FontWeight.bold),

@@ -62,7 +62,7 @@ class _TomorrowPlanBoxState extends State<TomorrowPlanBox> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
-                            image: _safeImageWideget(widget.twoDayData['tomorrorBreakfast']['image']),
+                            image: _safeImageWideget(widget.twoDayData['todayBreakfast']['image']),
                             fit: BoxFit.cover,
                           )),
                       child: Stack(
@@ -82,7 +82,7 @@ class _TomorrowPlanBoxState extends State<TomorrowPlanBox> {
                                     height: 30,
                                   ),
                                   Text(
-                                    _lengthChecker(widget.twoDayData['tomorrorBreakfast']['title'], 29),
+                                    _lengthChecker(widget.twoDayData['todayBreakfast']['title'], 29),
                                     style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
@@ -118,7 +118,7 @@ class _TomorrowPlanBoxState extends State<TomorrowPlanBox> {
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
                                     image:
-                                        _safeImageWideget(widget.twoDayData['tomorrowLunch']['image']),
+                                        _safeImageWideget(widget.twoDayData['todayLunch']['image']),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -143,7 +143,7 @@ class _TomorrowPlanBoxState extends State<TomorrowPlanBox> {
                           Container(
                             width: 150,
                             child: Text(
-                              _lengthChecker(widget.twoDayData['tomorrowLunch']['title'], 25),
+                              _lengthChecker(widget.twoDayData['todayLunch']['title'], 25),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 10, fontWeight: FontWeight.bold),
@@ -187,7 +187,7 @@ class _TomorrowPlanBoxState extends State<TomorrowPlanBox> {
                           Container(
                             width: 150,
                             child: Text(
-                              _lengthChecker(widget.twoDayData['tomorrowDinner']['title'], 25),
+                              _lengthChecker(widget.twoDayData['todayDinner']['title'], 25),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 10, fontWeight: FontWeight.bold),
